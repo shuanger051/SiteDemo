@@ -1,0 +1,64 @@
+<!-- header -->
+<div class="header min_1200">
+    <div class="header w_1200">
+        <h1 class="png_img logo fl"><a href="${path}/index.htm"><img src="${path}/images/logo.png" alt="教练员平台_排舞"></a></h1>
+        <div class="h_city fl">
+            <h4>切换至</h4>
+            <#if s_site?? && s_site =="square" >
+                <p><a href="javascript:void(0)" onclick="forward(this)" data-site="line" class="city_a" target="_blank">排舞中国</a></p>
+                <#elseif s_site?? && s_site =="line" >
+                    <p><a href="javascript:void(0)" onclick="forward(this)" data-site="square" class="city_a" target="_blank">广场舞中国</a></p>
+                <#elseif s.site?? && s.site == "square">
+                    <p><a href="javascript:void(0)" onclick="forward(this)" data-site="line" class="city_a" target="_blank">排舞中国</a></p>
+                <#elseif s.site?? && s.site == "line">
+                    <p><a href="javascript:void(0)" onclick="forward(this)" data-site="square" class="city_a" target="_blank">广场舞中国</a></p>
+            </#if>
+            <p><a href="https://shop366732384.taobao.com/" class="city_a" target="_blank">进入商城</a></p>
+        </div>
+        <!--end城市-->
+        <div class="h_search fl">
+            <div class="fr">
+                <input type="button" class="h_search_btn png" value="" id="search_button">
+            </div>
+            <div class="r_cell">
+                <input type="text" class="h_search_text" placeholder="全站搜索文章..." id="search_input">
+            </div>
+        </div>
+        <!--end搜索-->
+        <div class="header_r fr">
+            <div class="header_link fl" <#if !user??> style = "border-right:none;"</#if> >
+                <#if user??>
+                    <a href="${path}/dance_book/up.htm"><span class="h_arrow h_arrow2 png"></span>上传舞谱</a>
+                    <#else>
+                        <a href="javascript:0;" class="cd-popup-trigger0"><span class="h_arrow png"></span>登录</a>
+                </#if>
+            </div>
+            <#if user??>
+            <!--end文字链接-->
+            <div class="header_club fl"><a href="###"><span class="option_arrow png">欢迎你，${user.realName!''}</span></a>
+                <ul class="header_club_ul">
+                    <li><a href="${path}/center/info.htm">个人中心</a></li>
+                    <li><a href="${path}/center/course.htm">我的课程<span class="round_m num_r">${user.totalLesson}</span></a></li>
+                    <li><a href="${path}/center/modifypwd.htm">密码修改</a></li>
+                    <li><a href="${path}/account/logout">退出登录</a></li>
+                </ul>
+            </div>
+            <!--end个人-->
+            </#if>
+        </div>
+        <!--end头文件右-->
+    </div>
+    <!--end宽度-->
+</div>
+
+<!--end头文件-->
+<script type="text/javascript">
+    function forward(that) {
+        $.cookie('site', $(that).attr("data-site"),{ expires: 7 });
+        window.location.href = "${path}/index.htm";
+    }
+</script>
+
+<!--star_弹框-->
+<#include "layout/login.html"/>
+

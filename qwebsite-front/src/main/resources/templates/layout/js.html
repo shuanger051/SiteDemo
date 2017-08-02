@@ -1,0 +1,57 @@
+<script type="text/javascript">
+    var path = "${path}";
+</script>
+<script src="${path}/js/lib/jquery-1.8.2.min.js"></script>
+<script src="${path}/js/lib/jquery.cookie.js"></script>
+<script src="${path}/js/lib/jquery.SuperSlide.2.1.2.js"></script>
+<script src="${path}/js/lib/template.js"></script>
+<script type="text/javascript" src="${path}/js/lib/jsencrypt.min.js"></script>
+<script type="text/javascript" src="${path}/js/lib/Validform_v5.3.2.js"></script>
+<script type="text/javascript" src="${path}/js/biz/validext.js"></script>
+<script type="text/javascript" src="${path}/js/lib/layer/layer.js"></script>
+<script src="${path}/js/lib/tool.js"></script>
+<script src="${path}/js/lib/page/page.js"></script>
+<script src="${path}/js/lib/page/table.js"></script>
+<script src="${path}/js/lib/tools.js"></script>
+<script src="${path}/js/lib/io.js"></script>
+<script src="${path}/js/lib/code.js"></script>
+<script type="text/javascript">
+    Ajax.config({
+        path:path
+    })
+    template.helper("dateFormat",Tool.dateFormat);
+    template.helper("int",function (num){
+        var number = (num.toFixed(2) + "");
+        return number.substring(0,number.indexOf("."));
+    });
+    template.helper("decimal",function (num){
+        var number = (num.toFixed(2) + "");
+        return number.substring(number.indexOf("."));
+    });
+    template.helper("balanceFormat",function (num){
+        return num.toFixed(2);
+    });
+
+</script>
+<script type="text/javascript" src="${path}/js/biz/index.js"></script>
+<script type="text/javascript">
+    function forward(that,page) {
+        $.cookie('site', $(that).attr("data-site"),{ expires: 7 ,path:"<#if request.contextPath==''>/<#else>${request.contextPath}</#if>"});
+        if(!!page){
+            window.location.href = "${path}/" + page;
+        }else{
+            window.location.href = "${path}/index.htm";
+        }
+
+    }
+    $(document).ready(function () {
+        $("#search_input").bind('keypress',function(event){
+            if(event.keyCode == "13"){
+                window.location.href = "${path}/search/index.htm?queryString=" + encodeURIComponent($("#search_input").val());
+            }
+        });
+        $("#search_button").on("click",function () {
+            window.location.href = "${path}/search/index.htm?queryString=" + encodeURIComponent($("#search_input").val());
+        });
+    });
+</script>

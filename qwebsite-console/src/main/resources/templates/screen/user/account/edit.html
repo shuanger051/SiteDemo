@@ -1,0 +1,76 @@
+<#assign title="添加会员"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <style>
+        .elem-field {
+            margin-bottom: 10px;
+            padding: 0;
+            border: 1px solid #e2e2e2;
+        }
+        .elem-field-left{
+            margin-left:20px;
+            padding: 0 10px;
+            font-size: 20px;
+            font-weight: 300;
+        }
+    </style>
+</#macro>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">用户管理</a></li>
+            <li><a href="#">角色管理</a></li>
+            <li><a href="#">添加角色</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <form id="form1" name="form1">
+        <div style="display: none">
+            <input type="hidden" name="id">
+            <input type="hidden" name="userId">
+        </div>
+        <div class="formbody">
+            <div class="rightinfo" >
+                <div style="width: 49%; float: left;">
+                <ul class="forminfo">
+                    <li><label>用户名<b>*</b></label><input name="userName" type="text" class="span" readonly/><i></i></li>
+                    <li><label>密码</label><input name="password" type="password" datatype="empty|pwd" class="dfinput" /><i style="display: block;margin-left: 67px;">不修改密码，留空</i></li>
+                    <li><label>会员类型<b>*</b></label>
+                        <div style="height: 34px;display: inline-block">
+                        <select name="isAdmin">
+
+                        </select>
+                        </div>
+                        </li>
+                    <li><label>禁用</label><cite id="isDisabledCon" style="height: 34px;line-height:34px;padding-top: 0px"></cite></li>
+                    <li><label>注册时间</label><input name="registerTime" type="text" class="span" readonly></li>
+                    <li><label>真实姓名</label><input name="realName" type="text" datatype="empty|zhen" class="dfinput" /><i></i></li>
+                    <li><label>出生日期</label><input name="birthday" type="text" class="dfinput" onclick="WdatePicker()" style="width: 184px;"/><i></i></li>
+                    <li><label>QQ</label><input name="qq" type="text" datatype="empty|n5-12" class="dfinput" /><i></i></li>
+                    <li><label>个人介绍</label><textarea name="intro" id="intro" class="textinput" style="width: 325px;height: 50px;"></textarea></li>
+                    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存"/></li>
+                </ul>
+            </div>
+            <div style="width: 49%; float: right;">
+                <ul class="forminfo">
+                    <li><label>电子邮箱</label><input name="email" type="text" datatype="empty|e" class="dfinput" /><i></i></li>
+                    <li><label>确认密码</label><input name="confirmPassword" type="password" recheck="password" datatype="empty|pwd" class="dfinput" /><i style="display: block;margin-left: 67px;">不修改密码，留空</i></li>
+                    <li><label>登录次数</label><input name="loginCount" type="input" readonly class="span"></li>
+                    <li><label>最后登录时间</label><input name="lastLoginTime" type="text" class="span" readonly/><i></i></li>
+                    <li><label>性别<b>*</b></label><cite id="genderCon" style="height: 34px;line-height:34px;padding-top: 0px"></cite></li>
+                    <li><label>来自</label><input name="comefrom" type="text" class="dfinput" /><i></i></li>
+                    <li><label>手机</label><input name="mobile" type="text" datatype="empty|m" class="dfinput" /><i></i></li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </form>
+</#macro>
+<#macro js>
+    <script src="${path}/js/lib/My97DatePicker/WdatePicker.js"></script>
+    <script src="${path}/js/lib/jsencrypt.min.js"></script>
+    <script src="${path}/js/biz/user/account/edit.js"></script>
+    <#include "/template/radio.html"/>
+    <#include "/template/select.html"/>
+</#macro>

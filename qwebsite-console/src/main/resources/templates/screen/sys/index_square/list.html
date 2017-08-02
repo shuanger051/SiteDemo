@@ -1,0 +1,63 @@
+<#assign title="广场舞首页模块管理-列表"/>
+<#include "/layout/error_layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页管理</a></li>
+            <li><a href="#">广场舞首页模块管理</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <div class="formtitle1"><span>模块列表</span></div>
+        <div class="tools">
+            <ul class="toolbar">
+                <li class="click" onclick="Manager.add()"><span><img src="${path}/images/t01.png" /></span>添加</li>
+            </ul>
+        </div>
+        <table class="imgtable" id="table">
+            <thead>
+            <tr>
+                <th width="100px;">图标</th>
+                <th>模块名称</th>
+                <th>链接地址</th>
+                <th>排序编号</th>
+                <th>是否显示</th>
+                <th width="200">操作</th>
+            </tr>
+            </thead>
+            <tbody id="table_tbody">
+
+            </tbody>
+        </table>
+        <div id="table_page">
+
+        </div>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/common/page.js"></script>
+    <script src="${path}/js/biz/common/table.js"></script>
+    <script src="${path}/js/biz/sys/index_square/list.js"></script>
+    <script type="text/html" id="table_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Manager.selectThis(event,this)">
+            <td class="imgtd"><img style="width: 80px;height: 60px;" src="${root.viewPath}{{item.logo}}"></td>
+            <td style="width: 35%">{{item.siteName}}<p style="padding: 0 20px;text-indent: 0;">简介：{{item.description}}</p></td>
+            <td>{{item.siteLink}}<p>发布时间：{{item.gmtCreateFormat}}</p></td>
+            <td>{{item.priority}}</td>
+            <td>{{item.isEnabledName}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.edit('{{item.id}}',event);">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.del('{{item.id}}','{{item.logo}}',event)">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="6">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+</#macro>

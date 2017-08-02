@@ -1,0 +1,30 @@
+<#assign title="添加数字字典"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">系统管理</a></li>
+            <li><a href="#">数据字典维护</a></li>
+            <li><a href="#">添加字典条目</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <div class="formbody">
+        <form id="form1" name="form1">
+            <ul class="forminfo">
+                <li><label>字典项</label><input name="entryCode" type="text" class="span" readonly /></li>
+                <li><label>字典名称</label><input name="entryName" type="text" class="span" readonly /></li>
+                <li><label>条目<b>*</b></label><input name="itemCode" type="text" datatype="ny" class="dfinput"/><i>格式:英文、数字、下划线的组合</i></li>
+                <li><label>条目名称<b>*</b></label><input name="itemName" type="text" datatype="zhen" class="dfinput" /><i>格式:中文、字母的组合</i></li>
+                <li><label>条目顺序<b>*</b></label><input name="itemOrder" type="text" datatype="n1-2" class="dfinput" errormsg="请输入0-99的数字"/><i>格式:0-99的数字</i></li>
+                <li><label>备注</label><textarea name="remark" id="remark" class="textinput"></textarea></li>
+                <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存"/></li>
+            </ul>
+        </form>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/sys/dict/add_item.js"></script>
+
+</#macro>

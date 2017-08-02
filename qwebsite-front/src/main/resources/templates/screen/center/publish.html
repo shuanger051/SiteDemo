@@ -1,0 +1,41 @@
+<#assign title="发布课程"/>
+<#assign navIndex="2"/>
+<#include "/layout/cloub_layout.html"/>
+<#macro style>
+    <link rel="stylesheet" type="text/css" href="${path}/css/round_i.css">
+</#macro>
+<#macro content>
+    <div class="box_shadow clearfix box_w w_1200">
+        <div class="i_center clearfix">
+            <div class="course_select png_img course_select_2">
+                <h2>请选择发布类型：</h2>
+                <ul class="click_ul list_2 clearfix">
+                    <li class="active">
+                        <a href="${path}/center/add_course.htm" class="box">
+                            <span class="round_r select_arrow transition_a png fl"></span>
+                            <div class="r_cell">
+                                <h5>开课教学发布入口</h5>
+                                <p>网上发布课程信息，学员主动找你约课，学员线上付费报名，老师现场开班教学！</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${path}/center/add_wx_activity.htm" class="box">
+                            <span class="round_r select_arrow transition_a select_arrow4 png fl"></span>
+                            <div class="r_cell">
+                                <h5>民间健身舞蹈类赛事、<br>活动、培训发布入口</h5>
+                                <p>网上发布民间指定赛事、活动、培训，让海量学员参与报名</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--end请选择课程类型-->
+
+        </div>
+        <!--end宽度-->
+    </div>
+    <!--end中间区域-->
+
+
+</#macro>

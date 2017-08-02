@@ -1,0 +1,35 @@
+<#assign title="404错误"/>
+<#assign bodyClass="body_bg"/>
+<#include "/layout/error_layout.html"/>
+<#macro style>
+    <style>
+        .body_bg {
+            background: #edf6fa;
+        }
+    </style>
+</#macro>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">错误提示</a></li>
+        </ul>
+    </div>
+
+    <div class="error e403">
+        <h2>您没有访问权限.</h2>
+        <div class="reindex"></div>
+    </div>
+
+</#macro>
+<#macro js>
+    <script language="javascript">
+        $(function(){
+            $('.error').css({'position':'absolute','left':($(window).width()-490)/2});
+            $(window).resize(function(){
+                $('.error').css({'position':'absolute','left':($(window).width()-490)/2});
+            })
+        });
+    </script>
+</#macro>

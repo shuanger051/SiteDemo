@@ -1,0 +1,5 @@
+<script type="text/html" id="radio_temp">
+    {{each list as item i}}
+    <input name="{{item.entryCode}}" type="radio" value="{{item.itemCode}}" {{if i ==0}} checked{{/if}}>{{item.itemName}}&nbsp;&nbsp;&nbsp;&nbsp;
+    {{/each}}
+</script>

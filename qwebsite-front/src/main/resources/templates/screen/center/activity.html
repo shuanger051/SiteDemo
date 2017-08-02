@@ -1,0 +1,91 @@
+<#assign title="我的活动赛事"/>
+<#assign navIndex="5"/>
+<#include "/layout/cloub_layout.html"/>
+<#macro style>
+    <link rel="stylesheet" type="text/css" href="${path}/css/round_i.css">
+</#macro>
+<#macro content>
+    <dl class="tab_nav i_tab_nav w_1200">
+        <dt class="fr"><a href="${path}/center/publish.htm" class="add_course round_m">创建课程</a></dt>
+        <dd class="r_cell" id="statusDiv">
+            <a class="tab_light" href="javascript:void(0)" data-value="">全部课程<span class="num_f_r" id="total">0</span></a>
+            <a href="javascript:void(0)" data-value="1">待审核<span class="num_f_r" id="pendingCheck">0</span></a>
+            <a href="javascript:void(0)" data-value="2">未通过<span class="num_f_r" id="notPass">0</span></a>
+            <a href="javascript:void(0)" data-value="3">审核通过<span class="num_f_r" id="pass">0</span></a>
+            <a href="javascript:void(0)" data-value="4">已上线<span class="num_f_r" id="online">0</span></a>
+            <a href="javascript:void(0)" data-value="5">已下线<span class="num_f_r" id="underline">0</span></a>
+        </dd>
+    </dl>
+    <div class="box_shadow clearfix box_n w_1200">
+        <div class="i_center clearfix tab_box">
+            <div>
+                <ul class="i_course even_ul" style="padding-top: 0;" id="tab">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <dl class="page" id="tab_page">
+    </dl>
+</#macro>
+<#macro js>
+    <script type="text/html" id="tab_temp">
+        {{if list.length > 0}}
+        {{each list as item i}}
+        <li class="clearfix li_o transition_a">
+        <div class="t"><span class="fr"><span class="pink_text font_16">&yen;<span class="font_22">{{if item.price == 0}}免费{{else}}{{item.price | int }}{{/if}}</span>{{if item.price != 0}}{{item.price | decimal }}{{/if}}</span></span>
+            <div class="r_cell"><h5 class="fl">课程ID：{{item.activityId}}</h5>
+                <span class="gray_text_l">（创建时间：{{item.gmtCreate | dateFormat:'yyyy-MM-dd'}}）</span>
+            </div></div>
+        <dl class="d">
+            <dt class="fl"><a href="###"><img src="${root.viewPath}{{item.activityPic}}" alt="" style="width: 200px;height: 140px;"></a></dt>
+            <dd class="r_cell">
+                <div class="r_text fr">
+                    <span class="text_r_box round_m {{if item.status == 2 || item.status == 5}}text_r_gray {{else if item.status == 1}}text_r_blue{{else if item.status == 4 || item.status == 3}}text_r_green{{/if}}">{{item.statusName}}</span>
+                    <p>报名人数{{item.personNo}}人</p>
+                    <!--<div class="btn"><a href="###" class="bao_btn excel_btn png">导出报名用户Excel</a><a href="###" class="bao_btn bao_btn_s m_l">重新发布</a></div>-->
+                </div>
+                <div class="r_cell">
+                    <h5 class="orange_link"><a href="###">{{item.activityKindName}}<span class="font_14">（{{item.activityKindName}}）</span></a></h5>
+                    <div class="text_d">
+                        <p><span class="s_arrow png"></span>类型：{{item.activityKindName}}</p>
+                        <p><span class="s_arrow s_arrow2 png"></span>时间：{{item.biginDate | dateFormat:'MM.dd'}}~{{item.endDate | dateFormat:'MM.dd'}} {{item.beginTime | dateFormat:'mm:ss'}} ~ {{item.endTime | dateFormat:'mm:ss'}} </p>
+                        <p><span class="s_arrow s_arrow3 png"></span>地点：{{item.site}}{{item.address}}</p>
+                    </div>
+                </div>
+            </dd>
+        </dl>
+        </li>
+        {{/each}}
+        {{else}}
+        <li>暂无数据</li>
+        {{/if}}
+    </script>
+    <script type="text/javascript">
+
+        $(function (){
+           var table = new $.Table();
+           table.init({
+               url:"/wxactivity/page"
+           }).render();
+
+            $("#statusDiv a").click(function () {
+                $(this).addClass('tab_light').siblings().removeClass('tab_light');
+                var status = $(this).attr("data-value");
+                if(status !== ""){
+                    table.options({status:status},true);
+                }else{
+                    table.options({},true);
+                }
+            })
+            Ajax.query("queryLessonNumber",{
+                url:"/wxactivity/number",
+                callback:function (data){
+                    $.each(data,function(k,v){
+                        $("#" + k).text(v);
+                    })
+                }
+            })
+        })
+    </script>
+</#macro>

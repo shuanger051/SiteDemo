@@ -1,0 +1,65 @@
+<#assign title="友情链接管理-修改"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页管理</a></li>
+            <li><a href="#">合作伙伴管理</a></li>
+            <li><a href="#">修改合作伙伴</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <div class="formbody">
+        <form id="form1" name="form1" method="post" enctype ="multipart/form-data">
+            <input name="id" id="id" type="hidden">
+            <input name="oldLogoUrl" type="hidden">
+            <ul class="forminfo">
+                <li>
+                    <label>图标<b>*</b></label>
+                    <div class="imgtd">
+                        <div class="uploader white">
+                            <input type="text" class="filename" style="width: 145px;" readonly/>
+                            <input type="button" class="button" value="修改"/>
+                            <input type="file" name="file" size="30"/>
+                        </div>
+                        <img name="logo" style="width: 80px;height: 60px;" src="#">
+                    </div>
+                </li>
+                <li>
+                    <label>跳转地址</label>
+                    <input name="siteLink" type="textinput" class="dfinput" datatype="url" style="width: 278px;" />
+                    <i>格式:中文、字母的组合</i>
+                </li>
+                <li>
+                    <label>显示位置<b>*</b></label>
+                    <select name="floatingPosition" id="floatingPosition" onchange="Manager.selectChange(this.options[this.options.selectedIndex].value)">
+
+                    </select>
+                </li>
+                <li>
+                    <label>是否显示<b>*</b></label>
+                    <select name="isEnabled">
+
+                    </select>
+                </li>
+                <li>
+                    <label>&nbsp;</label>
+                    <input name="" type="submit" class="btn" value="确认保存"/></li>
+            </ul>
+        </form>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/sys/index_floating/edit.js"></script>
+    <#include "/template/select.html"/>
+    <script>
+        var viewPath = "${root.viewPath!''}";
+        $(function(){
+            $("input[type=file]").change(function(){$(this).parents(".uploader").find(".filename").val($(this).val());});
+            $("input[type=file]").each(function(){
+                if($(this).val()==""){$(this).parents(".uploader").find(".filename").val("修改图标...");}
+            });
+        });
+    </script>
+</#macro>

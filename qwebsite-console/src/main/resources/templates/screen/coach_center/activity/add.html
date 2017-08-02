@@ -1,0 +1,115 @@
+<#assign title="微信活动管理-添加"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">微信活动管理</a></li>
+            <li><a href="#">添加</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <div class="formbody">
+        <form id="form1" name="form1" method="post" enctype ="multipart/form-data">
+            <ul class="forminfo">
+                <li>
+                    <label>封面<b>*</b></label>
+                    <div class="uploader white">
+                        <input type="text" class="filename" readonly/>
+                        <input type="button" class="button" value="选择上传文件"/>
+                        <input type="file" name="file" size="30"/>
+                    </div>
+                </li>
+                <li>
+                    <label>项目名称<b>*</b></label>
+                    <input name="title" type="textinput" class="dfinput" datatype="*" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>课程种类<b>*</b></label>
+                    <select name="activityKind" onchange="Manager.activityTypeChange(this)">
+
+                    </select>
+                </li>
+                <li>
+                    <label>项目类型<b>*</b></label>
+                    <select name="activityType">
+
+                    </select>
+                </li>
+                <li>
+                    <label>课程价格<b>*</b></label>
+                    <input name="price" type="textinput" class="dfinput" datatype="money" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>开始日期<b>*</b></label>
+                    <input name="biginDate" id="biginDate" type="textinput" class="dfinput" onfocus="WdatePicker({minDate:'%y-%M-{%d+1}'})" datatype="*" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>结束日期<b>*</b></label>
+                    <input name="endDate" id="endDate" type="textinput" class="dfinput" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'biginDate\')}'})" datatype="*" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>开始时间<b>*</b></label>
+                    <input name="beginTime" type="textinput" onfocus="WdatePicker({dateFmt:'HH:mm:ss',minDate:'06:00:00',maxDate:'23:59:59'})" class="dfinput" datatype="*" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>结束时间<b>*</b></label>
+                    <input name="endTime" type="textinput" onfocus="WdatePicker({dateFmt:'HH:mm:ss',minDate:'06:00:00',maxDate:'23:59:59'})" class="dfinput" datatype="*" style="width: 278px;"  />
+                </li>
+                <li><label>上课地点<b>*</b></label>
+                    <div style="float: left;margin-bottom: 13px;">
+                        <div style="display: inline;padding-right: 10px;">
+                            <select name="province" id="province">
+
+                            </select>
+                        </div>
+                        <div style="display: inline;padding-right: 10px;">
+                            <select name="city" id="city">
+
+                            </select>
+                        </div>
+                        <div style="display: inline;padding-right: 10px;">
+                            <select name="county" id="county">
+
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <label>详细地址<b>*</b></label>
+                    <input name="address" type="textinput" class="dfinput" datatype="*" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>联系电话<b>*</b></label>
+                    <input name="telNo" type="textinput" class="dfinput" datatype="mobile" style="width: 278px;"  />
+                </li>
+
+                <li>
+                    <label>APP端显示<b>*</b></label>
+                    <select name="appShowFlag">
+
+                    </select>
+                </li>
+                <li>
+                    <label>&nbsp;</label>
+                    <input name="" type="submit" class="btn" value="确认保存"/>
+                    <input name="" type="submit" class="btn" value="存草稿"/>
+                </li>
+            </ul>
+        </form>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/lib/My97DatePicker/WdatePicker.js"></script>
+    <script src="${path}/js/lib/qq_geo.js"></script>
+    <script src="${path}/js/biz/coach_center/activity/add.js"></script>
+    <#include "/template/select.html"/>
+    <script>
+        $(function(){
+            $("input[type=file]").change(function(){$(this).parents(".uploader").find(".filename").val($(this).val());});
+            $("input[type=file]").each(function(){
+                if($(this).val()==""){$(this).parents(".uploader").find(".filename").val("请选择需要上传的文件...");}
+            });
+        });
+    </script>
+</#macro>

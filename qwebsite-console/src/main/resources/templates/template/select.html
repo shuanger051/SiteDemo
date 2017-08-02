@@ -1,0 +1,5 @@
+<script type="text/html" id="selected_temp">
+    {{each list as item i}}
+    <option value="{{item.itemCode}}" {{if i == 0 }} selected {{/if}} >{{item.itemName}}</option>
+    {{/each}}
+</script>

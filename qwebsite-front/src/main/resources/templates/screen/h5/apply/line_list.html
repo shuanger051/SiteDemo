@@ -1,0 +1,24 @@
+<#assign title="排舞"/>
+<#assign parentChannelId=1/>
+<#include "/layout/h5_layout.html"/>
+<#macro content>
+    <h2 class="B-head"><span></span></h2>
+    <div id="content">
+        <div class="con-list con-listBM">
+            <div class="news-list">
+                <ul>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</#macro>
+<#macro style>
+    <link rel="stylesheet" type="text/css" href="${path}/css/h5/dropload.css">
+</#macro>
+<#macro js>
+    <script type="text/javascript" src="${path}/js/h5/dropload.min.js" ></script>
+    <script type="text/javascript">
+        $(function(){var id=$.Tool.getReqP("id");var url="";var applyUrl="";if(id==1){url="${path}/apply/train/list";applyUrl="${path}/h5/apply/line_train_apply.htm";$(".B-head span").text("培训报名")}else{if(id==2){url="${path}/apply/competition/list";applyUrl="${path}/h5/apply/line_competition_apply.htm";$(".B-head span").text("赛事报名")}else{url="${path}/apply/activity/list";applyUrl="${path}/h5/apply/line_activity_apply.htm";$(".B-head span").text("活动报名")}}var page=0;var size=10;$(".news-list").dropload({scrollArea:window,domUp:{domClass:"dropload-up",domRefresh:'<div class="dropload-refresh">↓下拉刷新</div>',domUpdate:'<div class="dropload-update">↑释放更新</div>',domLoad:'<div class="dropload-load"><span class="loading"></span>加载中...</div>'},domDown:{domClass:"dropload-down",domRefresh:'<div class="dropload-refresh">↑上拉加载更多</div>',domLoad:'<div class="dropload-load"><span class="loading"></span>加载中...</div>',domNoData:'<div class="dropload-noData">已经到底了</div>'},loadUpFn:function(me){$.ajax({type:"GET",url:url+"?page=1&pageSize="+size,dataType:"json",success:function(result){var data=result.data.data;var arrLen=data.length;var html="";if(arrLen>0){for(var i=0;i<arrLen;i++){html+=' <li class="news-contain"> <a href="'+applyUrl+"?id="+data[i].id+'">'+"<span>"+$.Tool.getTitle(data[i].title)+"</span>"+'<i class="times">'+$.Tool.dateFormat(data[i].gmtCreate)+"</i>"+"</a></li>"}$(".news-list ul").html(html)}else{if(page==1){html+='<li class="news-contain"><a href="javascript:void(0);" > <span>暂无数据</span> </a> </li>';$(".news-list ul").html(html)}}me.resetload();page=1;me.unlock();me.noData(false)},error:function(xhr,type){console.info("Ajax error!");me.resetload()}})},loadDownFn:function(me){page++;var result="";$.ajax({type:"GET",url:url+"?page="+page+"&pageSize="+size,dataType:"json",success:function(result){var data=result.data.data;var arrLen=data.length;var html="";if(arrLen>0){for(var i=0;i<arrLen;i++){html+=' <li class="news-contain">  <a href="'+applyUrl+"?id="+data[i].id+'">'+"<span>"+$.Tool.getTitle(data[i].title)+"</span>"+'<i class="times">'+$.Tool.dateFormat(data[i].gmtCreate)+"</i>"+"</a></li>"}$(".news-list ul").append(html)}else{if(page==1){html+='<li class="news-contain"><a href="javascript:void(0);" > <span>暂无数据</span> </a> </li>';$(".news-list ul").html(html)}me.lock();me.noData()}$(".lists").append(result);if(arrLen<size){me.lock();me.noData()}me.resetload();if(arrLen<size&&page==1){$(".dropload-down").remove()}},error:function(xhr,type){console.info("Ajax error!");me.resetload()}})},threshold:50})});
+    </script>
+</#macro>

@@ -1,0 +1,153 @@
+<#assign title="活动报名管理-列表"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">活动赛事培训管理</a></li>
+            <li><a href="#">活动报名管理</a></li>
+            <li><a href="#">活动报名列表</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <div class="tools">
+            <ul class="toolbar">
+                <li class="click" onclick="Manager.delAllSelectedVal(event)"><span><img src="${path}/images/t03.png" /></span>批量删除</li>
+            </ul>
+            <ul class="toolbar1">
+                <li class="click" style="cursor:pointer;" onclick="Manager.exportExcel()"><span><img style="margin-top: 3px;" src="${path}/images/f05.png" /></span>导出</li>
+            </ul>
+            <form id="searchForm" name="searchForm">
+                <ul class="seachform">
+                    <li>
+                        <label>姓名:</label>
+                        <input name="realName" id="realName" type="text" class="scinput" />
+                    </li>
+                    <li>
+                        <label>性别:</label>
+                        <select name="sex" id="sex">
+
+                        </select>
+                    </li>
+                    <li>
+                        <label>阅读状态:</label>
+                        <select name="readFlag" id="readFlag">
+
+                        </select>
+                    </li>
+                    <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+                </ul>
+            </form>
+        </div>
+        <table class="tablelist" id="table">
+            <thead>
+                <tr>
+                    <th><input id="th_checkbox" type="checkbox" value="" onclick="Manager.choseAll()"/></th>
+                    <th>活动标题</th>
+                    <th>姓名<i class="sort"><img src="${path}/images/px.gif" /></i></th>
+                    <th>性别</th>
+                    <th>身份证号</th>
+                    <th>联系电话</th>
+                    <th>邮箱地址</th>
+                    <th>查阅状态</th>
+                    <th>报名时间</th>
+                    <th>详情</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="table_tbody">
+
+            </tbody>
+        </table>
+        <div id="table_page">
+
+        </div>
+    </div>
+    <div class="tip" id="tip" style="width: 420px;height: 300px; ">
+    <div style="position: relative">
+        <div class="tiptop" style="position:absolute; top: 0px; width:100%;"><span>详情</span><a></a></div>
+        <div class="tipinfo" style="height:244px;padding-top: 55px;padding-left: 0;margin-left: 45px;overflow:auto">
+            <ul class="forminfo" style="padding-left: 0;padding-bottom: 40px;" id="tipInfo">
+                <li>
+                    <label style="text-align: right">培训标题：</label>
+                    <input name="title" type="text" class="dfinput detail" disabled value="">
+                </li>
+                <li>
+                    <label style="text-align: right">姓名：</label>
+                    <input name="realName" type="text" class="dfinput detail"  disabled value="">
+                </li>
+                <li>
+                    <label style="text-align: right">性别：</label>
+                    <input name="sexName" type="text" class="dfinput detail"  disabled value="">
+                </li>
+                <li>
+                    <label style="text-align: right">身份证号：</label>
+                    <input name="idNo" type="text" class="dfinput detail"  disabled value="">
+                </li>
+                <li>
+                    <label style="text-align: right">联系电话：</label>
+                    <input name="mobile" type="text" class="dfinput detail"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">邮箱地址：</label>
+                    <input name="email" type="text" class="dfinput detail"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">QQ号码：</label>
+                    <input name="qq" type="text" class="dfinput detail"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">身高(CM)：</label>
+                    <input name="height" type="text" class="dfinput detail"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">报名时间：</label>
+                    <input name="gmtCreateFormat" type="text" class="dfinput detail"  disabled  value="">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+    <div class="mengban">
+
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/common/page.js"></script>
+    <script src="${path}/js/biz/common/table.js"></script>
+    <script src="${path}/js/biz/event_training/square/activity_apply/list.js"></script>
+    <#include "/template/select.html"/>
+    <script type="text/html" id="table_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Manager.selectThis(event,this)">
+            <td><input name="checkbox" type="checkbox" value="{{item.id}}" /></td>
+            <td>{{item.title}}</td>
+            <td>{{item.realName}}</td>
+            <td>{{item.sexName}}</td>
+            <td>{{item.idNo}}</td>
+            <td>{{item.mobile}}</td>
+            <td>{{item.email}}</td>
+            {{if item.readFlag > 0}}
+                <td><a onclick="Manager.changeReadFlag('{{item.id}}','{{item.readFlag}}',event);" style="cursor: pointer;">{{item.readFlagName}}<img style="height: 16px;width: 16px;" src="${path}/images/eye02.png"></a></td>
+            {{else}}
+                <td><a onclick="Manager.changeReadFlag('{{item.id}}','{{item.readFlag}}',event);" style="cursor: pointer;">{{item.readFlagName}}<img style="height: 16px;width: 16px;vertical-align:middle;" src="${path}/images/eye01.png"></a></td>
+            {{/if}}
+            <td>{{item.gmtCreateFormat}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.detail('{{item.id}}',event);">详情</a>
+            </td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.edit('{{item.id}}',event);">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.del('{{item.id}}',event)">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="12">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+</#macro>
+

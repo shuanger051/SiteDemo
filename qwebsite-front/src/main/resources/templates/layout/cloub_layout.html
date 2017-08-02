@@ -1,0 +1,24 @@
+<#include "/layout/macro.html"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <#include "/layout/meta.html"/>
+    <!-- 公用css -->
+    <#include "/layout/style.html"/>
+    <!-- 个性css -->
+    <#if style??><@style/></#if>
+    <title>${root.site.title!''}<#if title??>${title!''}</#if></title>
+    <#if headJs??><@headJs/></#if>
+</head>
+<body <#if bodyClass??> class="${bodyClass!''}" </#if>>
+<#include "layout/cloub_header.html"/>
+<!-- 内容 -->
+<#if content??><@content/></#if>
+<#include "layout/footer.html"/>
+<#include "layout/alert.html"/>
+<!-- 公用js  -->
+<#include "layout/js.html"/>
+<!-- 个性js -->
+<#if js??><@js/></#if>
+</body>
+</html>

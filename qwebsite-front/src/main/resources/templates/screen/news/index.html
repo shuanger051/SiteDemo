@@ -1,0 +1,68 @@
+<#assign title="${channel.name}"/>
+<#assign parentChannelId=2/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <@channel_bean id=channel.parentId>
+    <#assign pChannel= tag_bean/>
+</@channel_bean>
+    <!--end导航-->
+    <div class="i_banner"><img src="${path}/images/i_banner/news.jpg" alt="新闻资讯" class="i_banner_img"></div>
+    <!--end大图片-->
+
+    <dl class="site_th w_1200"><dd>您所在的位置：<a href="${path}/index.htm">首页</a><em class="china">&gt;</em><a href="./index.jhtm">${pChannel.name}</a><em class="china">&gt;</em><b class="orange_text">${channel.name!''}</b></dd></dl>
+
+    <div class="box_shadow clearfix box_w w_1200">
+        <div class="i_center clearfix">
+            <div class="fl w_220">
+                <div class="l_nav clearfix">
+
+                    <h4 class="l_th"><span class="fr png eng">News</span><div class="r_cell"><#if pChannel.name?length gt 4><span class="more_text">${pChannel.name}</span><#else>${pChannel.name}</#if></div></h4>
+                    <ul class="l_nav_ul click_ul">
+                        <@channel_list parentId=channel.parentId>
+                            <#list tag_list as item>
+                                <li <#if item.id= channel.id> class="active" </#if>> <a href="${path}/${item.channelPath}/index.jhtm" data-channel-id="${item.id}" class="png">${item.name!''}</a></li>
+                            </#list>
+                        </@channel_list>
+                    </ul>
+                </div>
+                <!--end左导航-->
+            </div>
+            <!--end左边-->
+            <div class="fr w_900">
+                <h4 class="r_th"><b>${channel.name!''}</b></h4>
+                <ul class="i_news" id="tab">
+                </ul>
+                <dl class="page" id="tab_page"></dl>
+
+            </div>
+            <!--end右边-->
+        </div>
+    </div>
+    <!--end中间区域-->
+</#macro>
+<#macro js>
+    <script type="text/html" id="tab_temp">
+        {{if list.length > 0}}
+        {{each list as item i}}
+        <li><span class="fr">{{item.contentExt.releaseDate | dateFormat}}</span><a href="${path}/{{item.channel.tplContent}}/{{item.id}}.jhtm" class="hide1">{{item.contentExt.title}}</a></li>
+        {{/each}}
+        {{else}}
+            <li>暂无数据</li>
+        {{/if}}
+    </script>
+    <script type="text/javascript">
+        $(function (){
+            var table = new $.Table();
+                //左导航
+                $('.click_ul li').unbind().click(function(){
+                    $(this).addClass('active').siblings().removeClass('active');
+                    table.options({channelId:$(this).find("a").attr("data-channel-id")},true);
+                });
+                table.init({
+                    tId:"tab",
+                    url:"/content/list",
+                    parameter:{channelId:"${channel.id}"}
+                }).render();
+        })
+    </script>
+</#macro>

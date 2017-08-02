@@ -1,0 +1,2 @@
+<#assign path=root.path/>
+<#macro link l><#if l?contains("http")>${l}<#else>${path}${l}</#if></#macro>

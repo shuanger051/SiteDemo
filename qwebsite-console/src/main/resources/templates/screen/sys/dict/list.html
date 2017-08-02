@@ -1,0 +1,113 @@
+<#assign title="数据字典维护"/>
+<#include "/layout/error_layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">系统管理</a></li>
+            <li><a href="#">数据字典维护</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <div class="formtitle1"><span>字典项列表</span></div>
+        <div class="tools">
+            <ul class="toolbar">
+                <li class="click" onclick="Manager.add()"> <span><img src="${path}/images/t01.png" /></span>添加</li>
+            </ul>
+        <form id="searchForm" name="searchForm">
+        <ul class="seachform">
+            <li><label>字典</label><input name="entryCode" datatype="empty|ny" type="text" class="scinput" /></li>
+            <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+        </ul>
+        </form>
+        </div>
+
+        <table class="tablelist" id="table">
+            <thead>
+            <tr>
+                <th>字典</th>
+                <th>字典名</th>
+                <th width="600">备注</th>
+                <th width="200">操作</th>
+            </tr>
+            </thead>
+            <tbody id="table_tbody">
+
+            </tbody>
+        </table>
+
+
+        <div id="table_page">
+
+        </div>
+
+        <div class="formtitle1"> <span id="itemTitle">字典条目列表(<label class="label_note">未选择</label>)</span></div>
+        <div class="tools" id="itemAddBut" style="display: none">
+            <ul class="toolbar">
+                <li class="click" onclick="Manager.addItem()"> <span><img src="${path}/images/t01.png" /></span>添加</li>
+            </ul>
+        </div>
+        <table class="tablelist" id="item">
+            <thead>
+            <tr>
+                <th>字典</th>
+                <th>字典名</th>
+                <th>顺序</th>
+                <th>备注</th>
+                <th width="200">操作</th>
+            </tr>
+            </thead>
+            <tbody id="item_tbody">
+            <tr>
+                <td colspan="5">没有数据</td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="item_page">
+        </div>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/common/page.js"></script>
+    <script src="${path}/js/biz/common/table.js"></script>
+    <script src="${path}/js/biz/sys/dict/list.js"></script>
+    <script type="text/html" id="table_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Manager.showItem('{{item.entryCode}}','{{item.entryName}}',event,this)">
+            <td>{{item.entryCode}}</td>
+            <td>{{item.entryName}}</td>
+            <td>{{item.remark}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.edit('{{item.id}}',event);">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.del('{{item.id}}',event)">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr>
+            <td colspan="4">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+    <script type="text/html" id="item_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Tool.clickTr(event,this)">
+            <td>{{item.itemCode}}</td>
+            <td>{{item.itemName}}</td>
+            <td>{{item.itemOrder}}</td>
+            <td>{{item.remark}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.editItem('{{item.id}}',event)">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.delItem('{{item.id}}',event)">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="5">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+</#macro>

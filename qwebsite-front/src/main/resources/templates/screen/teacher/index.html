@@ -1,0 +1,94 @@
+<#assign title="专家风采"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+<!--end导航-->
+<div class="i_banner"><img src="${path}/images/i_banner/expert.jpg" alt="专家风采" class="i_banner_img"></div>
+<!--end大图片-->
+
+<dl class="site_th w_1200"><dd>您所在的位置：<a href="${path}/index.htm">首页</a><em class="china">&gt;</em><a href="./index.htm">专家风采</a><em class="china">&gt;</em><b class="orange_text" id="navTitle"></b></dd></dl>
+
+<div class="box_shadow clearfix box_w w_1200">
+    <div class="i_center clearfix">
+        <div class="fl w_220">
+            <div class="l_nav clearfix">
+                <h4 class="l_th"><span class="fr png eng">Expert</span><div class="r_cell">专家风采</div></h4>
+                <ul class="l_nav_ul click_ul" id="navMenu">
+                    <@dict entry="teacherLevel">
+                        <#list tag_list as item>
+                            <#if item.itemCode == 1 || item.itemCode == 2>
+                                <li data-level="${item.itemCode}"><a href="javascript:void(0)" class="png">${item.itemName}</a></li>
+                            </#if>
+                        </#list>
+                    </@dict>
+                </ul>
+            </div>
+            <!--end左导航-->
+        </div>
+        <!--end左边-->
+        <div class="fr w_900">
+            <h4 class="r_th"><b id="listTitle"></b></h4>
+            <div class="hide_box">
+                <ul class="list_3 clearfix h_tearch i_tearch round_img" id="tab">
+                </ul>
+                <dl class="page" id="tab_page"></dl>
+            </div>
+            <!--end右边-->
+        </div>
+    </div>
+    <!--end中间区域-->
+</div>
+</#macro>
+<#macro js>
+    <script>
+        template.helper("split",function (str,split){
+            var strs = new Array();
+            $.each(str.split("\r\n"),function (i,v){
+                strs.push("<p>" + v + "</p>");
+            })
+            return strs.join("");
+        })
+    </script>
+    <script type="text/html" id="tab_temp">
+        {{if list.length > 0}}
+        {{each list as item i}}
+        <li><a href="${path}/teacher/{{item.id}}.htm" class="box transition_a"><div class="i_box transition_a"><img src="${root.viewPath}{{item.headImg}}" style="width: 150px;height: 150px;" alt=""><h5 class="orange_text">{{item.realName}}</h5>
+            {{split(item.brief)}}
+        </div></a></li>
+        {{/each}}
+        {{else}}
+        <li>暂无数据</li>
+        {{/if}}
+    </script>
+    <script type="text/javascript">
+        template.config("escape", false);
+        <#if s.site?? && s.site == "square">
+        var type = 2;
+            <#else>
+        var type = 1;
+            </#if>
+        $(function (){
+            var level = Tool.getReqP("level");
+            if(!!level){//存在
+                $("#navMenu").find("li[data-level='" + level + "']").addClass("active");
+            }else{
+                $("#navMenu").find("li:first-child").addClass("active");
+            }
+            var title = $("#navMenu li.active").text();
+            $("#listTitle").text(title);
+            $("#navTitle").text(title);
+            var table = new $.Table();
+            //左导航
+            $('.click_ul li').unbind().click(function(){
+                $(this).addClass('active').siblings().removeClass('active');
+                $("#listTitle").text($(this).text());
+                $("#navTitle").text($(this).text());
+                table.options({type:type,level:$(this).attr("data-level")},true);
+            });
+            table.init({
+                tId:"tab",
+                url:"/teacher/list",
+                parameter:{type:type,level:$("#navMenu li.active").attr("data-level")}
+            }).render();
+        })
+    </script>
+</#macro>

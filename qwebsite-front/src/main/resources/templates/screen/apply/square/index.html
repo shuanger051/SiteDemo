@@ -1,0 +1,101 @@
+<#assign title="报名中心"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+<!--end导航-->
+<div class="i_banner"><img src="${path}/images/i_banner/apply.jpg" alt="报名中心" class="i_banner_img"></div>
+<!--end大图片-->
+
+<dl class="site_th w_1200"><dd>您所在的位置：<a href="${path}/index.htm">首页</a><em class="china">&gt;</em><a href="./index.htm">报名中心</a><em class="china">&gt;</em><b class="orange_text" id="navTitle"></b></dd></dl>
+
+<div class="box_shadow clearfix box_w w_1200">
+    <div class="i_center clearfix">
+        <div class="fl w_220">
+            <div class="l_nav clearfix">
+                <h4 class="l_th"><span class="fr png eng">Apply</span><div class="r_cell">报名中心</div></h4>
+                <ul class="l_nav_ul click_ul" id="navMenu">
+                    <li data-content-type="1"> <a href="javascript:void(0)" class="png">培训报名</a></li>
+                    <li data-content-type="2"> <a href="javascript:void(0)" class="png">活动报名</a></li>
+                    <li data-content-type="3"> <a href="javascript:void(0)" class="png">赛事报名</a></li>
+                </ul>
+            </div>
+            <!--end左导航-->
+        </div>
+        <!--end左边-->
+        <div class="fr w_900" id="c1" style="display: none">
+            <h4 class="r_th"><b id="listTitle1"></b></h4>
+                <ul class="i_news" id="tab1">
+                </ul>
+                <dl class="page" id="tab1_page"></dl>
+            <!--end右边-->
+        </div>
+        <div class="fr w_900" id="c2" style="display: none">
+            <h4 class="r_th"><b id="listTitle2"></b></h4>
+            <ul class="i_news" id="tab2">
+            </ul>
+            <dl class="page" id="tab2_page"></dl>
+            <!--end右边-->
+        </div>
+        <div class="fr w_900" id="c3" style="display: none">
+            <h4 class="r_th"><b id="listTitle3">赛事报名</b></h4>
+            <ul class="i_news" id="tab3">
+            </ul>
+            <dl class="page" id="tab3_page"></dl>
+            <!--end右边-->
+        </div>
+        <div class="fr w_900" id="c4" style="display: none;">
+            <h4 class="r_th"><b>培训等级查询</b></h4>
+            <div class="fill_div">
+                <label for="id1">姓名或身份证号：</label><input type="text" class="round_m fill_text" id="id1" name="id1">
+                <div class="d"><img src="${path}/images/icon/error_o.png" alt="" class="img_vertical">如未查询到相应的证书信息，可在工作日9:00~19:00致电排舞中心办公室0571-58103572查询</div>
+                <div class="btn"><a href="###" class="round_m login_btn btn_120">查询</a><a href="###" class="round_m gray_btn btn_120 m_l_b">重置</a></div>
+            </div>
+            <!--end右一行-->
+            <table class="list_table">
+                <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>等级</th>
+                    <th>时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="3"><div class="null_box">暂无内容~</div></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--end中间区域-->
+</div>
+</#macro>
+<#macro js>
+    <script type="text/html" id="tab1_temp">
+        {{if list.length > 0}}
+        {{each list as item i}}
+        <li><span class="fr">{{item.gmtCreate | dateFormat:'yyyy-MM-dd'}}</span><a href="train_apply.htm?id={{item.id}}" class="hide1">{{item.title}}</a></li>
+        {{/each}}
+        {{else}}
+        <li>暂无数据</li>
+        {{/if}}
+    </script>
+    <script type="text/html" id="tab2_temp">
+        {{if list.length > 0}}
+        {{each list as item i}}
+        <li><span class="fr">{{item.gmtCreate | dateFormat:'yyyy-MM-dd'}}</span><a href="activity_apply.htm?id={{item.id}}" class="hide1">{{item.title}}</a></li>
+        {{/each}}
+        {{else}}
+        <li>暂无数据</li>
+        {{/if}}
+    </script>
+    <script type="text/html" id="tab3_temp">
+        {{if list.length > 0}}
+        {{each list as item i}}
+        <li><span class="fr">{{item.gmtCreate | dateFormat:'yyyy-MM-dd'}}</span><a href="competition_apply.htm?id={{item.id}}" class="hide1">{{item.title}}</a></li>
+        {{/each}}
+        {{else}}
+        <li>暂无数据</li>
+        {{/if}}
+    </script>
+    <script type="text/javascript" src="${path}/js/biz/apply/square/index.js"></script>
+</#macro>

@@ -1,0 +1,26 @@
+<#include "/layout/macro.html"/>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="${path}/css/h5/swiper.3.2.0.min.css" />
+    <link rel="stylesheet" type="text/css" href="${path}/css/h5/common.css">
+    <!-- 个性css -->
+    <#if style??><@style/></#if>
+    <title>${root.site.title!''}<#if title??>${title!''}</#if></title>
+    <#if headJs??><@headJs/></#if>
+</head>
+<body <#if bodyClass??> class="${bodyClass!''}" </#if>>
+<!-- 内容 -->
+<#if content??><@content/></#if>
+<script type="text/javascript" src="${path}/js/h5/zepto.js"></script>
+<script type="text/javascript" src="${path}/js/h5/io.js"></script>
+<script type="text/javascript" src="${path}/js/h5/common.js" ></script>
+<!-- 个性js -->
+<#if js??><@js/></#if>
+</body>
+</html>

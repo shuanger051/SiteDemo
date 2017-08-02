@@ -1,0 +1,39 @@
+<#assign title="密码修改"/>
+<#include "/layout/cloub_layout.html"/>
+<#macro style>
+    <link rel="stylesheet" type="text/css" href="${path}/css/round_i.css">
+</#macro>
+
+<#macro content>
+    <h4 class="pass_th w_1200"><b class="th_y_line"></b>修改密码</h4>
+
+    <div class="w_440 box_w">
+        <form id="modifyPwdForm">
+        <dl class="pass_fill">
+            <dt>
+            <div class="text_o">
+                <input type="password" class="round_s login_text" datatype="*" value="" name="old_passwd" placeholder="原密码" nullmsg="请输入原密码">
+                <div class="text_error png_img"></div>
+            </div>
+            <div class="text_o">
+                <input type="password" class="round_s login_text" value="" datatype="*6-18" name="new_passwd" placeholder="新密码" plugin="passwordStrength" autocomplete="false" nullmsg="请输入新密码">
+                <div class="text_error png_img"></div>
+                <div class="pass_box clearfix">6-16位数字、字母、特殊字符
+                    <ul class="pass_ul"><li>弱</li><li>中</li><li>强</li></ul>
+                </div>
+            </div>
+            <div class="text_o">
+                <input type="password" class="round_s login_text" placeholder="确认新密码" recheck="new_passwd" datatype="*" name="confirmPassword" autocomplete="false" nullmsg="请输入确认密码">
+                <div class="text_error png_img"></div>
+            </div>
+            </dt>
+            <dd><input type="submit" class="round_s login_btn" value="提交" ></dd>
+        </dl>
+        </form>
+    </div>
+</#macro>
+
+<#macro js>
+    <script src="${path}/js/biz/passwordstrong.js"></script>
+    <script src="${path}/js/biz/center/modifypwd.js"></script>
+</#macro>

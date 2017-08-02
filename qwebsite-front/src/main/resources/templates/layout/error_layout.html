@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<#include "/layout/macro.html"/>
+<html>
+<head>
+    <#include "/layout/meta.html"/>
+    <!-- 公用css -->
+    <#include "/layout/style.html"/>
+    <!-- 个性css -->
+    <#if style??><@style/></#if>
+    <title>${root.site.title!''}<#if title??>-${title!''}</#if></title>
+    <#if headJs??><@headJs/></#if>
+    <style>
+        .page-404 {
+            color: #afb5bf;
+            padding-top: 60px;
+        }
+        .text-c {
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body <#if bodyClass??> class="${bodyClass!''}" </#if>>
+<!-- 内容 -->
+<#if content??><@content/></#if>
+<!-- 公用js  -->
+<#include "layout/js.html"/>
+<!-- 个性js -->
+<#if js??><@js/></#if>
+</body>
+</html>

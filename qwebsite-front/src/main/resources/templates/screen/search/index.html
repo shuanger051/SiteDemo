@@ -1,0 +1,74 @@
+<#assign title="${channel.name!''}"/>
+<#assign parentChannelId=1/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <@channel_bean id=channel.parentId>
+    <#assign pChannel= tag_bean/>
+</@channel_bean>
+
+<dl class="site_th w_1200"><dd>您所在的位置：<a href="${path}/index.htm">首页</a><em class="china">&gt;</em>搜索</dd></dl>
+<div class="box_shadow clearfix box_w w_1200" style="padding-bottom: 4em;">
+    <div class="search_box">
+        <div class="fl search_l w_770">
+            <ul class="search_ul link_line" id="tab">
+
+            </ul>
+            <dl class="page page_c" id="tab_page">
+
+            </dl>
+
+        </div>
+        <!--end左边-->
+        <div class="fr search_r w_350">
+            <h4 class="th_r_line"><b></b>相关舞蹈</h4>
+            <div class="hide_box">
+                暂无内容
+            </div>
+            <h4 class="th_r_line"><b></b>人们正在热议</h4>
+            <div class="hide_box">
+                暂无内容
+            </div>
+        </div>
+        <!--end右边-->
+    </div>
+    <!--end宽度-->
+</div>
+<!--end中间区域-->
+</div>
+</#macro>
+
+<#macro js>
+    <script type="text/html" id="tab_temp">
+        {{if list.length > 0}}
+        {{each list as item i}}
+            <li><h4><a href="${path}/{{item.link}}">{{item.title}}</a></h4>
+                <div class="t">发文时间：{{item.gmtCreate}}</div>
+                <p>{{item.content}}</p>
+                <div class="d blue_link"><a href="${path}/{{item.link}}" target="_blank">...{{item.link}}</a><span class="m_l_b gray_text_l">索引时间：{{item.gmtAdd}}</span></div>
+            </li>
+        {{/each}}
+        {{else}}
+            <li>暂无数据</li>
+        {{/if}}
+    </script>
+    <script type="text/javascript">
+        $(function (){
+            var table = new $.Table();
+            var queryString = Tool.getReqP("queryString");
+            if(null != queryString && "" != queryString && "全站搜索文章..." != queryString){
+                $("#search_input").val("");
+                $("#search_input").val(queryString);
+            }else{
+                $("#tab").html("");
+                $("#tab").html("<li>暂无数据</li>");
+            }
+            if(null != queryString && "" != queryString && "全站搜索文章..." != queryString){
+                table.init({
+                    tId:"tab",
+                    url:"/search/queryIndex",
+                    parameter:{queryString:queryString,fieldName:"title"}
+                }).render();
+            }
+        })
+    </script>
+</#macro>

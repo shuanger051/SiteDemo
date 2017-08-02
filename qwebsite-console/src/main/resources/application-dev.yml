@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    username: 
+    password: 
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/qwebsite?characterEncoding=utf-8
+    initial-size: 5
+    max-active: 20
+    max-idle: 8
+    min-idle: 3
+    max-wait: 500
+    remove-abandoned: true
+    remove-abandoned-timeout: 180
+    test-while-idle: true
+    ##验证
+    validation-query: SELECT 1
+    validation-query-timeout: 1
+    time-between-eviction-runs-millis: 30000
+    num-tests-per-eviction-run: 20
+server:
+  port: 7777
+#  context-path: /q
+
+#文件上传路径
+uploadresource:
+  base-path: E://GIT//QWEBSITE//QWEBSITE//qwebsite-console//src//main//resources//static//upload//
+  view-path: http://127.0.0.1:7777/upload/
+
+#索引存放位置
+indexresource:
+  base-index-path: E://lucene_index//

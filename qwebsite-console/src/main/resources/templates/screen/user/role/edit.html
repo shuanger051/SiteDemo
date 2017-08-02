@@ -1,0 +1,53 @@
+<#assign title="添加角色"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <link rel="stylesheet" href="${path}/css/zTreeStyle/zTreeStyle.css">
+    <!--<link rel="stylesheet" href="${path}/css/zTreeStyle/demo.css">-->
+    <style>
+        .ztree li span.button.add {
+            margin-left:2px;
+            margin-right: -1px;
+            background-position:-144px 0;
+            vertical-align:top;
+            *vertical-align:middle
+        }
+        .ztree span{
+            display: inline;
+        }
+        .ztree li span.button.chk {
+            -moz-border-radius:0px 0px 0px 0px;
+            -webkit-border-radius:0px 0px 0px 0px;
+            border-radius:0px 0px 0px 0px;
+        }
+    </style>
+</#macro>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">用户管理</a></li>
+            <li><a href="#">角色管理</a></li>
+            <li><a href="#">编辑角色</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <div class="formbody">
+        <form id="form1" name="form1">
+            <!--<input name="id" type="hidden">-->
+            <ul class="forminfo">
+                <li><label>角色名<b>*</b></label><input name="roleName" type="text" datatype="zhen" class="dfinput" /><i></i></li>
+                <li><label>排列顺序<b>*</b></label><input name="priority" type="text" datatype="n1-2" class="dfinput" /><i></i></li>
+                <li><label>拥有所有权限<b>*</b></label><cite><input name="isSuper" type="radio" value="1">是&nbsp;&nbsp;&nbsp;&nbsp;<input name="isSuper" type="radio" value="0" checked>否</cite></li>
+                <li><label>权限</label><cite style="display: inline-block">
+                    <div id="tree" class="ztree"></div></cite>
+                </li>
+                <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存"/></li>
+            </ul>
+        </form>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/lib/jquery.ztree.all.min.js"></script>
+    <script src="${path}/js/biz/user/role/edit.js"></script>
+
+</#macro>

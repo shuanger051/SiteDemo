@@ -1,0 +1,103 @@
+<#assign title="权限维护"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <link rel="stylesheet" href="${path}/css/zTreeStyle/zTreeStyle.css">
+    <!--<link rel="stylesheet" href="${path}/css/zTreeStyle/demo.css">-->
+    <style>
+        .elem-field {
+            margin-bottom: 10px;
+            padding: 0;
+            border: 1px solid #e2e2e2;
+        }
+        .elem-field legend{
+            margin-left:20px;
+            padding: 0 10px;
+            font-size: 20px;
+            font-weight: 300;
+        }
+        .ztree li span.button.add {
+            float: right!important;
+            margin-left:2px;
+            margin-right: -1px;
+            background-position:-144px 0;
+            vertical-align:top;
+            *vertical-align:middle
+        }
+        .ztree li span.button.remove {
+            float: right!important;
+        }
+        .ztree span{
+            display: inline;
+        }
+    </style>
+</#macro>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页管理</a></li>
+            <li><a href="#">导航管理</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <fieldset class="elem-field" style="width: 29%; float: left;">
+            <legend>导航树</legend>
+            <div style="padding-left:23px;">
+                <div id="tree" class="ztree"> </div>
+            </div>
+        </fieldset>
+        <fieldset id="channelList" class="elem-field" style="width: 69%; float: right; border: none">
+            <!--<legend>栏目-列表</legend>-->
+            <div>
+                <div class="tools">
+                    <ul class="toolbar">
+                        <li class="click" onclick="Manager.add()"> <span><img src="${path}/images/t01.png" /></span>添加导航</li>
+                    </ul>
+                </div>
+                <table class="tablelist" id="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>导航名称</th>
+                        <th>排列顺序</th>
+                        <th>是否显示</th>
+                        <th width="200">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="table_tbody">
+
+                    </tbody>
+                </table>
+                <div id="table_page">
+
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/common/page.js"></script>
+    <script src="${path}/js/biz/common/table.js"></script>
+    <script src="${path}/js/lib/jquery.ztree.all.min.js"></script>
+    <script src="${path}/js/biz/sys/nav/manager.js"></script>
+    <script type="text/html" id="table_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Tool.clickTr(event,this)">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.priority}}</td>
+            <td>{{item.isDisplayName}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.edit('{{item.id}}',event);">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.del('{{item.id}}',event);">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="5">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+</#macro>

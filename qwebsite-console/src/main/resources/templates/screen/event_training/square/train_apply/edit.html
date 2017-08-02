@@ -1,0 +1,68 @@
+<#assign title="培训报名管理-修改"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">活动赛事培训管理</a></li>
+            <li><a href="#">培训报名管理</a></li>
+            <li><a href="#">培训报名修改</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <div class="formbody">
+        <form id="form1" name="form1" method="post" enctype ="multipart/form-data">
+            <input name="id" id="id" type="hidden">
+            <ul class="forminfo">
+                <li>
+                    <label>培训标题<b>*</b></label>
+                    <input name="title" type="text" style="background: white;width: 278px;" class="dfinput detail" readonly="">
+                </li>
+                <li>
+                    <label>姓名<b>*</b></label>
+                    <input name="realName" type="textinput" class="dfinput" datatype="*" style="width: 278px;" />
+                </li>
+                <li>
+                    <label>性别<b>*</b></label>
+                    <select name="sex">
+
+                    </select>
+                </li>
+                <li>
+                    <label>身份证号<b>*</b></label>
+                    <input name="idNo" type="textinput" class="dfinput" datatype="IdentityCode" style="width: 278px;" />
+                </li>
+                <li>
+                    <label>联系电话<b>*</b></label>
+                    <input name="mobile" type="textinput" class="dfinput" datatype="mobile" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>报名项目<b>*</b></label>
+                    <select name="trainerType">
+
+                    </select>
+                </li>
+                <li>
+                    <label>邮箱地址</label>
+                    <input name="email" type="textinput" class="dfinput" datatype="email" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>QQ号码</label>
+                    <input name="qq" type="textinput" class="dfinput" datatype="QQ" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>身高</label>
+                    <input name="height" type="textinput" class="dfinput" datatype="height" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>&nbsp;</label>
+                    <input name="" type="submit" class="btn" value="确认保存"/>
+                </li>
+            </ul>
+        </form>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/event_training/square/train_apply/edit.js"></script>
+    <#include "/template/select.html"/>
+</#macro>

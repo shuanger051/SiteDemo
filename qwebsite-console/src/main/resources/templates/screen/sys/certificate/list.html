@@ -1,0 +1,64 @@
+<#assign title="${table.remarks}列表"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页管理</a></li>
+            <li><a href="#">资质证书管理</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <div class="formtitle1"><span>名师列表</span></div>
+        <div class="tools">
+            <ul class="toolbar">
+                <li class="click" onclick="Manager.add()"><span><img src="${path}/images/t01.png" /></span>添加</li>
+            </ul>
+        </div>
+        <table class="imgtable" id="table">
+            <thead>
+            <tr>
+                <th width="100px">舞蹈类别</th>
+                        <th width="100px">证书</th>
+                        <th>名称</th>
+                        <th>排列顺序</th>
+                        <th>是否显示</th>
+                <th width="200">操作</th>
+            </tr>
+            </thead>
+            <tbody id="table_tbody">
+
+            </tbody>
+        </table>
+        <div id="table_page">
+
+        </div>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/common/page.js"></script>
+    <script src="${path}/js/biz/common/table.js"></script>
+    <script type="text/javascript" src="${path}/js/biz/sys/certificate/list.js"></script>
+    <script type="text/html" id="table_temp">
+
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Tool.clickTr(event,this)">
+            <td>{{item.typeName}}</td>
+            <td class="imgtd"><img style="width: 80px;height: 60px;" src="${root.viewPath}{{item.img}}"></td>
+                <td>{{item.name}}</td>
+                <td>{{item.priority}}</td>
+                <td>{{item.isEnabledName}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.edit('{{item.id}}',event);">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.del('{{item.id}}',event)">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="5">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+</#macro>

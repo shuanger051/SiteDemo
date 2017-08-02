@@ -1,0 +1,66 @@
+<#assign title="密码找回"/>
+<#include "/layout/home_layout.html"/>
+<#assign bodyClass="white_body"/>
+<#macro style>
+
+
+</#macro>
+
+<#macro content>
+    <div class="i_header min_1200">
+        <div class="w_1200">
+            <h1 class="png_img logo fl"><a href="${path}/index.htm"><img src="${path}/images/logo.png" alt=""></a></h1>
+            <#if !user??>
+            <div class="fr header_r_link">
+                <a href="javascript:0;" class="cd-popup-trigger0"><span class="h_arrow png"></span>登录</a>
+            </div>
+            </#if>
+        </div>
+        <!--end宽度-->
+    </div>
+    <h4 class="pass_th w_1200"><b class="th_y_line"></b>找回密码</h4>
+    <div class="w_440 box_w">
+        <form id="pwdFrom">
+            <dl class="pass_fill">
+                <dt>
+                    <div class="text_o">
+                        <span class="f_ma_r">
+                            <input type="button" class="ma_btn round_s" value="获取验证码" id="getCodeBtn">
+                        </span>
+                        <input type="text" name="mobile" class="round_s login_text" value="" placeholder="手机号" datatype="mobile"
+                               nullmsg="请输入手机号">
+                         <div class="text_error png_img"></div>
+                    </div>
+                    <div class="text_o">
+                        <input type="text" name="code" class="round_s login_text" datatype="*1-8" placeholder="验证码" nullmsg="请输入验证码">
+                        <div class="text_error png_img"></div>
+                    </div>
+                    <div style="display: none" id="pwdPanel">
+                    <div class="text_o">
+                        <input type="password" name="new_passwd" plugin="passwordStrength" datatype="*6-18" class="round_s login_text" value="" placeholder="新密码" nullmsg="请输入新密码">
+                        <div class="text_error png_img"></div>
+                        <div class="pass_box clearfix">至少包含数字和数字，6~16个字符，区分大小字
+                            <ul class="pass_ul">
+                                <li>弱</li>
+                                <li>中</li>
+                                <li>强</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text_o">
+                        <input type="password" name="confirmPasswd" class="round_s login_text " recheck="new_passwd"
+                               placeholder="确认新密码" datatype="*" nullmsg="请输入确认密码">
+                        <div class="text_error png_img"></div>
+                    </div>
+                    </div>
+                </dt>
+                <dd><input type="submit" class="round_s login_btn" value="提交"></dd>
+            </dl>
+        </form>
+    </div>
+    <!--end中间区域-->
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/passwordstrong.js"></script>
+    <script src="${path}/js/biz/retrive/pwd.js"></script>
+</#macro>

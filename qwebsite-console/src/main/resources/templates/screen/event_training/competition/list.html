@@ -1,0 +1,73 @@
+<#assign title="培训管理-列表"/>
+<#include "/layout/error_layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">活动赛事培训管理</a></li>
+            <li><a href="#">培训管理</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <div class="tools">
+            <ul class="toolbar">
+                <li class="click" onclick="Manager.add()"><span><img src="${path}/images/t01.png" /></span>添加</li>
+            </ul>
+            <form id="searchForm" name="searchForm">
+                <ul class="seachform">
+                    <li>
+                        <label>标题:</label>
+                        <input name="title" id="title" type="text" class="scinput" />
+                    </li>
+                    <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+                </ul>
+            </form>
+        </div>
+        <table class="tablelist" id="table">
+            <thead>
+            <tr>
+                <th>标题</th>
+                <th>所在省份</th>
+                <th>开始日期</th>
+                <th>结束日期</th>
+                <th>状态</th>
+                <th>创建时间</th>
+                <th width="200">操作</th>
+            </tr>
+            </thead>
+            <tbody id="table_tbody">
+
+            </tbody>
+        </table>
+        <div id="table_page">
+
+        </div>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/common/page.js"></script>
+    <script src="${path}/js/biz/common/table.js"></script>
+    <script src="${path}/js/biz/event_training/competition/list.js"></script>
+    <script type="text/html" id="table_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Manager.selectThis(event,this)">
+            <td>{{item.title}}</td>
+            <td>{{item.province}}站</td>
+            <td>{{item.gmtBeginFormat}}</td>
+            <td>{{item.gmtEndFormat}}</td>
+            <td>{{item.dateStatus}}</td>
+            <td>{{item.gmtCreateFormat}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.edit('{{item.id}}',event);">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.del('{{item.id}}',event)">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="7">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+</#macro>

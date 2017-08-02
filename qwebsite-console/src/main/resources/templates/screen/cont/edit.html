@@ -1,0 +1,175 @@
+<#assign title="添加会员"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <link rel="stylesheet" href="${path}/css/uploadfile/uploadfile.custom.css">
+    <style>
+        .elem-field {
+            margin-bottom: 10px;
+            padding: 0;
+            border: 1px solid #e2e2e2;
+        }
+        .elem-field-left{
+            margin-left:20px;
+            padding: 0 10px;
+            font-size: 20px;
+            font-weight: 300;
+        }
+        span {
+            display: inline-block;
+        }
+    </style>
+    <!--<link rel="stylesheet" href="${path}/css/uploadfile/uploadfile.css">-->
+</#macro>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">内容管理</a></li>
+            <li><a href="#">内容管理</a></li>
+            <li><a href="#">添加内容</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <form id="form1" name="form1">
+        <input name="id" type="hidden">
+        <input name="contentId" type="hidden">
+        <div class="rightinfo" >
+            <div style="width: 49%; float: left;">
+                <ul class="forminfo">
+                    <li><label>栏目</label><input id="channelName" name="channelName" type="text" class="span" readonly /><i></i></li>
+                    <li><label>标题<b>*</b></label><input name="title" type="text" datatype="zhen" class="dfinput" /><i></i></li>
+                    <li><label>摘要</label><textarea name="description" id="description" class="textinput" style="width: 325px;height: 64px;" maxlength="200"></textarea></li>
+                    <li><label>作者</label><input name="author" type="text" class="dfinput" value=""/><i></i></li>
+                    <li><label>固定级别</label><input name="topLevel" type="text" value="1" class="dfinput" style="width: 150px;" />&nbsp;&nbsp;排序时间<b>*</b>&nbsp;&nbsp;<input id="sortDate" name="sortDate" datatype="*" type="text" class="dfinput" style="width: 150px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/></li>
+
+                </ul>
+            </div>
+
+            <div style="width: 49%; float: right;">
+                <ul class="forminfo">
+                    <li style="height: 34px;"></li>
+                    <li><label>简短标题</label><input name="shortTitle" type="text" class="dfinput" /><i></i></li>
+                    <li style="height: 34px;"></li>
+                    <li style="height: 34px;"></li>
+                    <li><label>来源</label><input name="origin" type="text" class="dfinput" style="width: 120px"/>&nbsp;&nbsp;url&nbsp;&nbsp;<input name="originUrl" type="text" class="dfinput" style="width: 120px;"/></li>
+                    <li><label>发布日期<b>*</b></label><input id="releaseDate" name="releaseDate" type="text" class="dfinput" datatype="*" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/></li>
+                </ul>
+            </div>
+            <div style="width: 70%">
+                <ul class="forminfo">
+                    <li><label>附件</label>
+                        <div  id="fileuploader">
+                        <!--<input id="" type="file" name="attachments" multiple="">-->
+                        </div>
+                        <div>
+                            <table class="filetable" id="attachmentCont">
+                                <thead>
+                                <tr>
+                                    <th>附件名称</th>
+                                    <th>附件地址</th>
+                                    <th>上传</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div style="width: 100%">
+                <ul class="forminfo">
+                    <li><label>内容</label>
+                        <div id="txt" style="height: 500px; display: inline-block;left: 86px;" >
+
+                        </div>
+                    </li>
+                    <li><label>图片集</label>
+                        <div  id="pictureupload"></div>
+                        <ul class="imglist">
+
+                        </ul>
+                    </li>
+                    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存"/></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</#macro>
+<#macro js>
+    <script type="text/javascript">
+        function getFileType(){
+            return Tool.getFileType().join(",");
+        }
+        function getFormDate() {
+            return {};
+        }
+        var isTransfer = false;
+    </script>
+    <script type="text/javascript" charset="utf-8" src="${path}/js/lib/jquery.uploadfile.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${path}/js/lib/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${path}/js/lib/ueditor/ueditor.all.js"> </script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="${path}/js/lib/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="${path}/js/lib/My97DatePicker/WdatePicker.js"></script>
+    <script src="${path}/js/biz/cont/edit.js"></script>
+    <#include "/layout/ueditorjs.html"/>
+    <#include "/template/select.html"/>
+    <#include "/template/radio.html"/>
+    <script type="text/html" id="attachmentTemp">
+        <tr>
+            <td><a href="javascript:void(0)" class="tablelink" onclick="Manager.delAttachment(this);">删除</a>
+                <input data-t="name" class="smallinput" name="attachmentName" value="{{item.attachmentName}}"></td>
+            <td><input data-t="path" class="smallinput"  name="attachmentPath" value="{{item.attachmentPath}}" readonly></td>
+            <td style="text-indent: 0px;">
+                <div id="attachments{{count}}"></div>
+                </td>
+        </tr>
+    </script>
+    <script type="text/html" id="picturesTemp">
+        <li style="width: 328px; height: 160px; clear: none;">
+            <table class="filetable">
+                <tr>
+                    <td style="text-indent: 0px;">
+                        <div id="picture{{count}}"></div>
+                    </td>
+                    <td rowspan="3">
+                        <img style="width: 110px;height: 110px;" src="${root.viewPath}{{item.imgPath}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input data-t="name" type="text" class="smallinput" name="imgPath" style="width: 160px;" value="{{item.imgPath}}" readonly/>
+                        <a href="javascript:void(0)" class="tablelink" onclick="Manager.delPicture(this);">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea name="picDescription" class="textinput" style="width: 170px;height: 60px;" maxlength="255"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </li>
+    </script>
+    <script type="text/html" id="titleImgTemp">
+        <li style="width: 340px; height: 100px; clear: none;">
+            <table class="filetable">
+                <tr>
+                    <td style="text-indent: 0px;">
+
+                    </td>
+                    <td rowspan="2">
+                        <img style="width: 100px;height: 100px;" src="${root.viewPath}{{item.imgPath}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input data-t="name" type="text" class="smallinput" name="titleImg" style="width: 160px;" value="{{item.imgPath}}" readonly/>
+                        <a href="javascript:void(0)" class="tablelink" onclick="Manager.delPicture(this);">删除</a>
+                    </td>
+                </tr>
+            </table>
+        </li>
+    </script>
+</#macro>

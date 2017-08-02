@@ -1,0 +1,59 @@
+<#assign title="首页浮窗管理-添加"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页管理</a></li>
+            <li><a href="#">首页浮窗管理</a></li>
+            <li><a href="#">添加首页浮窗</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <div class="formbody">
+        <form id="form1" name="form1" method="post" enctype ="multipart/form-data">
+            <ul class="forminfo">
+                <li>
+                    <label>图标<b>*</b></label>
+                    <div class="uploader white">
+                        <input type="text" class="filename" readonly/>
+                        <input type="button" class="button" value="选择上传文件"/>
+                        <input type="file" name="file" size="30" />
+                    </div>
+                </li>
+                <li>
+                    <label>跳转地址</label>
+                    <input name="siteLink" type="textinput" class="dfinput" datatype="url" style="width: 278px;"  />
+                    <i>格式:英文、数字、字符的组合</i>
+                </li>
+                <li>
+                    <label>显示位置<b>*</b></label>
+                    <select name="floatingPosition" id="floatingPosition">
+
+                    </select>
+                </li>
+                <li>
+                    <label>是否显示<b>*</b></label>
+                    <select name="isEnabled">
+
+                    </select>
+                </li>
+                <li>
+                    <label>&nbsp;</label>
+                    <input name="" type="submit" class="btn" value="确认保存"/></li>
+            </ul>
+        </form>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/sys/index_floating/add.js"></script>
+    <#include "/template/select.html"/>
+    <script>
+        $(function(){
+            $("input[type=file]").change(function(){$(this).parents(".uploader").find(".filename").val($(this).val());});
+            $("input[type=file]").each(function(){
+                if($(this).val()==""){$(this).parents(".uploader").find(".filename").val("请选择需要上传的文件...");}
+            });
+        });
+    </script>
+</#macro>

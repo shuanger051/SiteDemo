@@ -1,0 +1,30 @@
+<!-- header -->
+<div class="header_og min_1200">
+    <div class="w_1200">
+        <h1 class="png_img logo fl"><a href="${path}/index.htm"><img src="${path}/images/club/logo.png" alt="教练员平台_排舞"></a></h1>
+
+        <ul class="i_funnav">
+            <li><a href="${path}/index.htm"><span>首页</span></a></li>
+            <li <#if navIndex=1> class="current"</#if>><a href="${path}/center/info.htm"><span>个人信息</span></a></li>
+            <li <#if navIndex=2> class="current"</#if>><a href="${path}/center/course.htm"><span>我的课程</span></a></li>
+            <li <#if navIndex=5> class="current"</#if>><a href="${path}/center/activity.htm"><span>赛事活动</span></a></li>
+            <li <#if navIndex=3> class="current"</#if>><a href="${path}/center/order.htm"><span>订单管理</span></a></li>
+            <li <#if navIndex=4> class="current"</#if>><a href="${path}/center/withdrawal.htm"><span>结算管理</span></a></li>
+        </ul>
+
+        <div class="header_r fr">
+            <div class="header_club fl"><a href="###"><span class="option_arrow png">欢迎你，${user.realName!''}</span></a>
+                <ul class="header_club_ul">
+                    <li><a href="${path}/center/info.htm">个人中心</a></li>
+                    <li><a href="${path}/center/course.htm">我的课程<span class="round_m num_r">${user.totalLesson}</span></a></li>
+                    <li><a href="${path}/center/modifypwd.htm">密码修改</a></li>
+                    <li><a href="${path}/account/logout">退出登录</a></li>
+                </ul>
+            </div>
+            <!--end个人-->
+        </div>
+        <!--end头文件右-->
+    </div>
+    <!--end宽度-->
+</div>
+<!--end头文件-->

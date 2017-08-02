@@ -1,0 +1,112 @@
+<#assign title="结算管理"/>
+<#assign navIndex="4"/>
+<#include "/layout/cloub_layout.html"/>
+<#macro style>
+    <link rel="stylesheet" type="text/css" href="${path}/css/round_i.css">
+    <link rel="stylesheet" type="text/css" href="${path}/css/jquery.datetimepicker.css"/>
+</#macro>
+<#macro content>
+
+    <div class="box_shadow clearfix box_w w_1200">
+        <div class="i_center clearfix" style="padding-top: .7em;">
+            <h4 class="r_th"><span class="fr font_14 link_line gray_link"></span><b>提现明细</b></h4>
+
+            <div class="search_o">
+                <form id="searchForm" name="searchForm">
+                    <input type="text" name="start_time" id="start_time" style="width: 240px;" class="fill_text round_m date_text datetimepicker" placeholder="开始时间" datatype="*">
+                    <span class="m_t"><img src="${path}/images/club/arrow.png" class="img_vertical"></span>
+                    <input name="end_time" id="end_time" type="text" style="width: 240px;" class="fill_text round_m date_text datetimepicker" placeholder="结束时间" datatype="*">
+                    <input type="button" class="r_search_btn round_r png" id="searchList">
+                </form>
+            </div>
+            <!--end搜索-->
+            <table class="list_table_w">
+                <thead>
+                <tr>
+                    <th>提现金额</th>
+                    <th>卡号</th>
+                    <th>开户行</th>
+                    <th>提现时间</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody id="tab">
+
+                </tbody>
+            </table>
+            <dl class="page" id="tab_page">
+            </dl>
+        </div>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/lib/jquery.datetimepicker.js"></script>
+
+    <script>
+        ;$(function(){
+            var options = {
+                lang:"ch",
+                i18n:{
+                    // 以中文显示月份
+                    de:{
+                        months:["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月",],
+                        // 以中文显示每周（必须按此顺序，否则日期出错）
+                        dayOfWeek:["日","一","二","三","四","五","六",]
+                    }
+                },
+                // 显示成年月日，时间--
+                format:"Y-m-d H:m:s"
+                // 限制不能选取今天之前
+//                minDate:0,
+                //取消时间选择
+//                timepicker:
+            };
+            // 日期时间选择器
+            $("#start_time").datetimepicker($.extend(options,{
+                onShow:function( ct ){
+                    this.setOptions({
+                        maxDate:jQuery('#end_time').val()?jQuery('#end_time').val():false
+                    })
+                },
+            }));
+            $("#end_time").datetimepicker($.extend(options,{
+                onShow:function( ct ){
+                    this.setOptions({
+                        minDate:jQuery('#start_time').val()?jQuery('#start_time').val():false
+                    })
+                },
+            }));
+
+        });
+    </script>
+    <script type="text/html" id="tab_temp">
+        {{if list.length > 0}}
+        {{each list as item i}}
+        <tr>
+            <td><span class="red_text">&yen;{{item.money | balanceFormat}}</span></td>
+            <td>{{item.account_code}}</td>
+            <td>{{item.bank_name}}</td>
+            <td>{{item.record_time | dateFormat}}</td>
+            <td>{{item.statusName}}</td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr>
+            <td colspan="5">您还没有提现记录</td>
+        </tr>
+        {{/if}}
+    </script>
+    <script type="text/javascript">
+        $(function (){
+            var table = new  $.Table();
+            table.init({
+                url:"/account/withdrawals",
+                page_size:10
+            }).render();
+            $("#searchList").click(function (){
+                table.options(Tool.serializeJson($("#searchForm")),true);
+            })
+        });
+    </script>
+
+</#macro>

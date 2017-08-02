@@ -1,0 +1,105 @@
+<#assign title="报名中心"/>
+<#assign s_site="square"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <style>
+        .tip {
+            color: #888;
+            font-style: oblique;
+        }
+    </style>
+</#macro>
+<#macro content>
+    <!--end导航-->
+    <div class="i_banner"><img src="${path}/images/i_banner/apply.jpg" alt="报名中心" class="i_banner_img"></div>
+    <!--end大图片-->
+
+    <dl class="site_th w_1200"><dd>您所在的位置：<a href="${path}/index.htm">首页</a><em class="china">&gt;</em><a href="./index.htm">报名中心</a><em class="china">&gt;</em><b class="orange_text" id="navTitle">培训报名</b></dd></dl>
+
+    <div class="box_shadow clearfix box_w w_1200">
+        <div class="i_center clearfix">
+            <div class="fl w_220">
+                <div class="l_nav clearfix">
+                    <h4 class="l_th"><span class="fr png eng">Apply</span><div class="r_cell">报名中心</div></h4>
+                    <ul class="l_nav_ul click_ul" id="navMenu">
+                        <li data-content-type="1" class="active"> <a href="index.htm?type=1" class="png">培训报名</a></li>
+                        <li data-content-type="2"> <a href="index.htm?type=2" class="png">活动报名</a></li>
+                        <li data-content-type="3"> <a href="index.htm?type=3" class="png">赛事报名</a></li>
+                    </ul>
+                </div>
+                <!--end左导航-->
+            </div>
+            <!--end左边-->
+            <div class="fr w_900">
+                <h4 class="r_th"><b>报名详情</b></h4>
+                <form id="applyForm" name="applyForm">
+                    <input type="hidden" name="contentId" id="contentId">
+                    <table class="fill_table">
+                    <tr>
+                        <th>培训项目：</th>
+                        <td><span class="orange_text font_24" id="contentName"></span></td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span><label for="realName">姓名：</label></th>
+                        <td><input type="text" value="请填写真实姓名" class="tip round_m fill_text" datatype="zhen" id="realName" name="realName" tip="请填写真实姓名" altercss="tip"><span class="error_gray Validform_checktip"></span></td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span>性别：</th>
+                        <td>
+                            <span class="sel_box_r">
+                                <input type="radio" id="sex-2" name="sex" value="2" checked />
+                                <label for="sex-2">男</label>
+                            </span>
+                            <span class="sel_box_r m_l_b">
+                                <input type="radio" id="sex-1" name="sex" value="1" />
+                                <label for="sex-1">女</label>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span><label for="idNo">身份证号码：</label></th>
+                        <td><input type="text" value="请输入身份证号码" class="tip round_m fill_text" datatype="IdentityCode" id="idNo" name="idNo" tip="请输入身份证号码" altercss="tip"><span class="error_gray Validform_checktip"></span></td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span><label for="mobile">联系电话：</label></th>
+                        <td><input type="text" value="如15858676187" class="tip round_m fill_text" datatype="mobile" id="mobile" name="mobile" errormsg="联系电话格式错误" tip="如15858676187" altercss="tip"><span class="error_gray Validform_checktip"></span></td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span>报名项目：</th>
+                        <td>
+                            <span class="sel_box_r">
+                                <input type="radio" id="trainerType-1" name="trainerType" value="1" checked />
+                                <label for="trainerType-1">教练员</label>
+                            </span>
+                            <span class="sel_box_r m_l_b">
+                                <input type="radio" id="trainerType-2" name="trainerType" value="2" />
+                                <label for="trainerType-2">裁判员</label>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span><label for="email">邮箱地址：</label></th>
+                        <td><input type="text" value="如zhangsan@126.com" class="tip round_m fill_text" datatype="email" id="email" name="email" tip="如zhangsan@126.com" altercss="tip" altercss="tip"><span class="error_gray Validform_checktip"></span></td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span><label for="height">身高：</label></th>
+                        <td><input type="text" value="175 代表175厘米 = 1.75米" class="tip round_m fill_text" id="height" name="height" datatype="n1-3" tip="175 代表175厘米 = 1.75米" altercss="tip"><span class="error_gray Validform_checktip"></span></td>
+                    </tr>
+                    <tfoot>
+                    <tr>
+                        <th></th>
+                        <td><input type="submit" class="login_btn round_m btn_300" value="确认提交"></td>
+                    </tr>
+                    </tfoot>
+                </table>
+                </form>
+            </div>
+            <!--end右边-->
+
+        </div>
+        <!--end中间区域-->
+    </div>
+</#macro>
+<#macro js>
+    <script type="text/javascript" src="${path}/js/biz/apply/square/train_apply.js"></script>
+</#macro>

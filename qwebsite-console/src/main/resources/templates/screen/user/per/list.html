@@ -1,0 +1,130 @@
+<#assign title="权限维护"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <link rel="stylesheet" href="${path}/css/zTreeStyle/zTreeStyle.css">
+    <!--<link rel="stylesheet" href="${path}/css/zTreeStyle/demo.css">-->
+    <style>
+        .elem-field {
+            margin-bottom: 10px;
+            padding: 0;
+            border: 1px solid #e2e2e2;
+        }
+        .elem-field legend{
+            margin-left:20px;
+            padding: 0 10px;
+            font-size: 20px;
+            font-weight: 300;
+        }
+        .ztree li span.button.add {
+              float: right!important;
+              margin-left:2px;
+              margin-right: -1px;
+              background-position:-144px 0;
+              vertical-align:top;
+              *vertical-align:middle
+          }
+        .ztree li span.button.remove {
+            float: right!important;
+        }
+        .ztree span{
+            display: inline;
+        }
+    </style>
+</#macro>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">系统管理</a></li>
+            <li><a href="#">用户管理</a></li>
+            <li><a href="#">权限管理</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <div class="formtitle1"><span>权限列表</span></div>
+        <fieldset class="elem-field" style="width: 49%; float: left;">
+            <legend>系统菜单</legend>
+            <div style="padding-left:23px;">
+                <div id="tree" class="ztree"> </div>
+            </div>
+        </fieldset>
+        <fieldset id="addForm" class="elem-field" style="width: 49%; float: right; display: none">
+        <legend>权限-添加</legend>
+        <div>
+            <div class="formbody">
+                <form id="form1" name="form1">
+                    <ul class="forminfo">
+                        <input name="parentId" type="hidden" class="span" />
+                        <li><label>父节点</label><input name="parentName" type="text" class="span" readonly/></li>
+                        <li><label>权限名<b>*</b></label><input name="name" type="text" datatype="zhen1-10" class="dfinput" style="width: 150px" /><i>格式:中文、字母的组合</i></li>
+                        <li><label>权限<b>*</b></label><textarea name="uri"  datatype="*" class="textinput" style="width: 250px;height: 40px" ></textarea><i>如果为空，填写#</i></li>
+                        <li><label>图标</label><input type="text" name="icon" class="dfinput" datatype="empty|ny" style="width: 150px" /></li>
+                        <li><label>是否菜单<b>*</b></label><cite><input name="isMenu" type="radio" value="1" checked="checked">是&nbsp;&nbsp;&nbsp;&nbsp;<input name="isMenu" type="radio" value="0">否</cite></li>
+                        <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存"/></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </fieldset>
+        <fieldset id="editForm" class="elem-field" style="width: 49%; float: right;display: none">
+            <legend>权限-修改</legend>
+            <div>
+                <div class="formbody">
+                    <form id="form2" name="form2">
+                        <ul class="forminfo">
+                            <input name="id" type="hidden" class="span" />
+                            <li><label>权限名<b>*</b></label><input name="name" type="text" datatype="zhen" class="dfinput" style="width: 150px" /><i>格式:中文、字母的组合</i></li>
+                            <li><label>权限<b>*</b></label><textarea name="uri" datatype="*" class="textinput" style="width: 250px;height: 40px" ></textarea><i>如果为空，填写#</i></li>
+                            <li><label>图标</label><input type="text" name="icon" class="dfinput" style="width: 150px" /></li>
+                            <li><label>是否菜单<b>*</b></label><cite><input name="isMenu" type="radio" value="1" checked="checked">是&nbsp;&nbsp;&nbsp;&nbsp;<input name="isMenu" type="radio" value="0">否</cite></li>
+                            <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认修改"/></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/lib/jquery.ztree.all.min.js"></script>
+    <script src="${path}/js/biz/user/per/list.js"></script>
+    <script type="text/html" id="table_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Manager.showItem('{{item.entryCode}}','{{item.entryName}}',event)">
+            <td>{{item.entryCode}}</td>
+            <td>{{item.entryName}}</td>
+            <td>{{item.remark}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.edit('{{item.id}}',event);">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.del('{{item.id}}',event)">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr>
+            <td colspan="4">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+    <script type="text/html" id="item_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr>
+            <td>{{item.itemCode}}</td>
+            <td>{{item.itemName}}</td>
+            <td>{{item.itemOrder}}</td>
+            <td>{{item.remark}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.editItem('{{item.id}}')">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.delItem('{{item.id}}')">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="5">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+</#macro>

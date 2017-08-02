@@ -1,0 +1,71 @@
+@media screen and (max-width: 1440px){
+.w_1200{ width:1000px;}
+.min_1200{ min-width:1000px;}
+/*头文件*/
+.header{ background-color:#fff; height: 110px;}
+/*标志*/
+.logo{padding:25px 0 0 0;}
+.logo img{ width:180px;}
+.h_city{ padding: 16px 0 0 12px;}
+.h_city h3,.h_city { font-size:12px;}
+.city_a{ width:80px;}
+/*搜索*/
+.h_search{  height: 34px; width: 320px; padding-left: 10px; margin:50px 0 0 15px;}
+.h_search_text{ height: 14px; line-height: 14px;}
+.h_search_btn{  width: 60px; height: 34px; line-height: 34px;}
+/*头文件右*/
+.header_r{ margin: 45px 0 0 0;}
+.header_link{padding:15px 0px 0 0;font-size: 13px;}
+.header_link a{ margin-right: .8em; }
+/*关于我*/
+.header_club{ font-size: 13px; margin:15px 0 0 10px; line-height: 25px;}
+/*---------------------star动画*/
+.banner{ min-width: 1000px; }
+.banner .bd li a{ width:1000px;}
+.banner:hover .btn_l{ left:24%;}
+.banner:hover .btn_r{ right:24%; }
+
+/*链接列表*/
+.h_link_ul{ width:101%;}
+.h_link_ul img{ height:130px; width: 100%;}
+.h_link_ul li{ margin:0em 0 1em 0; height: 130px;}
+.h_link_ul .box{ width:320px;}
+.h_link_ul .box_l{ width:120px;  height: 130px; }
+.h_link_ul h5{ font-size:18px; padding-top: 2.2em;}
+.h_link_ul p{ font-size: 10px;}
+
+/*标题*/
+.h_th{margin:-.4em auto -.5em auto;}
+
+/*列表*/
+.h_tearch,.h_book,.i_video { width:101%; padding-bottom: .5em;}
+.h_tearch img{ width:120px;}
+.h_tearch li,.i_video li{ margin:0 0 15px 0;}
+.h_tearch .box,.i_video .box{ margin-right:15px;}
+.h_tearch .i_box,.i_video .i_box{  height: 270px;}
+
+/*合作伙伴*/
+.h_brand .h_th{ margin:.8em auto 0 auto;}
+.h_brand_ul img,.brank_pic img{ width:130px;}
+
+/*文件底*/
+.footer_l img{ width:190px;}
+.footer{  margin-top: 3em; font-size: 13px; }
+.footer_l .d p{ margin:.1em 0 0 0;}
+.h_wechat img{ width:120px;}
+
+.h_wechat{ width:580px;}
+.h_wechat h5{ margin:20px 0 0 0; font-size:18px;}
+
+/*广告条*/
+.fladv{ margin-left:-640px;}
+.fradv{margin-right:-640px;}
+
+/*链接文件*/
+.h_search_btn{-ms-behavior: url(js/backgroundsize.min.htc);background-size:cover;  overflow:hidden; 
+behavior: url(js/backgroundsize.min.htc);}
+
+.h_search_btn{ background-size:26px auto;}	
+	
+}
+

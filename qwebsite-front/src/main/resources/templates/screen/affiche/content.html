@@ -1,0 +1,126 @@
+<#assign title="${detail.contentExt.title}"/>
+<#assign keywords="${detail.contentExt.shortTitle!''}"/>
+<#assign description="${detail.contentExt.description!''}"/>
+<#assign parentChannelId=4/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <style>
+        .d_wen img {
+            max-width: 860px;
+        }
+    </style>
+</#macro>
+<#macro content>
+    <@channel_bean id=detail.channel.id>
+    <#assign pChannel=tag_bean/>
+    <@channel_bean id=tag_bean.parentId>
+    <#assign rootChannel=tag_bean/>
+</@channel_bean>
+</@channel_bean>
+    <!--end导航-->
+    <div class="i_banner"><img src="${path}/images/i_banner/news.jpg" alt="新闻资讯" class="i_banner_img"></div>
+    <!--end大图片-->
+<dl class="site_th w_1200"><dd>您所在的位置：<a href="${path}/index.html">首页</a><em class="china">&gt;</em><a href="###">${rootChannel.name}</a><em class="china">&gt;</em><b class="orange_text">${pChannel.name}</b></dd></dl>
+
+    <div class="box_shadow clearfix box_w w_1200">
+        <div class="i_center clearfix">
+            <div class="fl w_220">
+                <div class="l_nav clearfix">
+                    <h4 class="l_th"><span class="fr png eng">Notice</span><div class="r_cell">${pChannel.name}</div></h4>
+                    <ul class="l_nav_ul click_ul">
+                        <@channel_list parentId=pChannel.parentId>
+                        <#list tag_list as item>
+                            <li <#if item.id == detail.channel.id> class="active" </#if>> <a href="${path}/${item.channelPath}/index.jhtm" data-channel-id="${item.id}" class="png">${item.name!''}</a></li>
+                        </#list>
+                    </@channel_list>
+                    </ul>
+                </div>
+                <!--end左导航-->
+            </div>
+            <!--end左边-->
+            <div class="fr w_900">
+                <div class="d_th clearfix">
+                    <h2>${detail.contentExt.title!''}</h2>
+                    <p>作者：${detail.contentExt.author!''}<span class="m_t_b">浏览次数：${detail.viewsDay!''}</span>发布时间：${detail.contentExt.releaseDate?string("yyyy-MM-dd HH:mm:ss")}</p>
+                    <div class="o_share"><a href="###" class="round_m share_btn">分享</a>
+                        <div class="sec_share_box shadow_box">
+                            <div class="fxdwz">分享到</div>
+                            <a href="javascript:void(0)" id="sina_blog" title="新浪微博" target="_self"><span class="share_arrow share_sina png round_r"></span></a>
+
+                            <a href="javascript:void(0)" id="qq_blog" title="腾讯微博" target="_blank"><span class="share_arrow share_qq_b png round_r"></span></a>
+
+                            <a href="javascript:void(0)" id="qq" title="qq" target="_self"><span class="share_arrow share_qq png round_r"></span></a>
+
+                            <!--<a href="javascript:;" title="微信" target="_blank"><span class="share_arrow share_wechat png round_r"></span></a>-->
+
+                            <!--<a href="javascript:void(0)" id="baidu" title="百度" target="_self"><span class="share_arrow share_baidu png round_r"></span></a>-->
+
+                            <a href="javascript:void(0)" id="douban" title="豆瓣" target="_self"><span class="share_arrow share_bouban png round_r"></span></a>
+
+                            <a href="javascript:void(0)" id="qq_zone" title="QQ空间" target="_self"><span class="share_arrow share_qzone png round_r"></span></a>
+
+                        </div>
+                    </div>
+                    <!--end分享-->
+                </div>
+                <#list detail.contentAttachments as att>
+                    <#if att_index == 0>
+                        <div class="pdf_o png_img"><img src="${path}/images/icon/pdf.png" alt="pdf">点击下载：
+                    </#if>
+                    <a href="${root.viewPath}${att.attachmentPath}" target="_blank">${att.attachmentName!''}</a>
+                    <#if att_has_next>
+                        <br/><div style="display: inline-block;margin-left: 126px;"></div>
+                        <#else>
+                        </div>
+                    </#if>
+                </#list>
+                <!--end下载-->
+                <div class="d_wen">
+                    ${detail.contentTxt.txt!''}
+                </div>
+                <!--end正文-->
+                <div class="wen_tool">
+                    <@content_bean id=detail.id channelId=detail.channel.id next='1'>
+                    <#if tag_bean??>
+                        <a href="${path}/${tag_bean.channel.channelPath}/${tag_bean.id}.jhtm" class="page_l png"></a>
+                        <#else>
+                            <span style="line-height: 50px;">没有了</span>
+                    </#if>
+                    </@content_bean>
+                    <a href="###" class="news_c"></a>
+                    <@content_bean id=detail.id channelId=detail.channel.id next='0'>
+                    <#if tag_bean??>
+                        <a href="${path}/${tag_bean.channel.channelPath}/${tag_bean.id}.jhtm" class="page_r png"></a>
+                        <#else>
+                            <span style="line-height: 50px;">没有了</span>
+                    </#if>
+                    </@content_bean>
+                </div>
+                <!--end上下篇-->
+
+            </div>
+            <!--end右边-->
+        </div>
+    </div>
+    <!--end中间区域-->
+</#macro>
+<#macro js>
+    <script type="text/javascript">
+        var title = "${detail.contentExt.title!''}";
+        var url = location.href.replace(/#/g,"");
+        $(function(){
+            $("#sina_blog").attr("href","http://service.weibo.com/share/share.php?url=" + url + "&amp;title=" + title);
+            $("#qq_blog").attr("href","http://share.v.t.qq.com/index.php?c=share&amp;a=index&amp;url=" + url + "&amp;title=" + title);
+            var qqShireUrl = "url=" + encodeURIComponent(url) + "&amp;desc=&amp;title=" + encodeURIComponent(title) + "&amp;summary=&amp;pics=&amp;flash=&amp;site=&amp;style=203&amp;width=16&amp;height=16"
+            $("#qq").attr("href","http://connect.qq.com/widget/shareqq/index.html?" + qqShireUrl);
+//            $("#baidu").attr("href","http://apps.hi.baidu.com/share/?url=" + url + "&amp;title=" + title);
+            $("#douban").attr("href","http://shuo.douban.com/!service/share?url=" + url + "&amp;title=" + title);
+            $("#qq_zone").attr("href","http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" + url + "&amp;title=" + title);
+        })
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('.click_ul li').unbind();
+        })
+    </script>
+</#macro>

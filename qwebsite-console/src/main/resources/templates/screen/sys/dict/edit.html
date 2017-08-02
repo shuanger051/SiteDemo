@@ -1,0 +1,28 @@
+<#assign title="添加数字字典"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">系统管理</a></li>
+            <li><a href="#">数据字典维护</a></li>
+            <li><a href="#">修改字典</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <div class="formbody">
+        <form id="form1" name="form1">
+            <input name="id" id="id" type="hidden">
+            <ul class="forminfo">
+                <li><label>字典项<b>*</b></label><input name="entryCode" type="text" class="span" readonly/></li>
+                <li><label>字典名称<b>*</b></label><input name="entryName" type="text" datatype="zhen" class="dfinput" /><i>格式:中文、字母的组合</i></li>
+                <li><label>备注</label><textarea name="remark" id="remark" class="textinput"></textarea></li>
+                <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存"/></li>
+            </ul>
+        </form>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/sys/dict/edit.js"></script>
+
+</#macro>

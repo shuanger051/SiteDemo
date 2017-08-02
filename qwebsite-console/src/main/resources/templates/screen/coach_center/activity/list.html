@@ -1,0 +1,81 @@
+<#assign title="微信活动管理-列表"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">微信活动管理</a></li>
+            <li><a href="#">列表</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <div class="tools">
+            <form id="searchForm" name="searchForm">
+            <ul class="seachform">
+                <li>
+                    <label>项目编号:</label>
+                    <input name="activityId" id="activityId" type="text" class="scinput" />
+                </li>
+                <li>
+                    <label>项目状态:</label>
+                    <select name="status" id="status">
+
+                    </select>
+                </li>
+                <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+            </ul>
+            </form>
+        </div>
+        <table class="imgtable" id="table">
+            <thead>
+            <tr>
+                <th width="100px;">封面</th>
+                <th>项目编号</th>
+                <th>项目名称</th>
+                <th>项目种类</th>
+                <th>项目类型</th>
+                <th>价格</th>
+                <th>APP展示</th>
+                <th>课程状态</th>
+                <th width="150">操作</th>
+            </tr>
+            </thead>
+            <tbody id="table_tbody">
+
+            </tbody>
+        </table>
+        <div id="table_page">
+
+        </div>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/common/page.js"></script>
+    <script src="${path}/js/biz/common/table.js"></script>
+    <script src="${path}/js/biz/coach_center/activity/list.js"></script>
+    <script type="text/html" id="table_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Tool.clickTr(event,this)">
+            <td class="imgtd"><img style="width: 80px;height: 60px;" src="${root.viewPath}{{item.activityPic}}"></td>
+            <td>{{item.activityId}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.activityKindName}}</td>
+            <td>{{item.activityTypeName}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.appShowFlagName}}</td>
+            <td>{{item.statusName}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.reviewed('{{item.id}}',event);">审核</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.unline('{{item.id}}',event);">下线</a>
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="10">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+    <#include "/template/select.html"/>
+</#macro>

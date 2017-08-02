@@ -1,0 +1,74 @@
+<#assign title="会员管理"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">用户管理</a></li>
+            <li><a href="#">会员管理</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <div class="formtitle1"><span>会员列表</span></div>
+        <div class="tools">
+            <ul class="toolbar">
+                <li class="click" onclick="Manager.add()"><span><img src="${path}/images/t01.png" /></span>添加</li>
+            </ul>
+            <form id="searchForm" name="searchForm">
+                <ul class="seachform">
+                    <li><label>用户名</label><input name="userName" type="text" class="scinput" /></li>
+                    <li><label>邮箱</label><input name="email" type="text" class="scinput" /></li>
+                    <li><label><input name="isDisabled" type="checkbox" value="1"/>&nbsp;&nbsp;&nbsp;禁用</label></li>
+                    <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+                </ul>
+            </form>
+        </div>
+
+        <table class="tablelist" id="table">
+            <thead>
+            <tr>
+                <th>用户名</th>
+                <th>电子邮箱</th>
+                <th>会员类型</th>
+                <th>最后登录时间</th>
+                <th>登录</th>
+                <th>禁用</th>
+                <th width="200">操作</th>
+            </tr>
+            </thead>
+            <tbody id="table_tbody">
+
+            </tbody>
+        </table>
+        <div id="table_page">
+
+        </div>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/common/page.js"></script>
+    <script src="${path}/js/biz/common/table.js"></script>
+    <script src="${path}/js/biz/user/account/list.js"></script>
+    <script type="text/html" id="table_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Tool.clickTr(event,this)">
+            <td>{{item.userName}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.isAdminName}}</td>
+            <td>{{item.lastLoginTime | dateFormat}}</td>
+            <td>{{item.loginCount}}</td>
+            <td>{{item.isDisabledName}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.edit('{{item.id}}',event);">修改</a>
+                <!--<a href="javascript:void(0)" class="tablelink" onclick="Manager.del('{{item.id}}',event)">删除</a>-->
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="7">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+</#macro>

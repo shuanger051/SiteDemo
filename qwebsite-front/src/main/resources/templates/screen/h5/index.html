@@ -1,0 +1,133 @@
+<#assign title="首页"/>
+<#assign parentChannelId=1/>
+<#include "/layout/h5_layout.html"/>
+<#macro content>
+    <div id="banner">
+        <div class="banner-view up_banner_wrapper">
+            <div class="sliderwrap swiper-item-list up_banner">
+                <ul id="banner_list" class="swiper-wrapper">
+                    <li class="swiper-slide"><img src="${path}/images/h5/banner.png"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <div class="con-list con-list1">
+            <h2 class="con-header">广场舞<span></span></h2>
+            <div class="con-content">
+                <div class="item-list">
+                    <a href="${path}/h5/notify_list.htm?id=67&name=培训通知">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_gcw_peixuntongzhi.png" width="100%" />
+                        </div>
+                        <span class="title">培训通知</span>
+                        <i class="rigBorder"></i>
+                    </a>
+                    <a href="${path}/h5/notify_list.htm?id=48&name=赛事通知">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_gcw_saishitongzhi.png" width="100%" />
+                        </div>
+                        <span class="title">赛事通知</span>
+                        <i class="rigBorder"></i>
+                    </a>
+                    <a href="${path}/h5/notify_list.htm?id=46&name=活动通知">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_gcw_huodongtongzhi.png" width="100%" />
+                            <i class="hoticon"></i>
+                        </div>
+                        <span class="title">活动通知</span>
+                    </a>
+                </div>
+                <div class="item-list">
+                    <a href="${path}/h5/apply/square_list.htm?id=1">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_gcw_saishibaoming.png" width="100%" />
+                        </div>
+                        <span class="title">培训报名</span>
+                        <i class="rigBorder"></i>
+                    </a>
+                    <a href="${path}/h5/apply/square_list.htm?id=2">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_gcw_peixunbaoming.png" width="100%" />
+                        </div>
+                        <span class="title">赛事报名</span>
+                        <i class="rigBorder"></i>
+                    </a>
+                    <a href="${path}/h5/apply/square_list.htm?id=3">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_gcw_huodongbaoming.png" width="100%" />
+                        </div>
+                        <span class="title">活动报名</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="con-list con-list1">
+            <h2 class="con-header">排舞<span class="paiwu"></span></h2>
+            <div class="con-content">
+                <div class="item-list">
+                    <a href="${path}/h5/notify_list.htm?id=18&name=培训通知">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_pw_huodongtongzhi.png" width="100%" />
+                        </div>
+                        <span class="title">培训通知</span>
+                        <i class="rigBorder"></i>
+                    </a>
+                    <a href="${path}/h5/notify_list.htm?id=27&name=赛事通知">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_pw_saishitongzhi.png" width="100%" />
+                        </div>
+                        <span class="title">赛事通知</span>
+                        <i class="rigBorder"></i>
+                    </a>
+                    <a href="${path}/h5/notify_list.htm?id=20&name=活动通知">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_pw_huodongtongzhi.png" width="100%" />
+                        </div>
+                        <span class="title">活动通知</span>
+                    </a>
+                </div>
+                <div class="item-list">
+                    <a href="${path}/h5/apply/line_list.htm?id=1">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_pw_saishibaoming.png" width="100%" />
+                        </div>
+                        <span class="title">培训报名</span>
+                        <i class="rigBorder"></i>
+                    </a>
+                    <a href="${path}/h5/apply/line_list.htm?id=2">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_pw_peixunbaoming.png" width="100%" />
+                        </div>
+                        <span class="title">赛事报名</span>
+                        <i class="rigBorder"></i>
+                    </a>
+                    <a href="${path}/h5/apply/line_list.htm?id=3">
+                        <div class="container" >
+                            <img src="${path}/images/h5/icon_pw_huodongbaoming.png" width="100%" />
+                        </div>
+                        <span class="title">活动报名</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="con-list con-list2">
+            <h2 class="con-header">新闻<span class="xinwen"></span></h2>
+            <div class="news-list">
+                <ul>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</#macro>
+<#macro style>
+    <link rel="stylesheet" type="text/css" href="${path}/css/h5/dropload.css">
+</#macro>
+<#macro js>
+    <script type="text/javascript" src="${path}/js/h5/dropload.min.js" ></script>
+        <script type="text/javascript">
+            function getTitle(title){if(!!title){return title.length>13?title.substring(0,13)+"...":title}return"无标题"}$(function(){var page=0;var size=10;$(".news-list").dropload({scrollArea:window,domDown:{domClass:"dropload-down",domRefresh:'<div class="dropload-refresh">↑上拉加载更多</div>',domLoad:'<div class="dropload-load"><span class="loading"></span>加载中...</div>',domNoData:'<div class="dropload-noData">已经到底了</div>'},loadDownFn:function(me){page++;var result="";$.ajax({type:"GET",url:"${path}/content/list?channelId=9&page="+page+"&pageSize="+size,dataType:"json",success:function(result){var data=result.data.data;var arrLen=data.length;var html="";if(arrLen>0){for(var i=0;i<arrLen;i++){html+=' <li class="news-contain"> <a href="${path}/h5/content.htm?id='+data[i].id+'">'+"<span>"+getTitle(data[i].contentExt.title)+"</span>"+'<i class="times">'+$.Tool.dateFormat(data[i].contentExt.releaseDate)+"</i>"+"</a></li>"}$(".news-list ul").html(html)}else{me.lock();me.noData()}$(".lists").append(result);me.resetload()},error:function(xhr,type){alert("Ajax error!");me.resetload()}})},threshold:50})});
+        </script>
+</#macro>

@@ -1,0 +1,66 @@
+<#assign title="添加角色成员"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <style>
+        body {
+            width: 100%!important;
+            min-width: 100px!important;
+        }
+    </style>
+</#macro>
+<#macro content>
+    <div class="rightinfo">
+        <form id="searchForm" name="searchForm">
+            <ul class="seachform">
+                <li><label>用户名</label><input name="userName" type="text" class="scinput" /></li>
+                <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+            </ul>
+        </form>
+        <table class="tablelist" id="table">
+            <thead>
+            <tr>
+                <th>用户名</th>
+                <th>电子邮箱</th>
+                <th>会员类型</th>
+                <th>禁用</th>
+                <th width="80">操作</th>
+            </tr>
+            </thead>
+            <tbody id="table_tbody">
+
+            </tbody>
+        </table>
+        <div id="table_page">
+
+        </div>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/common/page.js"></script>
+    <script src="${path}/js/biz/common/table.js"></script>
+    <script src="${path}/js/biz/user/role/add_member.js"></script>
+    <script type="text/html" id="table_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr>
+            <td>{{item.userName}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.isAdminName}}</td>
+            <td>{{item.isDisabledName}}</td>
+            <td>
+                {{if item.roleId}}
+                    已添加
+                {{else}}
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.add('{{item.id}}',event);">添加</a>
+                {{/if}}
+                <!--<a href="javascript:void(0)" class="tablelink" onclick="Manager.del('{{item.id}}',event)">删除</a>-->
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="5">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+</#macro>

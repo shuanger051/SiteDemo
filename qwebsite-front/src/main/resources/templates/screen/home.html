@@ -1,0 +1,52 @@
+<#assign title="全国排舞广场舞推广中心"/>
+<#include "/layout/home_layout.html"/>
+<#assign bodyClass="white_body"/>
+<#macro style>
+    <style>
+        @media screen and (max-width: 1440px){
+            .banner_th{ top:20%;}
+            .banner_th img{ width:800px;}
+            .banner_d img{ width:340px;}
+            .w_1200{ width:1100px;}
+        }
+    </style>
+</#macro>
+<#macro content>
+    <!-- header -->
+    <div class="i_header min_1200 h_header">
+        <div class="w_1200">
+            <h1 class="png_img logo fl"><a href="${path}/index.htm"><img src="images/logo.png"></a></h1>
+            <#if !user??>
+            <div class="fr header_r_link">
+                <a href="javascript:0;" class="cd-popup-trigger0"><span class="h_arrow png"></span>登录</a>
+            </div>
+            </#if>
+        </div>
+        <!--end宽度-->
+    </div>
+    <!--end头文件-->
+    <div class="h_banner min_1200">
+        <!--<img src="images/banner/home.jpg" class="h_banner_img" alt="全国排舞广场舞推广中心官方网站,家体育总局体操运动管理中心\中国蹦床与技巧协会排舞分会\主办">-->
+        <!--<div class="banner_text">-->
+        <div class="w_1200 h_banner_w">
+            <h2 class="banner_th png_img"><img src="${path}/images/banner/banner_th.png" alt="全国排舞广场舞推广中心官方网站"></h2>
+            <h4 class="banner_d png_img"><img src="${path}/images/banner/banner_d.png" alt="家体育总局体操运动管理中心\中国蹦床与技巧协会排舞分会\主办"></h4>
+            <ul class="banner_link_ul list_3">
+                <li><a href="javascript:void (0);" onclick="forward(this,'gnews/index.jhtm')" class="box transition_a"><img src="${path}/images/pic/24.jpg" class="transition_a" alt=""><h4 class="png">公益基金</h4></a></li>
+                <li><a href="javascript:void (0);" onclick="forward(this)"  class="box transition_a" data-site="square" ><img src="${path}/images/pic/25.jpg" class="transition_a" alt=""><h4 class="png th2"><span class="th_a png">广场舞中国</span></h4></a></li>
+                <li><a href="javascript:void (0);" onclick="forward(this)"  class="box transition_a" data-site="line" ><img src="${path}/images/pic/26.jpg" class="transition_a" alt=""><h4 class="png th3"><span class="th_a th_a2 png">排舞中国</span></h4></a></li>
+            </ul>
+        </div>
+        <!--</div>-->
+    </div>
+    <!--end图片-->
+</#macro>
+
+<#macro js>
+    <script>
+        ;$(function(){
+            var bodyH = document.documentElement.clientHeight - 150;
+            $('.h_banner,.h_banner_w').css({ "height": bodyH + "px" });
+        });
+    </script>
+</#macro>

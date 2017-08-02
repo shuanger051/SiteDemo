@@ -1,0 +1,133 @@
+<#assign title="课程管理-审核"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <style>
+        span {
+            display: inline-block;
+        }
+    </style>
+</#macro>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">课程管理</a></li>
+            <li><a href="#">课程审核</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <div class="formbody">
+        <form id="form1" name="form1" method="post" enctype ="multipart/form-data">
+            <input name="id" id="id" type="hidden">
+            <ul class="forminfo">
+                <li>
+                    <label>课程封面：</label>
+                    <img name="lessonPic" style="width: 340px;height: 140px;" src="#">
+                </li>
+                <li>
+                    <label style="text-align: right">教师名称：</label>
+                    <input name="teacherName" type="text" class="dfinput" disabled value="">
+                </li>
+                <li>
+                    <label style="text-align: right">课程种类：</label>
+                    <input name="lessonKindName" type="text" class="dfinput"  disabled value="">
+                </li>
+                <li>
+                    <label style="text-align: right">课程类型：</label>
+                    <input name="lessonTypeName" type="text" class="dfinput"  disabled value="">
+                </li>
+                <li style="display: none;">
+                    <label style="text-align: right;">最低人数：</label>
+                    <input name="personNo" type="text" class="dfinput"  disabled value="">
+                </li>
+                <li>
+                    <label style="text-align: right">课程价格：</label>
+                    <input name="price" type="text" class="dfinput"  disabled value="">
+                </li>
+                <li>
+                    <label style="text-align: right">开始日期：</label>
+                    <input name="biginDateFormat" type="text" class="dfinput"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">结束日期：</label>
+                    <input name="endDateFormat" type="text" class="dfinput"  disabled value="">
+                </li>
+                <li>
+                    <label style="text-align: right">开始时间：</label>
+                    <input name="beginTimeFormat" type="text" class="dfinput"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">结束时间：</label>
+                    <input name="endTimeFormat" type="text" class="dfinput"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">联系电话：</label>
+                    <input name="telNo" type="text" class="dfinput"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">是否预约：</label>
+                    <input name="appointmentFlagName" type="text" class="dfinput"  disabled  value="">
+                </li>
+                <li style="display: none;">
+                    <label style="text-align: right">预约天数：</label>
+                    <input name="appointmentDays" type="text" class="dfinput"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">APP端显示：</label>
+                    <input name="appShowFlagName" type="text" class="dfinput"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">区域：</label>
+                    <input name="site" type="text" class="dfinput"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">详细地址：</label>
+                    <input name="address" type="text" class="dfinput"  disabled  value="">
+                </li>
+                <li>
+                    <label style="text-align: right">课程简介：</label>
+                    <div id="txt" style="height: 500px; display: inline-block;left: 86px;" >
+
+                    </div>
+                </li>
+                <li>
+                    <label>&nbsp;</label>
+                    <input name="" type="submit" class="scbtn" value="通过"/>
+                    <input name="" type="button" class="scbtn2" onclick="Manager.detail('{{item.id}}',event);" value="打回"/>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div class="tip" id="tip" style="width: 420px;height: 300px; top:180%;left: 30%;">
+        <div style="position: relative">
+            <div class="tiptop" style="position:absolute; top: 0px; width:100%;"><span>意见反馈</span><a></a></div>
+            <div class="tipinfo" style="height:244px;padding-top: 55px;padding-left: 0;margin-left: 45px;overflow:auto">
+                <form id="suggestForm" name="suggestForm">
+                    <ul class="forminfo" style="padding-left: 0;padding-bottom: 40px;" id="tipInfo">
+                        <li>
+                            <label>打回原因：</label>
+                            <textarea name="suggestion" id="suggestion" type="text" class="dfinput" style="width:350px; height:100px; overflow-y:hidden;" value=""></textarea>
+                        </li>
+                        <li>
+                            <label>&nbsp;</label>
+                            <input name="" type="submit" class="scbtn" value="提交"/>
+                            <input name="" type="button" class="scbtn2" onclick="Manager.closeWindow();" value="取消"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="mengban">
+
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/coach_center/lesson/edit.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${path}/js/lib/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${path}/js/lib/ueditor/ueditor.all.js"> </script>
+    <#include "/layout/ueditorjs.html"/>
+    <script>
+        var viewPath = "${root.viewPath!''}";
+    </script>
+</#macro>

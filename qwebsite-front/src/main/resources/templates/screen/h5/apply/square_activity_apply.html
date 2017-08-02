@@ -1,0 +1,56 @@
+<#assign parentChannelId=1/>
+<#include "/layout/h5_layout.html"/>
+<#macro content>
+    <div id="TrainDeatil" class="ItemDetails">
+        <form id="applyForm" name="applyForm" style="width: 100%;">
+            <input type="hidden" name="contentId" id="contentId">
+            <div class="content-list">
+                <ul>
+                    <li>
+                        <label for="contentName">培训项目</label><span id="contentName" class="TR-program TR-input"></span>
+                    </li>
+                    <li>
+                        <label for="realName">姓名</label><input value="" class="TR-name TR-input" datatype="zhen" id="realName" name="realName" errormsg="真实姓名格式错误" placeholder="请填写真实姓名" altercss="tip" />
+                    </li>
+                    <li>
+                        <label for="tsex">性别</label><input id="tsex" class="TR-sex TR-input" type="text" value="男" datatype="*" readonly="readonly" />
+                    </li>
+                    <li>
+                        <label for="idNo">身份证号码</label><input type="text" value="" class="TR-identity TR-input" datatype="IdentityCode" id="idNo" name="idNo" errormsg="身份证号码格式错误" placeholder="请输入身份证号码" altercss="tip">
+                    </li>
+                    <li>
+                        <label for="mobile">联系电话</label><input type="text" value="" class="TR-tel TR-input" datatype="mobile" id="mobile" name="mobile" errormsg="联系电话格式错误" placeholder="如15858676187" altercss="tip">
+                    </li>
+                    <li>
+                        <label for="qq">QQ</label><input type="text" value="" class="TR-stature TR-input" id="qq" name="qq" datatype="n1-3" errormsg="QQ格式错误"  placeholder="请输入QQ号" ignore="true">
+                    </li>
+                    <li>
+                        <label for="email">邮箱地址</label><input type="text" value="" class="TR-email TR-input" type="email" datatype="email" id="email" name="email" errormsg="邮箱格式错误" placeholder="如zhangsan@126.com" altercss="tip" altercss="tip">
+                    </li>
+                    <li>
+                        <label for="height">身高</label><input type="text" value="" class="TR-stature TR-input" id="height" name="height" datatype="n1-3" errormsg="身高格式错误"  placeholder="175 代表175厘米 = 1.75米" altercss="tip">
+                    </li>
+                </ul>
+            </div>
+            <input name="sex" id="sex" type="hidden" value="2">
+            <button id="formSubmit" class="TR-button" type="button">提交</button>
+        </form>
+        <div id="setSex" style="display: none; opacity: 0;">
+            <div class="sex-list sex-items">
+                <ul>
+                    <li data-value="2" style="border-bottom: 1px #CACACA solid;">男</li>
+                    <li data-value="1">女</li>
+                </ul>
+            </div>
+
+            <div class="sex-list sex-cancel">取消</div>
+        </div>
+    </div>
+
+
+</#macro>
+<#macro js>
+    <script type="text/javascript">
+        $(function(){$.ajax({url:"${path}/square_apply/activity/get",type:"get",data:{id:$.Tool.getReqP("id")},success:function(result){var data=result.data;if(result.success&&!!data){$("#contentName").text(data.title);document.title=data.title;$("#contentId").val(data.id)}else{alert("获取数据错误")}},error:function(xhr,type){console.info("Ajax error!")}});$("#tsex").on("touchstart",function(){$("#setSex").fadeIn(500)});$("#setSex .sex-cancel").on("touchend",function(){$("#setSex").fadeOut(500)});$("#setSex .sex-items li").on("touchend",function(){$("#setSex").fadeOut(500);$("#sex").val($(this).attr("data-value"));$("#tsex").val($(this).text())});$("#TrainDeatil .content-list .prog-role").on("touchend",function(){var that=this;$("#trainerType").val($(that).attr("data-value"));if(!$(that).hasClass("pr-selected")){$(that).addClass("pr-selected").siblings(".prog-role").removeClass("pr-selected")}});$.Validate.init(function(){$.Validate.telValid($("#mobile"));$.Validate.nameValid($("#realName"));$.Validate.identityValid($("#idNo"));$.Validate.emailValid($("#email"));$.Validate.heightValid($("#height"));$.Validate.qqValid($("#qq"))});$("#formSubmit").on("touchend",function(e){if(!!$.Validate.check()){$(this).attr("disabled","disabled");Ajax.submit("apply",{url:"/square_apply/activity",data:$.Tool.serializeJson($("#applyForm")),callback:function(){$(this).removeAttr("disabled");alert("报名成功")},failure:function(result){$(this).removeAttr("disabled");alert(result.message)}})}})});
+    </script>
+</#macro>

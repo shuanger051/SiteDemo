@@ -1,0 +1,93 @@
+package cn.qweb.cms.biz.service.query;
+
+import cn.qweb.cms.core.base.BaseQueryEntity;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
+
+
+/*
+ *  Created by xuebj - 2017/03/31.
+ */
+
+/**
+ * @author xuebj email:xuebj@hundsun.com
+ * @version 1.0
+ * @since 1.0
+ */
+
+public class ActivitySquareQUERY extends BaseQueryEntity implements Serializable{
+    private static final long serialVersionUID = 1L;
+
+
+    /**
+     *@Fields title:标题
+     */
+    private String title;
+
+    /**
+     *@Fields content:详情
+     */
+    private String content;
+
+    /**
+     * @Fields 结束日期
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date gmtEnd;
+
+    /**
+     *@Fields gmt_create:
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date gmtCreate;
+
+    /**
+     *@Fields gmt_modified:
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date gmtModified;
+
+    public Date getGmtEnd() {
+        return gmtEnd;
+    }
+
+    public void setGmtEnd(Date gmtEnd) {
+        this.gmtEnd = gmtEnd;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
+    public String getTitle(){
+        return title;
+    }
+    public void setContent(String content){
+        this.content = content;
+    }
+    public String getContent(){
+        return content;
+    }
+    public void setGmtCreate(Date gmtCreate){
+        this.gmtCreate = gmtCreate;
+    }
+    public Date getGmtCreate(){
+        return gmtCreate;
+    }
+    public void setGmtModified(Date gmtModified){
+        this.gmtModified = gmtModified;
+    }
+    public Date getGmtModified(){
+        return gmtModified;
+    }
+    @Override
+    public String toString(){
+        return "Activity{" +
+                    "title='" + title + "\'," +
+                    "content='" + content + "\'," +
+                    "gmtCreate='" + gmtCreate + "\'," +
+                    "gmtModified='" + gmtModified + "\'" +
+                "}";
+    }
+}

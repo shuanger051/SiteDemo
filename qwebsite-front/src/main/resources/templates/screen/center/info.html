@@ -1,0 +1,124 @@
+<#assign title="个人中心"/>
+<#assign navIndex="1"/>
+<#include "/layout/cloub_layout.html"/>
+<#macro style>
+    <link rel="stylesheet" type="text/css" href="${path}/css/round_i.css">
+</#macro>
+<#macro content>
+    <div class="box_shadow clearfix box_w w_1200">
+        <div class="i_center clearfix">
+            <div class="up_box">
+                <div class="file-box photo_file">
+                    <div class="up_pic_btn round_r" style="cursor: default;background-image: url('${user.avatarAddress}');background-size: cover;"></div>
+                </div>
+            </div>
+            <!--end上传-->
+            <form id="form" name="form">
+            <table class="fill_table">
+                <tr>
+                    <th><label for="nick_name">昵称：</label></th>
+                    <td><input type="text" class="round_m fill_text w_480" id="nick_name" name="nick_name" datatype="*" value="${user.nickName}" placeholder="请输入昵称"></td>
+                </tr>
+                <tr>
+                    <th><label for="nick_name">姓名：</label></th>
+                    <td><input type="text" class="round_m fill_text w_480" id="name" name="name" datatype="*" value="${user.realName}" placeholder="请输入姓名"></td>
+                </tr>
+                <tr>
+                    <th>所在地区：</th>
+                    <td>
+                        <div id="test" class="city_div"></div>
+                </tr>
+                <tfoot>
+                <tr>
+                    <th></th>
+                    <td><input type="submit" class="round_m login_btn btn_auto" value="提交"></td>
+                </tr>
+                </tfoot>
+            </table>
+            </form>
+        </div>
+        <!--end宽度-->
+    </div>
+    <!--end中间区域-->
+</#macro>
+<#macro js>
+    <script type="text/javascript" src="${path}/js/lib/underscore-min.js"></script>
+    <script type="text/javascript" src="${path}/js/lib/nation.js"></script>
+    <script type="text/javascript">
+        $(function () {
+                var id = "#test";
+                var provinceId = "${user.provinceId}";
+                var cityId = "${user.cityId}";
+                var districtId = "${user.districtId}";
+                var provinces = _.map(NationModel.getProvince(),function (p){
+                    return  "<option value='" + p[0]+ "'>" + p[2] + "</option>";
+                });
+
+            $(id).append("<select id='province_id' name='province_id'>" + provinces.join("") + "</select>");
+            $("#province_id").attr("value",provinceId);
+            var cities = _.map(NationModel.getCity(provinceId),function (p){
+                return  "<option value='" + p[0]+ "'>" + p[3] + "</option>";
+            });
+            $(id).append("<select id='city_id' name='city_id'>" + cities.join("") + "</select>");
+            $("#city_id").attr("value",cityId);
+            var districts = _.map(NationModel.getDistrict(cityId),function (p){
+                return  "<option value='" + p[0]+ "'>" + p[4] + "</option>";
+            });
+            $(id).append("<select id='district_id' name='district_id'>" + districts.join("") + "</select>");
+            $("#district_id").attr("value",districtId);
+
+            $("#province_id").change(function (){
+                //set city
+                var cities = _.map(NationModel.getCity($(this).val()),function (p){
+                    return  "<option value='" + p[0]+ "'>" + p[3] + "</option>";
+                });
+                $("#city_id").html(cities);
+                //set districts
+                var districts = _.map(NationModel.getDistrict($("#city_id").val()),function (p){
+                    return  "<option value='" + p[0]+ "'>" + p[4] + "</option>";
+                });
+                $("#district_id").html(districts);
+
+                // add city event;
+                $("#city_id").change(function (){
+                    //set districts
+                    var districts = _.map(NationModel.getDistrict($("#city_id").val()),function (p){
+                        return  "<option value='" + p[0]+ "'>" + p[4] + "</option>";
+                    });
+                    $("#district_id").html(districts);
+                });
+            })
+
+            // add city event;
+            $("#city_id").change(function (){
+                //set districts
+                var districts = _.map(NationModel.getDistrict($("#city_id").val()),function (p){
+                    return  "<option value='" + p[0]+ "'>" + p[4] + "</option>";
+                });
+                $("#district_id").html(districts);
+            });
+        });
+    </script>
+        <script type="text/javascript">
+
+        $(function (){
+            $("#form").Validform({
+                tiptype:Tool.tipType,
+                callback:function(form){
+                    console.info(Tool.serializeJson(form));
+                    Ajax.submit("updateInfo",{
+                        url:"/account/modify",
+                        data:Tool.serializeJson(form),
+                        callback:function (){
+                            $("#alert").find("#alert_ok_content").find("h5").html("修改资料成功").end().show().end().addClass('is-visible2');
+                        },
+                        failure:function (message){
+                            $("#alert").find("#alert_error_content").find("h5").html(message.message).end().show().end().addClass('is-visible2');
+                        }
+                    })
+                    return false;
+                }
+            })
+        })
+    </script>
+</#macro>

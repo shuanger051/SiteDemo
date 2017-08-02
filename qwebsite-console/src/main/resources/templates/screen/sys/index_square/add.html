@@ -1,0 +1,64 @@
+<#assign title="广场舞首页模块管理-添加"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页管理</a></li>
+            <li><a href="#">广场舞首页模块管理</a></li>
+            <li><a href="#">添加广场舞首页模块</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <div class="formbody">
+        <form id="form1" name="form1" method="post" enctype ="multipart/form-data">
+            <ul class="forminfo">
+                <li>
+                    <label>图标<b>*</b></label>
+                    <div class="uploader white">
+                        <input type="text" class="filename" readonly/>
+                        <input type="button" class="button" value="选择上传文件"/>
+                        <input type="file" name="file" size="30"/>
+                    </div>
+                </li>
+                <li>
+                    <label>模块名称<b>*</b></label>
+                    <input name="siteName" type="textinput" class="dfinput" datatype="*" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>模块简介<b>*</b></label>
+                    <input name="description" type="textinput" class="dfinput" datatype="*" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>跳转地址<b>*</b></label>
+                    <input name="siteLink" type="textinput" class="dfinput" datatype="url" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>排序编号<b>*</b></label>
+                    <input name="priority" type="textinput" class="dfinput" datatype="num" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>是否显示<b>*</b></label>
+                    <select name="isEnabled">
+
+                    </select>
+                </li>
+                <li>
+                    <label>&nbsp;</label>
+                    <input name="" type="submit" class="btn" value="确认保存"/></li>
+            </ul>
+        </form>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/sys/index_square/add.js"></script>
+    <#include "/template/select.html"/>
+    <script>
+        $(function(){
+            $("input[type=file]").change(function(){$(this).parents(".uploader").find(".filename").val($(this).val());});
+            $("input[type=file]").each(function(){
+                if($(this).val()==""){$(this).parents(".uploader").find(".filename").val("请选择需要上传的文件...");}
+            });
+        });
+    </script>
+</#macro>

@@ -1,0 +1,91 @@
+<#assign title="舞谱上传"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <dl class="site_th w_1200"><dd>您所在的位置：<a href="index.html">首页</a><em class="china">&gt;</em><b class="orange_text">舞谱上传</b></dd></dl>
+
+    <div class="box_shadow clearfix box_w w_1200" style="padding:4em 0;">
+        <form action="../chorgraphy/save" method="post" enctype="multipart/form-data" id="form">
+        <table class="fill_table">
+            <tr>
+                <th><label for="uperName"><span class="red_text">*</span>姓名：</label></th>
+                <td><input type="text" class="fill_text round_m" id="uperName" name="uperName" datatype="zhen" nullmsg="请填写姓名" value="${user.realName}"></td>
+            </tr>
+            <tr>
+                <th><label for="uperMobile"><span class="red_text">*</span>手机：</label></th>
+                <td><input type="text" class="fill_text round_m" id="uperMobile" name="uperMobile" datatype="mobile" nullmsg="请填写手机号" value="${user.mobile}"></td>
+            </tr>
+            <tr>
+                <th><label for="uperEmail">邮箱：</label></th>
+                <td><input type="text" class="fill_text round_m" id="uperEmail" name="uperEmail" datatype="email|empty"></td>
+            </tr>
+            <tr>
+                <th><label for="name"><span class="red_text">*</span>舞谱名：</label></th>
+                <td><input type="text" class="fill_text fill_text_b round_m" id="name" name="name" maxlength="100" datatype="*" nullmsg="请填写舞谱名"></td>
+            </tr>
+            <tr>
+                <th><label for="content"><span class="red_text">*</span>内容：</label></th>
+                <td><textarea type="text" class="textarea_text round_m" id="content" name="content" datatype="*" nullmsg="请输入内容"></textarea></td>
+            </tr>
+            <tr>
+                <th><label for="attFile"><span class="red_text">*</span>上传附件：</label></th>
+                <td><div class="file-box">
+                        <input type="file" name="attFile" class="file" id="attFile" />
+                        <input type="submit" name="submit" class="up_btn png round_m" value="点击选择文件" />
+
+                </div>
+                    <ul class="up_file clearfix even_ul" id="attachmentShow">
+                    </ul>
+                </td>
+            </tr>
+        </table>
+            <div style="display: none" id="fileList">
+
+            </div>
+        <div class="btn_line"><input type="submit" class="round_m login_btn btn_280 cd-popup-trigger2" value="确认提交"></div>
+        </form>
+        <!--end居中按钮-->
+    </div>
+    <!--end中间区域-->
+</#macro>
+<#macro js>
+    <script type="text/javascript" src="${path}/js/lib/jquery.form.min.js"></script>
+    <script type="text/javascript">
+        function getFileName(v){
+            var path = v.split("\\");
+            return path[path.length-1];
+        }
+        function remove(that,e){
+            $(that).parent("li").remove();
+            $("#file" + $(that).attr("data-index") +"").remove();
+        }
+        var index = 0;
+        $(function (){
+            $("#attFile").change(function (){
+                if(this.value !== ""){
+                    var i = index+1;
+                    $("#fileList").append($(this).clone().attr("name","attachment").attr("id","file"+ i));
+                    $("#attachmentShow").append('<li><span class="fr" onclick="remove(this,event)" data-index="'+i+'"><a href="###" class="file_close png"></a></span><a href="###" class="fl">' + getFileName(this.value) + '</a></li>');
+                }
+            })
+
+            $("#form").Validform({
+                tiptype:Tool.tipType,
+                callback:function(form){
+                    if($("#fileList input").size() < 1){
+                        Tool.tipType("请上传附件",{type:3},null);
+                        return false;
+                    }
+                    form.ajaxSubmit({
+                        success:function (responseText, statusText, xhr, $form){
+                            if(!!responseText && !!responseText.success){
+                                $("#alert").find("#alert_ok_content").find("h5").html("恭喜你,上传成功，请耐心等待管理员审核。").end().show().end().addClass('is-visible2');
+                            }
+
+                        }
+                    });
+                    return false;
+                }
+            })
+        })
+    </script>
+</#macro>

@@ -1,0 +1,307 @@
+<#assign title="桌面"/>
+<#assign bodyClass="body-bg"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+<style>
+    .body-bg{
+        background:#f0f9fd;
+    }
+</style>
+</#macro>
+<#macro content>
+    <!--<div class="lefttop"><span></span>通讯录</div>-->
+    <dl class="leftmenu">
+        <dd>
+            <div class="title">
+                <span><img src="images/leftico01.png" /></span>用户管理
+            </div>
+            <ul class="menuson">
+                <li class="active">
+                    <div class="header">
+                        <cite></cite>
+                        <a href="user/account/list.htm" target="rightFrame">会员管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="user/role/list.htm" target="rightFrame">角色管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="user/per/list.htm" target="rightFrame">权限管理</a>
+                        <i></i>
+                    </div>
+                </li>
+            </ul>
+        </dd>
+        <dd>
+            <div class="title">
+                <span><img src="images/leftico01.png" /></span>内容管理
+            </div>
+            <ul class="menuson">
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="channel/manager.htm" target="rightFrame">栏目管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="cont/list.htm" target="rightFrame">内容管理</a>
+                        <i></i>
+                    </div>
+                </li>
+            </ul>
+        </dd>
+        <dd><div class="title"><span><img src="images/leftico01.png" /></span>系统管理</div>
+            <ul class="menuson">
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="sys/dict/list.htm" target="rightFrame">数据字典维护</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="sys/lucene/list.htm" target="rightFrame">索引管理</a>
+                        <i></i>
+                    </div>
+                </li>
+            </ul>
+        </dd>
+        <dd><div class="title"><span><img src="images/leftico01.png" /></span>首页管理</div>
+            <ul class="menuson">
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="sys/nav/manager.htm" target="rightFrame">导航管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="sys/blogroll/list.htm" target="rightFrame">友情链接管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="sys/partner/list.htm" target="rightFrame">合作伙伴管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="sys/index_floating/list.htm" target="rightFrame">浮窗&Banner管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="sys/index_square/list.htm" target="rightFrame">广场舞板块管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="sys/index_line/list.htm" target="rightFrame">排舞板块管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="sys/teacher/list.htm" target="rightFrame">名师管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="sys/certificate/list.htm" target="rightFrame">资质证书管理</a>
+                        <i></i>
+                    </div>
+                </li>
+            </ul>
+
+        </dd>
+        <dd><div class="title"><span><img src="images/leftico01.png" /></span>排舞活动培训</div>
+            <ul class="menuson">
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/activity/list.htm" target="rightFrame">活动管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/activity_apply/list.htm" target="rightFrame">活动报名管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/train/list.htm" target="rightFrame">培训管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/train_apply/list.htm" target="rightFrame">培训报名管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/competition/list.htm" target="rightFrame">赛事管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/competition_apply/list.htm" target="rightFrame">赛事报名管理</a>
+                        <i></i>
+                    </div>
+                </li>
+            </ul>
+        </dd>
+        <dd><div class="title"><span><img src="images/leftico01.png" /></span>广场舞活动培训</div>
+            <ul class="menuson">
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/square/activity/list.htm" target="rightFrame">活动管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/square/activity_apply/list.htm" target="rightFrame">活动报名管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/square/train/list.htm" target="rightFrame">培训管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/square/train_apply/list.htm" target="rightFrame">培训报名管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/square/competition/list.htm" target="rightFrame">赛事管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="event_training/square/competition_apply/list.htm" target="rightFrame">赛事报名管理</a>
+                        <i></i>
+                    </div>
+                </li>
+            </ul>
+        </dd>
+        <dd><div class="title"><span><img src="images/leftico01.png" /></span>教练员中心</div>
+            <ul class="menuson">
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="coach_center/lesson/list.htm" target="rightFrame">课程管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="coach_center/activity/list.htm" target="rightFrame">微信培训赛事管理</a>
+                        <i></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="coach_center/credentials/list.htm" target="rightFrame">资质管理</a>
+                        <i></i>
+                    </div>
+                </li>
+            </ul>
+        </dd>
+        <dd><div class="title"><span><img src="images/leftico01.png" /></span>舞谱中心</div>
+            <ul class="menuson">
+                <li>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="dance_book/manager.htm" target="rightFrame">舞谱管理</a>
+                        <i></i>
+                    </div>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+</#macro>
+<#macro js>
+    <script type="text/javascript">
+        $(function(){
+            //导航切换
+            $(".menuson .header").click(function(){
+                var $parent = $(this).parent();
+                $(".menuson>li.active").not($parent).removeClass("active open").find('.sub-menus').hide();
+
+                $parent.addClass("active");
+                if(!!$(this).next('.sub-menus').size()){
+                    if($parent.hasClass("open")){
+                        $parent.removeClass("open").find('.sub-menus').hide();
+                    }else{
+                        $parent.addClass("open").find('.sub-menus').show();
+                    }
+                }
+            });
+
+            // 三级菜单点击
+            $('.sub-menus li').click(function(e) {
+                $(".sub-menus li.active").removeClass("active")
+                $(this).addClass("active");
+            });
+
+            $('.title').click(function(){
+                var $ul = $(this).next('ul');
+                $('dd').find('.menuson').slideUp();
+                if($ul.is(':visible')){
+                    $(this).next('.menuson').slideUp();
+                }else{
+                    $(this).next('.menuson').slideDown();
+                }
+            });
+        })
+    </script>
+</#macro>

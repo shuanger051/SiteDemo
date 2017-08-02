@@ -1,0 +1,134 @@
+<#assign title="权限维护"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <link rel="stylesheet" href="${path}/css/zTreeStyle/zTreeStyle.css">
+    <!--<link rel="stylesheet" href="${path}/css/zTreeStyle/demo.css">-->
+    <style>
+        .elem-field {
+            margin-bottom: 10px;
+            padding: 0;
+            border: 1px solid #e2e2e2;
+        }
+        .elem-field legend{
+            margin-left:20px;
+            padding: 0 10px;
+            font-size: 20px;
+            font-weight: 300;
+        }
+        .ztree li span.button.add {
+            float: right!important;
+            margin-left:2px;
+            margin-right: -1px;
+            background-position:-144px 0;
+            vertical-align:top;
+            *vertical-align:middle
+        }
+        .ztree li span.button.remove {
+            float: right!important;
+        }
+        .ztree span{
+            display: inline;
+        }
+    </style>
+</#macro>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">内容管理</a></li>
+            <li><a href="#">栏目管理</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <fieldset class="elem-field" style="width: 20%; float: left;">
+            <legend>栏目树</legend>
+            <div style="padding-left:23px;">
+                <div id="tree" class="ztree"> </div>
+            </div>
+        </fieldset>
+        <fieldset id="channelList" class="elem-field" style="width: 79%; float: right; border: none">
+            <!--<legend>栏目-列表</legend>-->
+            <div>
+                <div class="tools">
+                    <ul class="toolbar">
+                        <li class="click" onclick="Manager.add()"> <span><img src="${path}/images/t01.png" /></span>添加</li>
+                    </ul>
+                    <form id="searchForm" name="searchForm">
+                        <ul class="seachform">
+                            <li><label>标题</label><input name="title" type="text" class="scinput" /></li>
+                            <li><label>状态</label>
+                                <div style="display: inline-block">
+                                    <select name="status">
+
+                                    </select>
+                                </div>
+                            </li>
+                            <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+                        </ul>
+                    </form>
+                </div>
+                <table class="tablelist" id="table">
+                    <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>固定级别</th>
+                        <th>发布时间</th>
+                        <th>状态</th>
+                        <th width="200">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="table_tbody">
+
+                    </tbody>
+                </table>
+                <div id="table_page">
+
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/common/page.js"></script>
+    <script src="${path}/js/biz/common/table.js"></script>
+    <script src="${path}/js/lib/jquery.ztree.all.min.js"></script>
+    <script src="${path}/js/biz/cont/list.js"></script>
+    <script type="text/html" id="table_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Tool.clickTr(event,this)">
+            <td title="{{item.contentExt.title}}">【<b style="color: #056DBB">{{item.channel.name}}</b>】{{item.contentExt.title.length > 24 ? item.contentExt.title.substring(0,24) : item.contentExt.title }}</td>
+            <td>{{item.topLevel}}</td>
+            <td>{{item.contentExt.releaseDate | dateFormat}}</td>
+            <td>{{item.statusName}}
+                {{if item.contentCheck.checkOpinion != ""}} 退回: {{item.contentCheck.checkOpinion}}
+                {{/if}}
+            </td>
+            <td>
+                {{if item.status == 1}}
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.audit('{{item.contentCheck.id}}',event);">审核</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.showReject('{{item.contentCheck.id}}',event);">退回</a>
+                {{else if item.status == 0}}
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.edit('{{item.id}}',event);">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.del('{{item.id}}',event);">删除</a>
+                {{else if item.status == 2}}
+                    {{if item.contentCheck.checkStep == item.channel.finalStep}}
+                        {{if item.channel.afterCheck == 1}}
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.showReject('{{item.contentCheck.id}}',event);">退回</a>
+                        {{else if item.channel.afterCheck == 2 || item.channel.afterCheck == 3}}
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.edit('{{item.id}}',event);">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.showReject('{{item.contentCheck.id}}',event);">退回</a>
+                {{/if}}
+                    {{/if}}
+                {{/if}}
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="5">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+    <#include "/template/select.html"/>
+</#macro>

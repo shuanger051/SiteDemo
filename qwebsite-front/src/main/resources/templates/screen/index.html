@@ -1,0 +1,195 @@
+<#assign title="首页"/>
+<#assign parentChannelId=1/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <style>
+        .fladv{ margin-left:-640px;}
+        .fradv{margin-right:-640px;}
+    </style>
+</#macro>
+<#macro content>
+    <!--star动画-->
+    <div class="banner">
+        <ul class="bd">
+            <@index_floating position=3>
+                <#list tag_list as item>
+                    <li style="background-image:url(${root.viewPath}${item.logo!''});"><a href="${item.siteLink!''}"></a></li>
+                </#list>
+            </@index_floating>
+        </ul>
+        <ul class="hd"></ul>
+        <div class="btn btn_l prev transition_a china">&lt;</div>
+        <div class="btn btn_r next transition_a china">&gt;</div>
+    </div>
+    <!--end动画-->
+
+
+    <div class="h_ann w_1200">
+        <h4 class="fl ann_th">活动通知：</h4>
+        <!--star滚动-->
+        <div class="ann_scroll fl">
+            <ul class="annlist bd">
+                <#if s.site?? && s.site == "line">
+                <@content_list channelId=20 size=3>
+                    <#list tag_list as item>
+                        <li><a href="${path}/${item.channel.channelPath}/${item.id}.jhtm">${item.contentExt.title!''}</a></li>
+                    </#list>
+                </@content_list>
+            </#if>
+                <#if s.site?? && s.site == "square">
+                    <@content_list channelId=46 size=3>
+                    <#list tag_list as item>
+                        <li><a href="${path}/${item.channel.channelPath}/${item.id}.jhtm">${item.contentExt.title!''}</a></li>
+                    </#list>
+                </@content_list>
+                </#if>
+            </ul>
+        </div>
+        <!--end滚动-->
+    </div>
+    <!--end赛事通知-->
+
+    <div class="box_w w_1200 hide_box">
+        <ul class="h_link_ul list_3 hover_box">
+            <#if s.site?? && s.site == "line">
+            <@index_line_list>
+                <#list tag_list as item>
+                    <li class="li_${item_index+1}"><a class="box transition_a" href="${item.siteLink!''}">
+                        <div class="box_l fl"><h5><b>${item.siteName?replace("&lt;br&gt;","<br>")}</b></h5><p>${item.description?replace("&lt;br&gt;","<br>")}</p></div>
+                        <div class="r_cell"><img src="${root.viewPath}${item.logo!''}" alt="${item.siteName}"></div>
+                    </a></li>
+                </#list>
+            </@index_line_list>
+            </#if>
+            <#if s.site?? && s.site == "square">
+                <@index_square_list>
+                <#list tag_list as item>
+                    <li class="li_${item_index+1}"><a class="box transition_a" href="${item.siteLink!''}">
+                        <div class="box_l fl"><h5><b>${item.siteName?replace("&lt;br&gt;","<br>")}</b></h5><p>${item.description?replace("&lt;br&gt;","<br>")}</p></div>
+                        <div class="r_cell"><img src="${root.viewPath}${item.logo!''}" alt="${item.siteName}"></div>
+                    </a></li>
+                </#list>
+            </@index_square_list>
+            </#if>
+        </ul>
+    </div>
+    <!--end一行-->
+    <#if s.site?? && s.site == "line">
+    <h4 class="h_th w_1200"><span class="fr font_14 gray_link"><a href="${path}/teacher/index.htm">更多<b class="orange_text china">&nbsp;&gt;</b></a></span><span class="th_arrow png"></span><b class="th_line_d"></b>排舞国家级名师</h4>
+    <div class="w_1200 box_w hide_box">
+        <ul class="list_4 clearfix h_tearch round_img">
+            <@teacher_list type="1" size=12>
+                <#list tag_list as item>
+                    <li><a href="${path}/teacher/${item.id}.htm" class="box transition_a"><div class="i_box transition_a"><img style="width: 150px;height: 150px;" src="${root.viewPath}${item.headImg!''}" alt=""><h5 class="orange_text">${item.realName!''}</h5>
+                        <#list item.brief?split("\r\n") as b>
+                            <p>${b!''}</p>
+                        </#list>
+                    </div></a></li>
+                </#list>
+            </@teacher_list>
+        </ul>
+    </div>
+    </#if>
+    <#if s.site?? && s.site == "square">
+        <h4 class="h_th w_1200"><span class="fr font_14 gray_link"><a href="${path}/teacher/index.htm">更多<b class="orange_text china">&nbsp;&gt;</b></a></span><span class="th_arrow png"></span><b class="th_line_d" style="width: 70px;"></b>广场舞国家级名师</h4>
+        <div class="w_1200 box_w hide_box">
+            <ul class="list_4 clearfix h_tearch round_img">
+                <@teacher_list type="2" size=12>
+                <#list tag_list as item>
+                    <li><a href="${path}/teacher/${item.id}.htm" class="box transition_a"><div class="i_box transition_a"><img style="width: 150px;height: 150px;" src="${root.viewPath}${item.headImg!''}" alt=""><h5 class="orange_text">${item.realName!''}</h5>
+                        <#list item.brief?split("\r\n") as b>
+                            <p>${b!''}</p>
+                        </#list>
+                    </div></a></li>
+                </#list>
+            </@teacher_list>
+            </ul>
+        </div>
+    </#if>
+    <!--end一行-->
+
+    <h4 class="h_th w_1200"><span class="th_arrow th_arrow2 png"></span><b class="th_line_d"></b>国家级资格证书</h4>
+    <div class="w_1200 box_w hide_box">
+        <ul class="list_4 clearfix h_book">
+            <#if s.site?? && s.site == "square">
+            <@certificate_list size=12 type=1>
+                <#list tag_list as item>
+                    <li><a href="###" class="transition_a box"><img style="width: 200px;height: 278px;" src="${root.viewPath}${item.img}" alt=""><p>${item.name!''}</p></a></li>
+                </#list>
+            </@certificate_list>
+            </#if>
+            <#if s.site?? && s.site == "line">
+                <@certificate_list size=12 type=2>
+                <#list tag_list as item>
+                    <li><a href="###" class="transition_a box"><img style="width: 200px;height: 278px;" src="${root.viewPath}${item.img}" alt=""><p>${item.name!''}</p></a></li>
+                </#list>
+            </@certificate_list>
+            </#if>
+        </ul>
+    </div>
+    <!--end一行-->
+
+    <div class="clearfix min_1200 h_brand">
+        <div class="clearfix w_1200 h_brand">
+            <h4 class="h_th"><span class="th_arrow th_arrow3 png"></span><b class="th_line_d"></b>合作伙伴</h4>
+            <!--star不滚动-->
+            <div class="hide_box">
+                <ul class="h_brand_ul list_7 img_border">
+                    <@partner_list>
+                        <#list tag_list as item>
+                            <li><a href="${item.siteLink!'###'}"><img style="width: 160px;height: 80px" src="${root.viewPath}${item.logo!''}" alt=""></a></li>
+                        </#list>
+                    </@partner_list>
+                </ul>
+            </div>
+            <!--end不滚动-->
+
+            <h4 class="h_th"><span class="th_arrow th_arrow4 png"></span><b class="th_line_d"></b>友情链接</h4>
+            <!--star滚动-->
+            <div class="pic_scroll brank_pic img_border">
+                <ul class="bd">
+                    <@friendlink_list >
+                        <#list tag_list as item>
+                            <li><a href="${item.siteLink!''}"><img style="width: 160px;height: 80px;" src="${root.viewPath}${item.logo!''}" alt=""></a></li>
+                        </#list>
+                    </@friendlink_list>
+                </ul>
+            </div>
+            <!--end滚动-->
+
+        </div>
+        <!--end宽度-->
+    </div>
+    <!--end一行-->
+
+
+    <!--返回顶部-->
+    <div class="ftool_top"><a href="#" class="top_ftoolab transition_a" id="ftoolTop"></a></div>
+    <!--返回顶部-->
+
+    <!--star浮动广告 -->
+    <@index_floating position=1>
+    <#list tag_list as item>
+        <div class="fladv f_adv"><div class="fadv_mc"><a href="${item.siteLink!''}"><img style="width: 120px;height: 300px;" src="${root.viewPath}${item.logo!''}" alt="" /></a></div><div class="fadv_close png"></div></div>
+    </#list>
+    </@index_floating>
+<@index_floating position=2>
+    <#list tag_list as item>
+        <div class="fradv f_adv"><div class="fadv_mc"><a href="${item.siteLink!''}"><img style="width: 120px;height: 300px;"  src="${root.viewPath}${item.logo!''}" alt="" /></a></div><div class="fadv_close png"></div></div>
+    </#list>
+</@index_floating>
+    <!-- end浮动广告 -->
+
+</#macro>
+<#macro js>
+    <script type="text/javascript">
+        ;$(function(){
+//star 关闭广告条
+            $('.fadv_close').click(function(){
+                $(this).parent('.f_adv').fadeOut();
+            });
+//end 关闭广告条
+
+        });
+    </script>
+</#macro>

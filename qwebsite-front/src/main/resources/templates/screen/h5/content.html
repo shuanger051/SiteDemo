@@ -1,0 +1,24 @@
+<#assign title="新闻详情"/>
+<#assign parentChannelId=1/>
+<#include "/layout/h5_layout.html"/>
+<#macro content>
+    <div id="tzxq-content">
+
+    </div>
+</#macro>
+<#macro js>
+    <script type="text/javascript">
+        $.ajax({
+            type:"get",
+            url:"/content/get?id=" + $.Tool.getReqP("id"),
+            dataType:"json",
+            success:function (result){
+                document.title = result.data.contentExt.title;
+                $("#tzxq-content").html(result.data.contentTxt.txt);
+            },
+            error: function(xhr, type) {
+                console.error("调用出错")
+            }
+        })
+    </script>
+</#macro>

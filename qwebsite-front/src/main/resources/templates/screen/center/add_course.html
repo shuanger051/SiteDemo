@@ -1,0 +1,151 @@
+<#assign title="我的课程"/>
+<#assign navIndex="2"/>
+<#include "/layout/cloub_layout.html"/>
+<#macro style>
+    <link rel="stylesheet" type="text/css" href="${path}/css/round_i.css">
+    <link rel="stylesheet" type="text/css" href="${path}/css/jquery.datetimepicker.css"/>
+</#macro>
+<#macro content>
+    <div class="box_shadow clearfix box_w w_1200">
+        <div class="i_center clearfix">
+            <div class="box_d_line clearfix">
+                <ul class="list_3 clearfix course_step">
+                    <div class="step_line"></div>
+                    <li class="first active"><span class="step_arrow png"></span><h5>填写课程信息</h5></li>
+                    <li><span class="step_arrow step_arrow2 png"></span><h5>课程审核</h5></li>
+                    <li class="last"><span class="step_arrow step_arrow3 png"></span><h5>课程上线</h5></li>
+                </ul>
+            </div>
+            <!--end步骤-->
+
+            <div class="box_fill_line clearfix" style="border-bottom: none;">
+                <form action="${path}/lesson/save" method="post" enctype="multipart/form-data" id="form">
+                <table class="fill_table">
+                    <tr>
+                        <th><span class="red_text">*</span><label for="title">课程名称：</label></th>
+                        <td><input type="text" class="round_m fill_text w_480" id="title" name="title"  nullmsg="请填写课程名称" placeholder="请输入课程全名，限25个字，注意语句是否通顺及错别字哦~" datatype="*1-25"></td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span>课程种类：</th>
+                        <td>
+                            <div class="dtdropsel divselect round_m"><cite></cite>
+                                <ul class="dtselect_list"  id="lessonKind">
+                                </ul>
+                            </div>
+                            <input value="" type="hidden" name="lessonKind" datatype="*" nullmsg="请选择课程种类">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span>上课人数：</th>
+                        <td>
+                            <div class="dtdropsel divselect round_m"><cite></cite>
+                                <ul class="dtselect_list" id="lessonType">
+                                </ul>
+                            </div>
+                            至少<input type="text" name="personNo" class="round_m fill_text input_120"  nullmsg="请输入上课人数" placeholder="输入人数" datatype="n1-4">人
+                            <input value="" type="hidden" name="lessonType" datatype="*" nullmsg="请选择课程类型">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span>上课地点：</th>
+                        <td><div id="test" class="city_div"></div></td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span><label for="address">所在区域：</label></th>
+                        <td><input type="text" class="round_m fill_text w_480" id="address" name="address">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span>上课时间：</th>
+                        <td>
+                            <input type="text" id="biginDate" name="biginDate" class="fill_text round_m date_text datetimepicker" placeholder="开始日期" datatype="*" nullmsg="请选择上课时间">
+                            <span class="m_t"><img src="${path}/images/club/arrow.png" class="img_vertical"></span>
+                            <input id="endDate" name="endDate" type="text" class="fill_text round_m date_text datetimepicker" placeholder="结束日期" datatype="*"  nullmsg="请选择上课时间"></br></br>
+                            <input type="text" id="beginTime" name="beginTime" class="fill_text round_m date_text datetimepicker" placeholder="开始时间" datatype="*"  nullmsg="请选择上课时间">
+                            <span class="m_t"><img src="${path}/images/club/arrow.png" class="img_vertical"></span>
+                            <input id="endTime" name="endTime" type="text" class="fill_text round_m date_text datetimepicker" placeholder="结束时间" datatype="*" nullmsg="请选择上课时间">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span>课程封面：</th>
+                        <td>
+                            <div class="file-box_face">
+                                <input type="file" name="file" class="file" id="file" datatype="*" nullmsg="请选择封面" size="28" onchange="Manager.showImg(event)" />
+                                <div  class="up_face" style="background-size: 100% 100%"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span>内容说明：</th>
+                        <td>
+                            <div class="d_pic" id="content" style="width: 700px;height: 300px;">
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span><label for="telNo">咨询电话：</label></th>
+                        <td><input type="text" class="round_m fill_text" id="telNo" name="telNo" datatype="mobile" nullmsg="请填写电话" ></td>
+                    </tr>
+                    <tr>
+                        <th>是否预约：</th>
+                        <td>
+                            <span class="sel_box_r">
+                                <input type="radio" id="c-1" name="appointmentFlag" value="0"/>
+                                <label for="c-1">无需预约</label>
+                            </span>
+                            <span class="sel_box_r m_l_b">
+                                <input type="radio" id="c-2" name="appointmentFlag" value="1" checked />
+                                <label for="c-2">需要提前预约</label>
+                            </span>
+                            <input type="text" maxlength="2" class="round_m fill_text input_120" placeholder="预约天数" name="appointmentDays" datatype="n1-2" nullmsg="请输入1-2位数字">天
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span><label for="price">学员课时费：</label></th>
+                        <td><input type="text" class="round_m fill_text" id="price" name="price"  nullmsg="请输入价格" datatype="money"><span class="m_l">元/人</span></td>
+                    </tr>
+                    <tr>
+                        <th><span class="red_text">*</span>是否在app上显示课程：</th>
+                        <td>
+                            <span class="sel_box_r">
+                                <input type="radio" id="b-1" name="appShowFlag" value="1"/>
+                                <label for="b-1">是</label>
+                            </span>
+                            <span class="sel_box_r m_l_b">
+                                <input type="radio" id="b-2" name="appShowFlag" value="0" checked />
+                                <label for="b-2">否</label>
+                            </span>
+                        </td>
+                    </tr>
+                    <tfoot>
+                    <tr>
+                        <th></th>
+                        <td><input type="submit" class="round_m login_btn btn_auto btn_170" value="确定提交"></td>
+                    </tr>
+                    </tfoot>
+                </table>
+                </form>
+            </div>
+            <!--end一行-->
+        </div>
+        <!--end宽度-->
+    </div>
+    <!--end中间区域-->
+
+
+
+</#macro>
+
+<#macro js>
+    <script type="text/javascript" src="${path}/js/lib/jquery.form.min.js"></script>
+    <script src="${path}/js/lib/jquery.provincesCity.js"></script>
+    <script src="${path}/js/lib/provincesdata.js"></script>
+    <script src="${path}/js/lib/jquery.datetimepicker.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${path}/js/lib/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${path}/js/lib/ueditor/ueditor.all.js"> </script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="${path}/js/lib/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="${path}/js/biz/lesson/addcourse.js"></script>
+</#macro>

@@ -1,0 +1,68 @@
+<#assign title="活动赛事培训管理-添加"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <style>
+        span {
+            display: inline-block;
+        }
+    </style>
+</#macro>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">活动赛事培训管理</a></li>
+            <li><a href="#">活动报名管理</a></li>
+            <li><a href="#">活动报名添加</a></li>
+        </ul>
+    </div>
+    <#include "/layout/back.html"/>
+    <div class="formbody">
+        <form id="form1" name="form1" method="post" enctype ="multipart/form-data">
+            <ul class="forminfo">
+                <li>
+                    <label>标题</label>
+                    <input name="title" type="textinput" class="dfinput" maxlength="50"  datatype="*" style="width: 278px;" />
+                </li>
+                <li>
+                    <label>所属省份</label>
+                    <div style="float: left;margin-bottom: 13px;">
+                        <div style="display: inline;padding-right: 10px;">
+                            <select name="province" id="province">
+
+                            </select>
+                        </div>
+                        <div style="display: none;padding-right: 10px;">
+                            <select name="city" id="city">
+
+                            </select>
+                        </div>
+                        <div style="display: none;padding-right: 10px;">
+                            <select name="county" id="county">
+
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <label>开始日期<b>*</b></label>
+                    <input name="gmtBegin" id="biginDate" type="textinput" class="dfinput" onfocus="WdatePicker({minDate:'%y-%M-{%d+1}'})" datatype="*" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>结束日期<b>*</b></label>
+                    <input name="gmtEnd" id="endDate" type="textinput" class="dfinput" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'biginDate\')}'})" datatype="*" style="width: 278px;"  />
+                </li>
+                <li>
+                    <label>&nbsp;</label>
+                    <input name="" type="submit" class="btn" value="确认保存"/>
+                </li>
+            </ul>
+        </form>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/lib/My97DatePicker/WdatePicker.js"></script>
+    <script src="${path}/js/lib/qq_geo.js"></script>
+    <script src="${path}/js/biz/event_training/square/activity/add.js"></script>
+    <#include "/template/select.html"/>
+</#macro>

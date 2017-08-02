@@ -1,0 +1,81 @@
+<#assign title="订单管理"/>
+<#assign navIndex="3"/>
+<#include "/layout/cloub_layout.html"/>
+<#macro style>
+    <link rel="stylesheet" type="text/css" href="${path}/css/round_i.css">
+</#macro>
+<#macro content>
+    <dl class="tab_nav i_tab_nav w_1200">
+        <dd class="r_cell" id="statusDiv">
+            <a class="tab_light" href="javascript:void(0)" data-value="">全部订单</a>
+            <a href="javascript:void(0)" data-value="1">待上课</a>
+            <a href="javascript:void(0)" data-value="4">上课中</a>
+            <a href="javascript:void(0)" data-value="2">已完成授课</a>
+            <a href="javascript:void(0)" data-value="3">已完成</a>
+            <a href="javascript:void(0)" data-value="5">已退课</a>
+        </dd>
+    </dl>
+    <div class="box_shadow clearfix box_n w_1200">
+        <div class="i_center clearfix tab_box">
+            <div>
+                <ul class="i_course even_ul" style="padding-top: 0;" id="tab">
+                </ul>
+            <dl class="page" id="tab_page">
+            </dl>
+            </div>
+        </div>
+    </div>
+
+</#macro>
+<#macro js>
+    <script type="text/html" id="tab_temp">
+        {{if list.length > 0}}
+        {{each list as item i}}
+        <li class="clearfix li_o transition_a">
+        <div class="t"><span class="fr"><span class="pink_text font_16">实付:<span class="font_22">{{item.pay_money | balanceFormat}}</span></span><span class="gray_text_l">&nbsp;(总价:{{item.total_money | balanceFormat}})</span></span>
+            <div class="r_cell"><h5 class="fl">订单号：{{item.bill_no}}</h5>
+                <span class="gray_text_l">（创建时间：{{item.record_time | dateFormat:'yyyy-MM-dd'}}）</span>
+            </div></div>
+        <dl class="d">
+            <dd class="r_cell">
+                <div class="r_text fr">
+                    <span class="text_r_box round_m {{if item.status == 2 || item.status == 5}}text_r_gray {{else if item.status == 1}}text_r_blue{{else if item.status == 4 || item.status == 3}}text_r_green{{/if}}">{{item.statusName}}</span>
+                    <p>报名人数{{item.number}}人</p>
+                    <!--<div class="btn"><a href="###" class="bao_btn excel_btn png">导出报名用户Excel</a><a href="###" class="bao_btn bao_btn_s m_l">重新发布</a></div>-->
+                </div>
+                <div class="r_cell">
+                    <h5 class="orange_link"><a href="###">{{item.course_name}}</a></h5>
+                    <div class="text_d">
+                        <p><span class="s_arrow s_arrow4 png"></span>报名人：{{item.nick_name}}({{item.phone_number}})</p>
+                        <p><span class="s_arrow s_arrow3 png"></span>类型：{{item.course_type_name}}</p>
+                        <p><span class="s_arrow s_arrow2 png"></span>时间：{{item.start_time}} </p>
+                        <!--<p><span class="s_arrow s_arrow3 png"></span>地点：{{item.site}}{{item.address}}</p>-->
+                    </div>
+                </div>
+            </dd>
+        </dl>
+        </li>
+        {{/each}}
+        {{else}}
+        <li>暂无数据</li>
+        {{/if}}
+    </script>
+    <script type="text/javascript">
+
+        $(function (){
+           var table = new $.Table();
+           table.init({
+               url:"/account/orders"
+           }).render();
+           $("#statusDiv a").click(function () {
+               $(this).addClass('tab_light').siblings().removeClass('tab_light');
+               var status = $(this).attr("data-value");
+               if(status !== ""){
+                   table.options({status:status},true);
+               }else{
+                   table.options({},true);
+               }
+           })
+        })
+    </script>
+</#macro>

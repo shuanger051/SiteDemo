@@ -1,0 +1,434 @@
+
+    html{-webkit-tap-highlight-color:transparent;overflow-x:hidden;margin: 0; padding: 0;}
+    body{color:#333;font-size:.28em;line-height:1.5;font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;margin: 0; padding: 0; position: relative;}
+    body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+    table{border-collapse:collapse;border-spacing:0}
+    img{vertical-align:middle;border:0}
+    h1,h2,h3,h4,h5,h6{font-weight:normal}
+    ul,ol,li{list-style:none}
+    em,i{font-style:normal}
+    img{border:none}
+    input,img{vertical-align:middle}
+    input,select,textarea{-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-appearance:none;border:0;border-radius:0}
+    textarea:focus{outline:0}
+    a{color:#6E7D8B;text-decoration:none;outline:0}
+    a:active,a:hover,a.current{outline:0}
+    .c{text-align:center}
+    .tr{text-align:right}
+    
+    * {
+    	box-sizing: border-box;
+    	-webkit-box-sizing: border-box;
+    	-moz-box-sizing: border-box;
+    }
+    
+  	*,:after,:before {
+    	box-sizing: inherit;
+    	-webkit-tap-highlight-color: transparent
+    }
+    html {
+    	box-sizing: border-box;
+    	background-color:#f2f2f2;
+    	font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
+		line-height: 1.2;
+      	-webkit-user-select: none;
+      	-moz-user-select: none;
+      	-ms-user-select: none;
+      	user-select: none;
+      	-webkit-font-smoothing: antialiased;
+      	-ms-touch-action: manipulation;
+      	touch-action: manipulation;
+      	-webkit-text-size-adjust: none;
+      	-ms-text-size-adjust: none;
+      	text-size-adjust: none;
+    }
+
+/** 设置占位符颜色 **/
+	::-webkit-input-placeholder {
+		color: #CACACA;
+	    font-weight: 200;
+	}
+	:-moz-placeholder { 
+	    color: #CACACA;    
+	    font-weight: 200;
+	}
+	::-moz-placeholder { 
+	    color: #CACACA;
+	    font-weight: 200;
+	}
+	:-ms-input-placeholder { 
+	    color: #CACACA;
+	    font-weight: 200;
+	}
+
+
+/** 首页  **/
+	/* banner  */
+	#banner {
+		position: relative;	
+	}
+	.swiper-container-horizontal>.swiper-pagination {
+		bottom: .1rem;
+	}
+	.swiper-pagination-bullet{
+		width: .15rem;
+		height: .15rem;
+	}
+	.swiper-container-horizontal>.swiper-pagination .swiper-pagination-bullet {
+		margin: 0 0.07rem;
+	}
+    .up_banner img {
+        width: 100%;
+      }
+    .up_banner_wrapper .swiper-pagination-bullet-active {
+        background: #fff !important;
+     }
+     
+     /* content  */
+    #content .con-list{
+      position: relative;      
+      width: 100%;
+      background-color: #FFFFFF;
+      overflow: hidden;
+      margin-bottom: 0.25rem;
+    	font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
+     }
+    #content .con-list1 {     	
+      height: 7.63rem;
+    }
+    #content .con-list .con-header {
+      width: 100%;
+      height: 1.63rem;
+      line-height: 1.63rem;
+      padding-left: .6rem;      
+      font-size: 0.48rem;
+     	color: #353535;
+      position: relative;
+    }
+    #content .con-list .con-header span {
+    	width: .148rem;
+    	height: .444rem;
+    	position: absolute;
+    	left: .2rem;
+    	top: 0.593rem;
+    	background-color: #f17373;
+    }
+    #content .con-list .con-header span.paiwu {
+    	background-color: #FFC636;
+    }
+    #content .con-list .con-header span.xinwen {
+    	background-color: #2873FF;
+    }
+    #content .con-list .item-list {
+    	width: 100%;
+    	border-top: 1px #d0d0d0 solid;
+    }
+    #content .con-list .item-list a {
+    	position: relative;
+    	display: inline-block;
+    	width: 32.5%;
+    	height: 3rem;
+    	text-align: center;
+    }
+    #content .con-list .item-list .container {
+    	  width: .67rem;
+    	  height: .67rem;
+    	  margin: .73rem auto .33rem;
+    	  position: relative;
+    }
+    #content .con-list .item-list .hoticon {
+    	position: absolute;
+    	top: -0.1rem;
+    	right: -0.1rem;
+    	width: .2rem;
+    	height: .2rem;
+    	background-color: #F85379;
+    	border-radius: 50%;
+    }
+    #content .con-list .item-list .title {
+    	width: 100%;    	
+    	font-size: .41rem;
+    	color: #393D42;    	
+    }
+    #content .con-list .item-list .rigBorder {
+    	position: absolute;
+    	right: 0;
+    	top: .73rem;
+    	width: 1px;
+    	height: 1.63rem;
+    	background-color: #d0d0d0;
+    }
+    
+    #content .con-list .news-list {
+    	margin-left: .4rem;
+    }
+    #content .con-list .news-list li.news-contain {
+    	position: relative;
+    	border-top: 1px #d0d0d0 solid;
+    	padding: .36rem 0;
+    }
+    #content .con-list .news-list li.news-contain:first-child {
+    	border: none;
+    }
+    #content .con-list .news-list li.news-contain span {
+    	display: inline-block;
+    	width: 80%;
+    	overflow: hidden;
+    	font-size: 0.45rem;
+    	line-height: .7rem;
+     	color: #393D42;
+    }
+    #content .con-list .news-list li.news-contain a:visited span, #content .con-list .news-list li.news-contain a:hover span, content .con-list .news-list li.news-contain a:active  span {
+    	color: #838383;;
+    }
+    #content .con-list .news-list li.news-contain i.times {
+    	position: absolute;
+    	right: .3rem;
+    	font-size: .4rem;
+    	line-height: .7rem;
+    	color: #838383;
+    }
+    
+
+/** 首页 标注 **/
+
+	#content .con-marker .item-list .container {
+	 	background-color: #f2f2f2;
+	}
+
+
+/** 赛事报名   赛事通知  **/
+	.B-head {
+		width: 100%;
+      	height: 1.85rem;
+      	background-color: #f2f2f2;
+      	line-height: 1.85rem;
+      	padding-left: .4rem;      
+      	font-size: 0.48rem;
+     	color: #353535;
+	}
+	#content .con-list .news-list li.news-contain i.times img {
+		width: .22rem;
+	}
+
+
+/** 通知详情 **/
+	#tzxq-content {
+		width: 90%;
+		background-color: #FFFFFF;
+		margin: 1.1rem auto;
+		padding: 0.37rem;
+		border-radius: .3rem;
+		text-align: center;
+	}
+	#tzxq-content img {
+		width: 100%;
+	}
+	
+	
+/** 培训报名 **/
+	
+	.ItemDetails {
+		width: 100%;
+		overflow-x: hidden;
+	}
+	.ItemDetails .content-list {		
+		margin: 0 auto .37rem;
+		background: #FFFFFF;
+	}
+	.ItemDetails .content-list ul li {
+		margin: 0 0 0 .4rem;
+		padding: .5rem 0;
+		border-bottom: 1px #d0d0d0 solid;
+		text-align: right;
+	} 
+	.ItemDetails .setRoles-list ul li {
+		text-align: left;
+	}
+	.ItemDetails .content-list label, .ItemDetails .content-list .TR-input {
+		font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
+		display: inline-block;
+		font-size: 0.44rem;
+		color: #393D42;
+		line-height: .85rem;		
+		vertical-align: top;
+	}
+	.ItemDetails .content-list label{
+		width: 29.8%;
+		text-align: left;
+	}
+	.ItemDetails .content-list .TR-input {
+		position: relative;
+		width: 70%;
+		min-height: 0.85rem;
+		right: .4rem;
+		background-color: transparent;
+		outline: 0 none;
+		text-align: right;
+	}
+	.ItemDetails .content-list .TR-input.error{
+		color: #ff5757;
+		outline: 2px solid #ff5a5a;
+	}
+	.ItemDetails .content-list .TR-program {
+		color: #FF725C;
+	}
+	.ItemDetails .content-list .TR-sex, .ItemDetails .content-list .TR-region , .ItemDetails .content-list .TR-gamegroup{
+		padding-right: .4rem;
+		background: url(../../images/h5/icon_tongyong_jinru.png) center right no-repeat transparent;
+		background-size: auto .34rem;
+	}
+	.ItemDetails .content-list .prog-role {
+		display: inline-block;
+		width: 49%;		
+		margin: 0 auto;
+		padding: .5rem 0;
+		text-align: center;
+		font-size: .44rem;
+		color: #393D42;
+		text-align: center;
+	}
+	.ItemDetails .content-list .prog-role i {
+		display: inline-block;
+		padding: 0 .75rem;
+		line-height: .88rem;
+		border-radius: .56rem;
+		border: 1px #CACACA solid;
+		background-color: transparent;
+	}
+	.ItemDetails .content-list .pr-selected i {
+		background-color: #FF725C;
+		border: 1px #FF725C solid;
+		color: #FFFFFF;
+	}
+	.ItemDetails .TR-button {
+		display: block;
+		width: 88%;
+		height: 1.6rem;
+		margin: .8rem auto .56rem;
+		padding: 0;
+		background-color: #FF725C;
+		border: 0 none;
+		border-radius: 3.7rem;
+		font-size: .59rem;
+		color: #FFFFFF;
+		line-height:  1.6rem;
+		text-align: center;
+		outline: none;
+	}
+	
+/** 设置性别   **/
+	#setSex, #setGroup  {
+		position: absolute;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 9;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		background-color: rgba(0,0,0,.3);
+	}
+	#setSex .sex-list {
+		position: absolute;
+		bottom: .18rem;
+		left: 5%;
+		width: 90%;		
+		background-color: #FFFFFF;
+		border-radius: .3rem;
+		text-align: center;
+		font-size: 0.44rem;
+		line-height: 1.6rem;
+		color: #0076FF;
+	}
+	#setSex .sex-items {
+		bottom: 1.96rem;
+	}
+
+
+/** 参赛项目详情 **/
+	.ItemDetails .content-list .comp-role {
+		display: inline-block;
+		width: 32%;		
+		margin: 0 auto;
+		padding: .4rem 0;
+		text-align: center;
+		font-size: .4rem;
+		color: #393D42;
+		text-align: center;
+	}
+	.ItemDetails .content-list .comp-role i {
+		display: inline-block;
+		width: 3rem;
+		line-height: 1rem;
+		border-radius: .56rem;
+		border: 1px #CACACA solid;
+		background-color: transparent;
+	}
+	.ItemDetails .content-list .com-selected i {
+		background-color: #FF725C;
+		border: 1px #FF725C solid;
+		color: #FFFFFF;
+	}
+
+
+/** 参赛组别  **/
+	.ItemDetails .content-list .TR-input.unset-gamegroup {
+		color: #CACACA;
+		font-weight: 200;
+	}
+	#setGroup .group-content {
+		position: absolute;
+		left: 5%;
+		top: 1rem;
+		bottom: 1rem;
+		width: 90%;		
+		overflow: hidden;
+		background-color: #FFFFFF;
+		border-radius: .3rem;
+		text-align: left;
+		font-size: 0.4rem;
+		line-height: 1.6rem;
+		color: #393D42;;
+		vertical-align: middle;
+	}
+	#setGroup .group-list {
+		position: absolute;
+		width: 100%;
+	}
+	#setGroup .group-list i {
+		display: inline-block;
+		width: .4rem;
+		height: .4rem;
+		background-color: transparent;
+		vertical-align: middle;
+		margin: 0 .2rem;
+		background: url(../../images/h5/icon_weixuanzhong.png) center center no-repeat;
+		background-size: 100% 100%;
+	}
+	#setGroup .group-list .role-selected i {		
+		background: url(../../images/h5/icon_xuanzhong.png) center center no-repeat;
+		background-size: 100% 100%;
+	}
+	#setGroup .group-list .group-button {
+		margin: 0 1rem;
+		font-size: 0.45rem;
+		line-height: 1rem;
+		color: #838383;
+		font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
+		background-color: transparent;
+		border: none 0;
+		outline: none 0;
+	}
+	#setGroup .group-list .group-sure {
+		color: #FF725C;
+	}
+
+
+
+
+
+
+
+
+

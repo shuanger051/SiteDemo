@@ -1,0 +1,61 @@
+<#assign title="登录页"/>
+<#assign bodyClass="body-bg"/>
+<#include "/layout/layout.html"/>
+<#macro style>
+    <style>
+        .body-bg {
+            background: #1c77ac url(./images/light.png) no-repeat center top;
+            overflow: hidden;
+        }
+        .login {
+            position: absolute;
+            left: 50%;
+            top:50%;
+            margin-left: -350px;
+            margin-top: -80px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        //全登陆不允许iframe嵌入
+        if (window.top !== window.self) {
+            window.top.location = window.location;
+        }
+
+    </script>
+</#macro>
+<#macro content>
+    <div id="mainBody">
+        <div id="cloud1" class="cloud"></div>
+        <div id="cloud2" class="cloud"></div>
+    </div>
+
+
+    <div class="logintop">
+        <span>欢迎登录后台管理界面平台</span>
+    </div>
+    <div class="loginbody">
+        <span class="systemlogo"></span>
+        <div class="loginbox loginbox3 login">
+
+            <form id="form1" name="form1" action="${path}/login" method="post">
+            <ul>
+                <#if shiroLoginFailure??>
+                    <li style="color: orangered;margin-bottom: 1px;">${shiroLoginFailure}</li>
+                </#if>
+                <li><input id="username" name="username" type="text" class="loginuser" datatype="*" nullmsg="请输入用户名" placeholder="用户名" /></li>
+                <li><input id="password" name="password" type="password" class="loginpwd" datatype="*" nullmsg="请输入密码" placeholder="密码" /></li>
+                <li class="yzm">
+                    <span><input name="captchaCode" type="text" datatype="*" nullmsg="请输入验证码" placeholder="验证码"/></span><cite><img src="./jcaptcha.jpeg?_=${.now?long}" id="vimg"></cite>
+                </li>
+                <li><input name="" type="submit" class="loginbtn" value="登录" /></li>
+            </ul>
+            </form>
+        </div>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/lib/cloud.js" type="text/javascript"></script>
+    <script src="${path}/js/lib/jsencrypt.min.js"></script>
+    <script src="${path}/js/biz/login.js" type="text/javascript"></script>
+</#macro>

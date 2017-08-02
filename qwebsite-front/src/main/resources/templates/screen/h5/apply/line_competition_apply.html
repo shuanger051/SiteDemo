@@ -1,0 +1,96 @@
+<#assign parentChannelId=1/>
+<#include "/layout/h5_layout.html"/>
+<#macro content>
+    <div id="CompDetail" class="ItemDetails">
+        <form id="applyForm" name="applyForm" style="width: 100%;">
+            <input type="hidden" name="contentId" id="contentId">
+            <div class="content-list">
+                <ul>
+                    <li>
+                        <label for="contentName">参赛项目</label><span id="contentName" class="TR-program TR-input"></span>
+                    </li>
+                    <li>
+                        <label for="division">参赛赛区</label><input id="division" name="division" class="TR-sex TR-input" type="text" value="" datatype="*" placeholder="请选择赛区" readonly="readonly" />
+                    </li>
+                    <li>
+                        <label for="captainName">领队姓名</label><input value="" class="TR-name TR-input" datatype="zhen" id="captainName" name="captainName" errormsg="姓名格式错误" placeholder="请输入领队姓名" altercss="tip" />
+                    </li>
+                    <li>
+                        <label for="teamName">参赛队名</label><input type="text" value="" class="TR-identity TR-input" datatype="teamName" id="teamName" name="teamName" errormsg="请输入队名" placeholder="请输入队名" altercss="tip">
+                    </li>
+                    <li>
+                        <label for="dteamType" style="width: 21.8%;">组别</label><span id="dteamType" class="TR-gamegroup TR-input unset-gamegroup" style="width: 78%;">选择组别</span>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="content-list setRoles-list">
+                <ul>
+                    <li>
+                        <label>参赛项目</label><br  />
+                        <@dict entry="projectKind">
+                            <#list tag_list as item>
+                                <div data-value="${item.itemCode}" class="comp-role <#if item_index == 0> com-selected </#if>">
+                                    <i>${item.itemName}</i>
+                                </div>
+                                <#if item_index == 0>
+                                    <input name="projectKind" id="projectKind" type="hidden" value="${item.itemCode}">
+                                </#if>
+                            </#list>
+                        </@dict>
+                    </li>
+                </ul>
+            </div>
+            <input name="teamType" id="teamType" type="hidden" value="">
+
+            <div class="content-list">
+                <ul>
+                    <li>
+                        <label for="mobile">联系电话</label><input type="text" value="" class="TR-tel TR-input" datatype="mobile" id="mobile" name="mobile" errormsg="联系电话格式错误" placeholder="如15858676187" altercss="tip">
+                    </li>
+                    <li>
+                        <label for="email">邮箱地址</label><input type="text" value="" class="TR-email TR-input" type="email" datatype="email" id="email" name="email" errormsg="邮箱格式错误" placeholder="如zhangsan@126.com" altercss="tip" altercss="tip">
+                    </li>
+                    <li>
+                        <label for="address">详细地址</label><input type="text" value="" class="TR-stature TR-input" id="address" name="address" datatype="n1-3" errormsg="请输入详细地址"  placeholder="请输入详细地址" altercss="tip">
+                    </li>
+                </ul>
+            </div>
+            <button id="formSubmit" class="TR-button" type="button">提交</button>
+        </form>
+        <div id="setSex" style="display: none; opacity: 0;">
+            <div class="sex-list sex-items">
+                <ul id="divisionsUl">
+
+                </ul>
+            </div>
+
+            <div class="sex-list sex-cancel">取消</div>
+        </div>
+
+        <div id="setGroup" style="display: none; opacity: 0;">
+            <div class="group-content">
+                <div class="group-list group-items" style="border-bottom: 1px #CACACA solid; overflow-y: scroll; top: 0; bottom: 1.6rem;">
+                    <ul id="">
+                        <@dict entry="teamType">
+                            <#list tag_list as item>
+                                <li data-value="${item.itemCode}" <#if item_index==0> class="role-selected" </#if> ><i></i>${item.itemName}</li>
+                            </#list>
+                        </@dict>
+                    </ul>
+                </div>
+                <div class="group-list" style="text-align: center; bottom: 0;">
+                    <button class="group-cancel group-button">取消</button>
+                    <button class="group-sure group-button">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</#macro>
+<#macro js>
+    <script type="text/javascript">
+        $(function(){Ajax.query("getTrain",{url:"/apply/competition/get",data:{id:$.Tool.getReqP("id")},callback:function(result){$("#contentName").text(result.title);document.title=result.title;$("#contentId").val(result.id);var divisions=result.division;if(!!divisions&&divisions!=""){divisions=divisions.replace(/，/g,",").split(",");var html="";$.each(divisions,function(i,v){if(i==0){html+='<li  style="border-bottom: 1px #CACACA solid;">'+v+"</li>"}else{html+="<li>"+v+"</li>"}});$("#divisionsUl").html(html);$("#division").on("touchstart",function(){$("#setSex").fadeIn(500);if($(this).hasClass("error")){$(this).removeClass("error")}});$("#setSex .sex-cancel").on("touchend",function(){$("#setSex").fadeOut(500)});$("#setSex .sex-items li").on("touchend",function(){$("#setSex").fadeOut(500);$("#division").val($(this).text())})}}});$("#dteamType").on("touchstart",function(){$("#setGroup").fadeIn(500);if($(this).hasClass("error")){$(this).removeClass("error")}});$("#setGroup .group-items li").on("touchend",function(){if(!$(this).hasClass("role-selected")){$(this).addClass("role-selected").siblings("li").removeClass("role-selected")}});$("#setGroup .group-sure").on("touchend",function(){var gamegroup=$("#dteamType");$("#setGroup").fadeOut(500);if(gamegroup.hasClass("unset-gamegroup")){gamegroup.removeClass("unset-gamegroup")}var s=$("#setGroup .group-items li.role-selected");$("#teamType").val(s.attr("data-value"));gamegroup.text(s.text())});$("#setGroup .group-cancel").on("touchend",function(){$("#setGroup").fadeOut(500)});$("#CompDetail .content-list .comp-role").on("touchend",function(){var that=this;$("#projectKind").val($(that).attr("data-value"));if(!$(that).hasClass("com-selected")){$(that).addClass("com-selected").siblings(".comp-role").removeClass("com-selected")}});$.Validate.init(function(){$.Validate.telValid($("#mobile"));$.Validate.nameValid($("#realName"));$.Validate.emailValid($("#email"))});$("#formSubmit").on("touchend",function(e){if(!!$.Validate.check()){$(this).attr("disabled","disabled");Ajax.submit("apply",{url:"/apply/competition",data:$.Tool.serializeJson($("#applyForm")),callback:function(){$(this).removeAttr("disabled");alert("报名成功")},failure:function(result){$(this).removeAttr("disabled");alert(result.message)}})}})});
+    </script>
+</#macro>

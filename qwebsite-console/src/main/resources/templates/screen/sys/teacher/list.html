@@ -1,0 +1,92 @@
+<#assign title="名师管理-列表"/>
+<#include "/layout/layout.html"/>
+<#macro content>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页管理</a></li>
+            <li><a href="#">名师管理</a></li>
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <div class="formtitle1"><span>名师列表</span></div>
+        <div class="tools">
+            <ul class="toolbar">
+                <li class="click" onclick="Manager.add()"><span><img src="${path}/images/t01.png" /></span>添加</li>
+            </ul>
+            <ul class="toolbar1">
+                <li class="click" style="cursor:pointer;" onclick="Manager.exportExcel()"><span><img style="margin-top: 3px;" src="${path}/images/f05.png" /></span>导出</li>
+            </ul>
+            <form id="searchForm" name="searchForm">
+            <ul class="seachform">
+                <li>
+                    <label>姓名:</label>
+                    <input name="realName" id="realName" type="text" class="scinput" />
+                </li>
+                <li>
+                    <label>舞蹈类别:</label>
+                    <select name="type">
+
+                    </select>
+                </li>
+                <li>
+                    <label>职称:</label>
+                    <select name="level">
+
+                    </select>
+                </li>
+                <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+            </ul>
+            </form>
+        </div>
+        <table class="imgtable" id="table">
+            <thead>
+            <tr>
+                <th width="100px">舞蹈类别</th>
+                <th width="100px;">头像</th>
+                <th>姓名</th>
+                <th>职称</th>
+                <th>简介</th>
+                <th>显示顺序</th>
+                <th>是否显示</th>
+                <th width="200">操作</th>
+            </tr>
+            </thead>
+            <tbody id="table_tbody">
+
+            </tbody>
+        </table>
+        <div id="table_page">
+
+        </div>
+    </div>
+</#macro>
+<#macro js>
+    <script src="${path}/js/biz/common/page.js"></script>
+    <script src="${path}/js/biz/common/table.js"></script>
+    <script src="${path}/js/biz/sys/teacher/list.js"></script>
+    <script type="text/html" id="table_temp">
+        {{if list.length > 0}}
+        {{each list as item}}
+        <tr onclick="Tool.clickTr(event,this)">
+            <td>{{item.typeName}}</td>
+            <td class="imgtd"><img style="width: 80px;height: 60px;" src="${root.viewPath}{{item.headImg}}"></td>
+            <td>{{item.realName}}</td>
+            <td>{{item.levelName}}</td>
+            <td>{{item.brief}}</td>
+            <td>{{item.priority}}</td>
+            <td>{{item.isEnabledName}}</td>
+            <td>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.edit('{{item.id}}',event);">修改</a>
+                <a href="javascript:void(0)" class="tablelink" onclick="Manager.del('{{item.id}}',event)">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr style="text-align: center;height: 40px;">
+            <td colspan="8">没有数据</td>
+        </tr>
+        {{/if}}
+    </script>
+    <#include "/template/select.html"/>
+</#macro>

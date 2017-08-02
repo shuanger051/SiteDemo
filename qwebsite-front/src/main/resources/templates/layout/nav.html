@@ -1,0 +1,24 @@
+<div class="nav min_1200">
+    <div class="nav w_1200">
+        <ul class="funnav">
+            <#if s.site?? && s.site == "line">
+                <@nav_list parentId=15>
+                <#list tag_list as item>
+                    <li <#if item.priority==parentChannelId> class="current"</#if>> <a href="${path}/${item.link!''}">${item.name!''}</a></li>
+                </#list>
+            </@nav_list>
+            </#if>
+
+            <#if s.site?? && s.site == "square">
+                <@nav_list parentId=7>
+                <#list tag_list as item>
+                    <li <#if item.priority==parentChannelId> class="current"</#if>> <a href="${path}/${item.link!''}">${item.name!''}</a></li>
+                </#list>
+            </@nav_list>
+            </#if>
+
+        </ul>
+    </div>
+    <!--end宽度-->
+</div>
+<!--end导航-->
