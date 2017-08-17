@@ -1,5 +1,6 @@
 package cn.qweb.cms.biz.service.dto;
 import cn.qweb.cms.core.dictionary.DictManager;
+import org.apache.commons.lang3.StringUtils;
 import org.wuwz.poi.annotation.ExportConfig;
 
 import java.io.Serializable;
@@ -141,7 +142,14 @@ public class CompetitionSquareApplyDTO implements Serializable{
     }
     public void setProjectKind(String projectKind){
         this.projectKind = projectKind;
-        this.setProjectKindName(DictManager.getItem("projectKind",projectKind));
+        StringBuilder prodName = new StringBuilder();
+        if(StringUtils.isNotBlank(projectKind)){
+            String[] prods = StringUtils.split(projectKind, ",");
+            for (String id : prods) {
+                prodName.append(DictManager.getItem("projectKind",id)).append(",");
+            }
+        }
+        this.setProjectKindName(prodName.deleteCharAt(prodName.length()-1).toString());
     }
     public String getProjectKind(){
         return projectKind;

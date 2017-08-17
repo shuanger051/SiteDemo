@@ -54,7 +54,17 @@ var TrainApplyModel = function ($){
         $("#applyForm").Validform({
             tiptype:3,
             callback:function (form){
-                var data = Tool.serializeJson(form);
+                var data={};
+                $.each(form.serializeArray(),function (){
+                    if($.trim(this.value) !== ""){
+                        if(!!data[this.name]){
+                            data[this.name] = data[this.name] + "," + this.value;
+                        }else{
+                            data[this.name] = this.value;
+                        }
+
+                    }
+                })
                 data.division = $("#division div cite").text();
                 Ajax.submit("apply",{
                     url:"/apply/competition",

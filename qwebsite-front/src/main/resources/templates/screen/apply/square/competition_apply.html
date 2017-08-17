@@ -107,8 +107,8 @@
     <script type="text/javascript" src="${path}/js/biz/apply/square/competition_apply.js"></script>
     <script type="text/html" id="selectTemp">
             {{each list as item i}}
-            <span class="sel_box_r m_l_b">
-                                <input type="radio" id="projectKind{{item.itemCode}}" name="projectKind" value="{{item.itemCode}}" {{if i ==0 }}checked{{/if}}/>
+            <span class="sel_box m_l_b">
+                                <input type="checkbox" id="projectKind{{item.itemCode}}" name="projectKind" value="{{item.itemCode}}" {{if i ==0 }}checked{{/if}}/>
                                 <label for="projectKind{{item.itemCode}}">{{item.itemName}}</label>
                             </span>
 
