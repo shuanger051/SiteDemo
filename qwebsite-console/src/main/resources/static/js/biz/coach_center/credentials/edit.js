@@ -5,6 +5,7 @@ var CredentialsEdit = function (){
                 url:"/credential/get",
                 data:{id:id},
                 callback:function (result) {
+                    result.credentialsDate = Tool.dateFormat(result.credentialsDate,"yyyy-MM-dd");
                     Tool.set_form_data($("#form1"),result);
                 }
             })
