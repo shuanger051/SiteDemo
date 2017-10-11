@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    username: root
+    password: hsfund
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/qwebsite?characterEncoding=utf-8
+    initial-size: 5
+    max-active: 20
+    max-idle: 8
+    min-idle: 3
+    max-wait: 500
+    remove-abandoned: true
+    remove-abandoned-timeout: 180
+    test-while-idle: true
+    ##验证
+    validation-query: SELECT 1
+    validation-query-timeout: 1
+    time-between-eviction-runs-millis: 30000
+    num-tests-per-eviction-run: 20
+server:
+  port: 8080
+jwt:
+  ## token 过期时间 单位秒
+  expiresSecond: 3600
+  account: api_manager
+  password: ZGFuY2VfbGluZUAxMjM0NTY=
+  type: bearer
+  ## MD5 加密字符串盐
+  md5String: 4ce38a28aa8d6a95fdbb24939e6d5964
+  enable: true
+#文件上传路径
+uploadresource:
+  base-path: C:\server\apache-tomcat\webapps\console\WEB-INF\classes\static\upload\
+  view-path: http://www.linedancechina.org/console/upload/
+feign:
+  url: http://api.1758app.com/server/egress
+  #索引存放位置
+indexresource:
+  base-index-path: C:\server\lucene\
