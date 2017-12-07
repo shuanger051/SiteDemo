@@ -181,16 +181,21 @@ var TrainApplyList = function (){
             e.stopPropagation();
         },
         exportExcel:function () {
-            var realName = $("#realName").val();
-            var sex =  $("#sex").val();
-            var readFlag = $("#readFlag").val();
-            var idNo = $("#idNo").val();
+			
+			var obj = Tool.serializeJson($("#searchForm"));
+            var p ="";
+            $.each(obj,function (k,v){
+                p += k + "=" + v + "&";
+            });
+            if(p != ""){
+                p.substring(0,p.length-1);
+            }
 
             Ajax.query("getData",{
-                url:"/train_square_apply/checkExport?realName="+realName+"&sex="+sex+"&readFlag="+readFlag+"&idNo="+idNo,
+                url:"/train_square_apply/checkExport?"+p,
                 callback:function (result) {
                     if(result=="success"){
-                        window.location.href = path + "/train_square_apply/export?realName="+realName+"&sex="+sex+"&readFlag="+readFlag+"&idNo="+idNo;
+                        window.location.href = path + "/train_square_apply/export?"+p;
                     }else{
                         Tool.layer_alert("导出数据不能大于5000条，请先查询");
                     }
