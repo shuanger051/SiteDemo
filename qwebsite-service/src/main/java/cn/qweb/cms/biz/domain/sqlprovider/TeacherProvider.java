@@ -37,9 +37,9 @@ public class TeacherProvider extends BaseDynaSqlProvider{
             SELECT(getField(Fields));
             FROM(TABLE_ALIAS);
             if(bean.getNext()){
-                WHERE("id > #{id}");
-            }else{
                 WHERE("id < #{id}");
+            }else{
+                WHERE("id > #{id}");
             }
             if(bean.getLevel() != null){
                 WHERE("level=#{level}");
@@ -47,7 +47,11 @@ public class TeacherProvider extends BaseDynaSqlProvider{
             if(bean.getType() != null){
                 WHERE("type=#{type}");
             }
-            ORDER_BY("id desc");
+            if (bean.getNext()){
+                ORDER_BY("id desc");
+            }else {
+                ORDER_BY("id");
+            }
         }}.toString();
     }
 

@@ -37,14 +37,18 @@ public class ChorgraphyProvider extends BaseDynaSqlProvider{
             SELECT(getField(Fields));
             FROM(TABLE_ALIAS);
             if(bean.getNext()){
-                WHERE("id > #{id}");
-            }else{
                 WHERE("id < #{id}");
+            }else{
+                WHERE("id > #{id}");
             }
             if(null != bean.getStatus()){
                 WHERE("status=#{status}");
             }
-            ORDER_BY("id desc");
+            if (bean.getNext()){
+                ORDER_BY("id desc");
+            }else {
+                ORDER_BY("id");
+            }
         }}.toString();
     }
 

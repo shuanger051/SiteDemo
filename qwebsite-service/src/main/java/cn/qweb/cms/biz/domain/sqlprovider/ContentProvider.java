@@ -38,9 +38,9 @@ public class ContentProvider extends BaseDynaSqlProvider{
             SELECT(getField(Fields));
             FROM(TABLE_ALIAS);
             if(bean.getNext()){
-                WHERE("id > #{id}");
-            }else{
                 WHERE("id < #{id}");
+            }else{
+                WHERE("id > #{id}");
             }
             if(null != bean.getStatus()){
                 WHERE("status=#{status}");
@@ -48,7 +48,11 @@ public class ContentProvider extends BaseDynaSqlProvider{
             if(null != bean.getChannelId()){
                 WHERE("channel_id=#{channelId}");
             }
-            ORDER_BY("id desc");
+            if (bean.getNext()){
+                ORDER_BY("id desc");
+            }else {
+                ORDER_BY("id");
+            }
         }}.toString();
     }
 
