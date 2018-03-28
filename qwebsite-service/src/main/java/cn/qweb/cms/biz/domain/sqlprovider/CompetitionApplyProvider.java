@@ -94,6 +94,8 @@ public class CompetitionApplyProvider extends BaseDynaSqlProvider{
                 WHERE("t.content_id = a.id");
                 if(bean.getSort() != null){
                     ORDER_BY(bean.getSort());
+                }else{
+                    ORDER_BY(" gmt_create DESC");
                 }
             }
 
