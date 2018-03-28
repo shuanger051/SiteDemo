@@ -130,10 +130,28 @@
         {{each list as item}}
         <tr onclick="Manager.selectThis(event,this)">
             <td><input name="checkbox" type="checkbox" value="{{item.id}}" /></td>
-            <td>{{item.teamName}}</td>
+            <td title="{{item.teamName}}" >
+                {{if item.teamName.length > 8 }}
+                    {{item.teamName.substr(0,8)}}
+                {{else}}
+                    {{item.teamName}}
+                {{/if}}
+            </td>
             <td>{{item.captainName}}</td>
-            <td>{{item.division}}</td>
-            <td>{{item.projectKindName}}</td>
+            <td title="{{item.division}}" >
+                {{if item.division.length > 8 }}
+                    {{item.division.substr(0,8)}}
+                {{else}}
+                    {{item.division}}
+                {{/if}}
+            </td>
+            <td title="{{item.projectKindName}}" >
+                {{if item.projectKindName.length > 12}}
+                    {{item.projectKindName.substr(0,8)}}
+                {{else}}
+                    {{item.projectKindName}}
+                {{/if}}
+            </td>
             <td>{{item.mobile}}</td>
             <td>{{item.email}}</td>
             {{if item.readFlag > 0}}
