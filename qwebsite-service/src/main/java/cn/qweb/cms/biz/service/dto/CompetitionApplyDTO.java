@@ -88,6 +88,7 @@ public class CompetitionApplyDTO implements Serializable{
     /**
      * @Fields captain_name 队长名称
      */
+    @ExportConfig(value = "队长名称", width = 150)
     private String captainName;
 
     /**
