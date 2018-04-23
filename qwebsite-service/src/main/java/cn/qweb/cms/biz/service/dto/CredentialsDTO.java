@@ -3,6 +3,7 @@ import cn.qweb.cms.core.dictionary.DictManager;
 import org.wuwz.poi.annotation.ExportConfig;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -79,6 +80,7 @@ public class CredentialsDTO implements Serializable{
      *@Fields gmt_create:创建时间
      */
     private Date gmtCreate;
+    private String gmtCreateFormat;
     /**
      *@Fields gmt_modified:更新时间
      */
@@ -154,10 +156,20 @@ public class CredentialsDTO implements Serializable{
     }
     public void setGmtCreate(Date gmtCreate){
         this.gmtCreate = gmtCreate;
+        this.gmtCreateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(gmtCreate);
     }
     public Date getGmtCreate(){
         return gmtCreate;
     }
+
+    public String getGmtCreateFormat() {
+        return gmtCreateFormat;
+    }
+
+    public void setGmtCreateFormat(String gmtCreateFormat) {
+        this.gmtCreateFormat = gmtCreateFormat;
+    }
+
     public void setGmtModified(Date gmtModified){
         this.gmtModified = gmtModified;
     }

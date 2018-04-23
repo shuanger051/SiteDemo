@@ -80,6 +80,8 @@ public class CredentialsProvider extends BaseDynaSqlProvider{
                 }
                 if(bean.getSort() != null){
                     ORDER_BY(bean.getSort());
+                }else{
+                    ORDER_BY(" gmt_create DESC");
                 }
             }
 
