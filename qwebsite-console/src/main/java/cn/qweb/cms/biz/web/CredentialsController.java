@@ -9,6 +9,9 @@ import cn.qweb.cms.biz.service.bo.CredentialsRemoveBO;
 import cn.qweb.cms.biz.service.dto.CredentialsDTO;
 import cn.qweb.cms.biz.service.bo.CredentialsUpdateBO;
 import cn.qweb.cms.core.base.Pagination;
+import cn.qweb.cms.core.exception.BizException;
+import cn.qweb.cms.core.exception.builder.ErrorBuilder;
+import cn.qweb.cms.core.utils.PersonCardCheckUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -24,11 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 
@@ -116,7 +116,7 @@ public class CredentialsController extends BaseController{
 
     @ApiOperation(value="导入", notes="根据条件导入EXCEL")
     @RequestMapping(value = "/import",method = RequestMethod.POST)
-    public String importExcel(HttpServletRequest request, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile) throws IOException {
+    public String importExcel(HttpServletRequest request, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile) throws Exception {
         if (null == uploadFile) {
             return FAILURE;
         }
@@ -127,42 +127,60 @@ public class CredentialsController extends BaseController{
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
-
             String fileName = uploadFile.getOriginalFilename();
             String filePath = uploadPath + File.separator + fileName;
 
             File file = new File(filePath);
             uploadFile.transferTo(file);
+            importExcel(file);
+            file.deleteOnExit();
+            return SUCCESS;
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
 
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    /**
+     * @info 导入Excel 工具函数
+     * @param file
+     * @throws BizException
+     */
+    public void importExcel(File file) throws BizException{
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        PersonCardCheckUtil idCheck = new PersonCardCheckUtil();
+        try {
 
             // 执行excel文件导入
             ExcelKit.$Import().readExcel(file, new ReadHandler() {
                 @Override
-                public void handler(int sheetIndex, int rowIndex, List<String> row) {
+                public void handler(int sheetIndex, int rowIndex, List<String> row) throws BizException{
                     if(rowIndex != 0) { //排除第一行
+
+                        CredentialsSaveBO bean = new CredentialsSaveBO();
+                        bean.setCredentialsId(row.get(0).trim());
+                        bean.setCredentialsType(row.get(1).trim());
+                        bean.setCredentialsLevel(row.get(2).trim());
                         try {
-                            CredentialsSaveBO bean = new CredentialsSaveBO();
-                            bean.setCredentialsId(row.get(0).trim());
-                            bean.setCredentialsType(row.get(1).trim());
-                            bean.setCredentialsLevel(row.get(2).trim());
                             bean.setCredentialsDate(format.parse(row.get(3).trim()));
-                            bean.setName(row.get(4).trim());
-                            bean.setPersonNo(row.get(5).trim());
-                            bean.setCardNo(row.get(6).trim());
-                            bean.setWorkUnit(row.get(7).trim());
-                            bean.setTrainerType(row.get(8).trim());
-                            credentialsService.doSave(bean);
-                        } catch (ParseException e) {
-                            logger.error("Excel 转 Bean 出错:" + e.getMessage());
+                        }catch (Exception e){
+                            throw new BizException(ErrorBuilder.buildBizError("导入Excel异常"));
                         }
+                        bean.setName(row.get(4).trim());
+                        bean.setPersonNo(row.get(5).trim());
+                        if (idCheck.isValidatedAllIdcard(row.get(6).trim())) {
+                            bean.setCardNo(row.get(6).trim());
+                        } else {
+                            throw new BizException(ErrorBuilder.buildBizError(" 第 " + (rowIndex + 1) + " 行，身份证错误, 本次导入 "+(rowIndex-1)+" 条"));
+                        }
+                        bean.setWorkUnit(row.get(7).trim());
+                        bean.setTrainerType(row.get(8).trim());
+                        credentialsService.doSave(bean);
                     }
                 }
             });
-            file.deleteOnExit();
-            return SUCCESS;
-        } catch (Exception ex) {
-            return FAILURE;
+        }catch (Exception e){
+            throw (BizException)e;
         }
     }
 

@@ -41,7 +41,7 @@
 
         },
         layer_alert:function (msg,callback,opts){
-            return layer.msg(msg,$.extend({time:2000,shade:0.01},opts||{}),callback);
+            return layer.msg(msg,$.extend({time:5000,shade:0.01},opts||{}),callback);
         },
         layer_confirm:function (msg,callback){
             return layer.confirm(msg, {

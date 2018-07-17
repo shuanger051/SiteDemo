@@ -34,12 +34,11 @@ public class JCaptchaFilter extends OncePerRequestFilter {
         response.addHeader("Cache-Control", "post-check=0, pre-check=0");
         response.setHeader("Pragma", "no-cache");
         response.setContentType("image/jpeg");
-
         String id = request.getSession().getId();
+        System.out.println("id="+id);
         BufferedImage bi = JCaptcha.captchaService.getImageChallengeForID(id);
-
         ServletOutputStream out = response.getOutputStream();
-
+        System.out.println(out);
         ImageIO.write(bi, "jpeg", out);
         try {
             out.flush();

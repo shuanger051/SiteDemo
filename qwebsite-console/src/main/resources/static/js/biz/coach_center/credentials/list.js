@@ -148,9 +148,14 @@ var CredentialsList = function (){
                     beforeSubmit:function () {
                         Tool.layer_alert("正在导入Excel数据");
                     },  //提交前处理
-                    success:function () {
-                        Tool.layer_alert("导入完成");
-                        table.render();
+                    success:function (result) {
+                        if(result.success == true){
+                            Tool.layer_alert("导入完成");
+                            table.render();
+                        }else{
+                            Tool.layer_alert("出错了,"+result.data.message);
+                            table.render();
+                        }
                     },  //处理完成
                     resetForm:false,
                     type:'POST',
