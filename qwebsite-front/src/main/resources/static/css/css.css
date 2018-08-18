@@ -552,7 +552,7 @@ li:hover .app_arrow,.app_arrow:hover{background-color: #f08200; background-posit
 
 
 /*左标题*/
-.l_th{ font-size: 22px; text-transform: capitalize;background-color:#f08c00; color: #fff; background-image: url(../images/icon/l_line.gif); background-repeat: no-repeat; background-position: center top; padding: 18px 15px; line-height: 48px; height: 48px;}
+.l_th{ font-size: 20px; text-transform: capitalize;background-color:#f08c00; color: #fff; background-image: url(../images/icon/l_line.gif); background-repeat: no-repeat; background-position: center top; padding: 18px 15px; line-height: 48px; height: 48px;}
 .l_th .eng{ line-height: 30px; padding-top: 24px; background-image: url(../images/icon/th_y.png); background-repeat: no-repeat; background-position: left center; padding-left: 1.2em;}
 .l_th .more_text{ display:inline-block; line-height: 24px;}
 
