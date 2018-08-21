@@ -1,21 +1,24 @@
 <#assign title="新闻动态"/>
-<#assign parentChannelId=4/>
+<#assign parentChannelId=6/>
 <#include "/layout/layout.html"/>
 
 <#macro content>
+        <@channel_bean id=channel.parentId>
+        <#assign pChannel= tag_bean/>
+    </@channel_bean>
     <!--end导航-->
     <div class="i_banner"><img src="${path}/images/i_banner/video.jpg" alt="新闻资讯" class="i_banner_img"></div>
     <!--end大图片-->
 
-    <dl class="site_th w_1200"><dd>您所在的位置：<a href="${path}/index.htm">首页</a><em class="china">&gt;</em><a href="./index.jhtm">下载中心</a><em class="china">&gt;</em><b class="orange_text">${channel.name!''}</b></dd></dl>
+    <dl class="site_th w_1200"><dd>您所在的位置：<a href="${path}/index.htm">首页</a><em class="china">&gt;</em><a href="./index.jhtm">${pChannel.name}</a><em class="china">&gt;</em><b class="orange_text">${channel.name!''}</b></dd></dl>
 
     <div class="box_shadow clearfix box_w w_1200">
         <div class="i_center clearfix">
             <div class="fl w_220">
                 <div class="l_nav clearfix">
-                    <h4 class="l_th"><span class="fr png eng">Down</span><div class="r_cell">下载中心</div></h4>
+                    <h4 class="l_th"><span class="fr png eng">Video</span><div class="r_cell"><#if pChannel.name?length gt 4><span class="more_text">${pChannel.name}</span><#else>${pChannel.name}</#if></div></h4>
                     <ul class="l_nav_ul click_ul">
-                        <@channel_list parentId=10>
+                        <@channel_list parentId=pChannel.id>
                             <#list tag_list as item>
                                 <li <#if item.id= channel.id> class="active" </#if>> <a href="${path}/${item.channelPath}/index.jhtm" data-channel-id="${item.id}" class="png">${item.name!''}</a></li>
                             </#list>
@@ -44,14 +47,16 @@
         <li><span class="fr">{{item.contentExt.releaseDate | dateFormat}}</span>
             {{if item.contentAttachments[0]}}
             <a target="_blank" href="${root.viewPath}{{item.contentAttachments[0].attachmentPath}}" class="hide1">{{item.contentExt.title}}</a>
+            <a target="_blank" href="${root.viewPath}{{item.contentAttachments[0].attachmentPath}}"><img src="${path}/images/download.png" style="height:20px;cursor:pointer;"></a>
             {{else}}
-            <a href="javascript:void(0)" class="hide1">{{item.contentExt.title}}</a>
+            <a href="javascript:void(0)" class="hide1" style="cursor: default">{{item.contentExt.title}}</a>
             {{/if}}
         </li>
         {{/each}}
         {{else}}
         <li>暂无数据</li>
         {{/if}}
+
     </script>
     <script type="text/javascript">
         $(function (){
