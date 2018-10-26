@@ -147,7 +147,8 @@ public class CredentialsController extends BaseController{
      */
     public void importExcel(File file) throws BizException{
 
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat format2 = new SimpleDateFormat("yyyy/MM/dd");
         PersonCardCheckUtil idCheck = new PersonCardCheckUtil();
         try {
 
@@ -162,9 +163,13 @@ public class CredentialsController extends BaseController{
                         bean.setCredentialsType(row.get(1).trim());
                         bean.setCredentialsLevel(row.get(2).trim());
                         try {
-                            bean.setCredentialsDate(format.parse(row.get(3).trim()));
+                            if(null != row.get(3).trim() && row.get(3).trim().indexOf("-") != -1){
+                                bean.setCredentialsDate(format1.parse(row.get(3).trim()));
+                            }else if (null != row.get(3).trim() && row.get(3).trim().indexOf("/") != -1){
+                                bean.setCredentialsDate(format2.parse(row.get(3).trim()));
+                            }
                         }catch (Exception e){
-                            throw new BizException(ErrorBuilder.buildBizError("导入Excel异常"));
+                            throw new BizException(ErrorBuilder.buildBizError("导入Excel异常，日期格式不正确"));
                         }
                         bean.setName(row.get(4).trim());
                         bean.setPersonNo(row.get(5).trim());
