@@ -27,4 +27,5 @@ public class BizException extends BaseRuntimeException {
      */
     public BizException() {
     }
+
 }

@@ -6,26 +6,32 @@ package cn.qweb.cms.core.exception.domain;
  * Created by xuebojie on 16/5/6.
  */
 public class ErrorInfo {
+
     /**
      * 错误状态
      */
     private Integer status;
+
     /**
      * 错误吗
      */
     private String code;
+
     /**
      * 提示信息
      */
     private String message;
+
     /**
      * 开发者使用的错误信息,如 堆栈信息,排除 第三方类库的错误,只保留自己代码的信息
      */
     private String developerMessage;
+
     /**
      * 给定一个URL,此错误的详细信息,产生原因,解决办法等等
      */
     private String moreInfo;
+
     /**
      * 请求的ID号,后台可以根据此ID号 查到所有相关日志
      */
@@ -122,4 +128,5 @@ public class ErrorInfo {
     public void setRequestId(String requestId) {
         this.requestId = requestId;
     }
+
 }
