@@ -1,8 +1,6 @@
 
 package cn.qweb.cms.biz.service;
-import cn.qweb.cms.biz.service.bo.CompetitionApplyRemoveBO;
-import cn.qweb.cms.biz.service.bo.CompetitionApplySaveBO;
-import cn.qweb.cms.biz.service.bo.CompetitionApplyUpdateBO;
+import cn.qweb.cms.biz.service.bo.*;
 import cn.qweb.cms.biz.service.dto.CompetitionApplyDTO;
 import cn.qweb.cms.biz.service.query.CompetitionApplyQUERY;
 import cn.qweb.cms.core.base.Pagination;
@@ -39,6 +37,20 @@ public interface CompetitionApplyService {
      * @return 主键
      */
     Long doSave(CompetitionApplySaveBO bean);
+
+    /**
+     * 保存单个对象-70周年报名团队
+     * @param bean  保存对象
+     * @return 主键
+     */
+    Long doSaveForSeventyYearTeam(CompetitionApplyForSeventyYearTeamSaveBO bean);
+
+    /**
+     * 保存单个对象-70周年报名个人
+     * @param bean
+     * @return
+     */
+    Long doSaveForSeventyYearPerson(CompetitionApplyForSeventyYearPersonSaveBO bean);
 
     /**
      * 更新单个对象 id必须有

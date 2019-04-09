@@ -89,6 +89,11 @@ public class CompetitionApplyUpdateBO implements Serializable{
      */
     private String captainName;
 
+    /**
+     * @Fields group_code 团队编码
+     */
+    private Integer groupCode;
+
     public void setId(Long id){
         this.id = id;
     }
@@ -190,6 +195,14 @@ public class CompetitionApplyUpdateBO implements Serializable{
         this.captainName = captainName;
     }
 
+    public Integer getGroupCode() {
+        return groupCode;
+    }
+
+    public void setGroupCode(Integer groupCode) {
+        this.groupCode = groupCode;
+    }
+
     @Override
     public String toString() {
         return "CompetitionApplyUpdateBO{" +
@@ -209,6 +222,7 @@ public class CompetitionApplyUpdateBO implements Serializable{
                 ", gmtIndex=" + gmtIndex +
                 ", teamType='" + teamType + '\'' +
                 ", captainName='" + captainName + '\'' +
+                ", groupCode=" + groupCode +
                 '}';
     }
 }

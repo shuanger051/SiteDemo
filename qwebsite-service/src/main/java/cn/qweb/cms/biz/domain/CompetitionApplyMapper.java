@@ -38,8 +38,10 @@ public interface CompetitionApplyMapper {
             @Result(property = "teamType", column = "team_type", jdbcType = JdbcType.CHAR, javaType = String.class),
             @Result(property = "gmtCreate", column = "gmt_create", jdbcType = JdbcType.TIMESTAMP, javaType = Date.class), 
             @Result(property = "gmtModified", column = "gmt_modified", jdbcType = JdbcType.TIMESTAMP, javaType = Date.class), 
-            @Result(property = "gmtIndex", column = "gmt_index", jdbcType = JdbcType.TIMESTAMP, javaType = Date.class)
-            })
+            @Result(property = "gmtIndex", column = "gmt_index", jdbcType = JdbcType.TIMESTAMP, javaType = Date.class),
+            @Result(property = "groupNum", column = "group_num", jdbcType = JdbcType.INTEGER, javaType = Integer.class),
+            @Result(property = "groupCode", column = "group_code", jdbcType = JdbcType.INTEGER, javaType = Integer.class)
+    })
     CompetitionApplyDO get(Long id);
 
     @SelectProvider(type = CompetitionApplyProvider.class, method = "list")
@@ -60,7 +62,9 @@ public interface CompetitionApplyMapper {
             @Result(property = "teamType", column = "team_type", jdbcType = JdbcType.CHAR, javaType = String.class),
             @Result(property = "gmtCreate", column = "gmt_create", jdbcType = JdbcType.TIMESTAMP, javaType = Date.class), 
             @Result(property = "gmtModified", column = "gmt_modified", jdbcType = JdbcType.TIMESTAMP, javaType = Date.class), 
-            @Result(property = "gmtIndex", column = "gmt_index", jdbcType = JdbcType.TIMESTAMP, javaType = Date.class)
+            @Result(property = "gmtIndex", column = "gmt_index", jdbcType = JdbcType.TIMESTAMP, javaType = Date.class),
+            @Result(property = "groupNum", column = "group_num", jdbcType = JdbcType.INTEGER, javaType = Integer.class),
+            @Result(property = "groupCode", column = "group_code", jdbcType = JdbcType.INTEGER, javaType = Integer.class)
             })
     List<CompetitionApplyDO> list(CompetitionApplyDO bean);
 

@@ -90,6 +90,16 @@ public class CompetitionApplyQUERY extends BaseQueryEntity implements Serializab
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date gmtIndex;
 
+    /**
+     *@Fields group_code:团队编码
+     */
+    private Integer groupCode;
+
+    /**
+     *@Fields captain_name:队长姓名
+     */
+    private String captainName;
+
     public String getTitle() {
         return title;
     }
@@ -177,6 +187,22 @@ public class CompetitionApplyQUERY extends BaseQueryEntity implements Serializab
         return gmtIndex;
     }
 
+    public Integer getGroupCode() {
+        return groupCode;
+    }
+
+    public void setGroupCode(Integer groupCode) {
+        this.groupCode = groupCode;
+    }
+
+    public String getCaptainName() {
+        return captainName;
+    }
+
+    public void setCaptainName(String captainName) {
+        this.captainName = captainName;
+    }
+
     @Override
     public String toString() {
         return "CompetitionApplyQUERY{" +
@@ -194,6 +220,9 @@ public class CompetitionApplyQUERY extends BaseQueryEntity implements Serializab
                 ", gmtCreate=" + gmtCreate +
                 ", gmtModified=" + gmtModified +
                 ", gmtIndex=" + gmtIndex +
+                ", groupCode=" + groupCode +
+                ", captainName='" + captainName + '\'' +
                 '}';
     }
+
 }

@@ -3,9 +3,7 @@ package cn.qweb.cms.biz.service.impl;
 import cn.qweb.cms.biz.domain.CompetitionApplyDO;
 import cn.qweb.cms.biz.domain.CompetitionApplyMapper;
 import cn.qweb.cms.biz.service.CompetitionApplyService;
-import cn.qweb.cms.biz.service.bo.CompetitionApplyRemoveBO;
-import cn.qweb.cms.biz.service.bo.CompetitionApplySaveBO;
-import cn.qweb.cms.biz.service.bo.CompetitionApplyUpdateBO;
+import cn.qweb.cms.biz.service.bo.*;
 import cn.qweb.cms.biz.service.dto.CompetitionApplyDTO;
 import cn.qweb.cms.biz.service.query.CompetitionApplyQUERY;
 import cn.qweb.cms.core.base.Pagination;
@@ -81,6 +79,62 @@ public class CompetitionApplyServiceImpl implements CompetitionApplyService {
         CompetitionApplyDO competitionApply = BeanPropertiesUtils.copyProperties(bean, CompetitionApplyDO.class);
         competitionApply.setGmtCreate(new Date());
         competitionApplyMapper.save(competitionApply);
+        return competitionApply.getId();
+    }
+
+    /**
+     * 保存单个对象,返回主键
+     * @param bean  保存对象
+     * @return 主键
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Long  doSaveForSeventyYearTeam(CompetitionApplyForSeventyYearTeamSaveBO bean){
+        //判断是否报过名
+        CompetitionApplyDO query = new CompetitionApplyDO();
+        query.setMobile(bean.getMobile());
+        query.setContentId(bean.getContentId());
+        if(competitionApplyMapper.list(query).size() > 0){
+            throw new BizException(ErrorBuilder.buildBizError("您已报名"));
+        }
+        CompetitionApplyDO competitionApply = BeanPropertiesUtils.copyProperties(bean, CompetitionApplyDO.class);
+        competitionApply.setGmtCreate(new Date());
+        competitionApplyMapper.save(competitionApply);
+
+        return competitionApply.getId();
+    }
+
+    /**
+     * 保存单个对象,返回主键
+     * @param bean  保存对象
+     * @return 主键
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Long  doSaveForSeventyYearPerson(CompetitionApplyForSeventyYearPersonSaveBO bean){
+        //判断是否报过名
+        CompetitionApplyDO query = new CompetitionApplyDO();
+        query.setMobile(bean.getMobile());
+        query.setContentId(bean.getContentId());
+        if(competitionApplyMapper.list(query).size() > 0){
+            throw new BizException(ErrorBuilder.buildBizError("您已报名"));
+        }
+
+        //判断是否填入团队码，若填写了团队码则根据团队码查询团队信息
+        if (bean.getGroupCode() != null){
+            CompetitionApplyDO competitionApplyDO = competitionApplyMapper.get(bean.getGroupCode().longValue());
+            if (competitionApplyDO != null && competitionApplyDO.getId().toString().equals(competitionApplyDO.getGroupCode().toString())){
+                bean.setTeamName(competitionApplyDO.getTeamName());
+                bean.setCaptainName(competitionApplyDO.getCaptainName());
+            }else {
+                throw new BizException(ErrorBuilder.buildBizError("团队码错误"));
+            }
+        }
+
+        CompetitionApplyDO competitionApply = BeanPropertiesUtils.copyProperties(bean, CompetitionApplyDO.class);
+        competitionApply.setGmtCreate(new Date());
+        competitionApplyMapper.save(competitionApply);
+
         return competitionApply.getId();
     }
 

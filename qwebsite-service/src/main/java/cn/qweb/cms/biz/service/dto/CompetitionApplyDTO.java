@@ -104,6 +104,16 @@ public class CompetitionApplyDTO implements Serializable{
      */
     private Date gmtIndex;
 
+    /**
+     * 团队编码
+     */
+    private Integer groupCode;
+
+    /**
+     * 团队成员数量
+     */
+    private Integer groupNum;
+
     public void setId(Long id){
         this.id = id;
     }
@@ -249,6 +259,22 @@ public class CompetitionApplyDTO implements Serializable{
         this.captainName = captainName;
     }
 
+    public Integer getGroupCode() {
+        return groupCode;
+    }
+
+    public void setGroupCode(Integer groupCode) {
+        this.groupCode = groupCode;
+    }
+
+    public Integer getGroupNum() {
+        return groupNum;
+    }
+
+    public void setGroupNum(Integer groupNum) {
+        this.groupNum = groupNum;
+    }
+
     @Override
     public String toString() {
         return "CompetitionApplyDTO{" +
@@ -272,6 +298,8 @@ public class CompetitionApplyDTO implements Serializable{
                 ", gmtCreate=" + gmtCreate +
                 ", gmtModified=" + gmtModified +
                 ", gmtIndex=" + gmtIndex +
+                ", groupCode=" + groupCode +
+                ", groupNum=" + groupNum +
                 '}';
     }
 }

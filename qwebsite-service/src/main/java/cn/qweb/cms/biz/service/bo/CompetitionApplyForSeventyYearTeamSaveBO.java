@@ -1,9 +1,10 @@
-package cn.qweb.cms.biz.domain;
-import cn.qweb.cms.core.base.BaseQueryEntity;
+package cn.qweb.cms.biz.service.bo;
+import cn.qweb.cms.core.validator.RegExpConstants;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
-import java.util.Date;
-
 
 /*
  *  Created by xuebj - 2017/05/24.
@@ -15,56 +16,50 @@ import java.util.Date;
  * @since 1.0
  */
 
-public class CompetitionApplyDO extends BaseQueryEntity implements Serializable {
+public class CompetitionApplyForSeventyYearTeamSaveBO implements Serializable{
+    private static final long serialVersionUID = 1L;
 
-private static final long serialVersionUID = 1L;
-
-    /**
-     *@Fields id:
-     */
-    private Long id;
-    /**
-     *@Fields channel_id:栏目号
-     */
-    private Long channelId;
     /**
      *@Fields content_id:赛事ID
      */
+    @NotNull(message = "赛事编号不能为空")
     private Long contentId;
 
-    private String title;
     /**
      *@Fields division:赛区
      */
     private String division;
+
     /**
      *@Fields real_name:真实姓名
      */
+    @Pattern(regexp = RegExpConstants.REALNAME,message = RegExpConstants.REALNAME_MESSAGE)
     private String realName;
+
     /**
      *@Fields team_name:战队名称
      */
+    @NotEmpty(message = "参赛队名不能为空")
     private String teamName;
+
     /**
      *@Fields project_kind:项目种类
      */
     private String projectKind;
+
     /**
      *@Fields mobile:联系方式
      */
+    @Pattern(regexp = RegExpConstants.MOBILE,message = RegExpConstants.MOBILE_MESSAGE)
     private String mobile;
-    /**
-     *@Fields email:邮箱
-     */
+
     private String email;
+
     /**
      *@Fields address:详细地址
      */
+    @NotEmpty(message = "联系地址不能为空")
     private String address;
-    /**
-     *@Fields read_flag:是否查阅
-     */
-    private String readFlag;
 
     /**
      * @Fields team_type 队名
@@ -76,50 +71,11 @@ private static final long serialVersionUID = 1L;
      */
     private String captainName;
 
-    /**
-     *@Fields gmt_create:
-     */
-    private Date gmtCreate;
-    /**
-     *@Fields gmt_modified:
-     */
-    private Date gmtModified;
-    /**
-     *@Fields gmt_index:索引时间
-     */
-    private Date gmtIndex;
-
-    /**
-     * 团队编码
-     */
     private Integer groupCode;
 
-    /**
-     * 团队成员数
-     */
     private Integer groupNum;
 
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setId(Long id){
-        this.id = id;
-    }
-    public Long getId(){
-        return id;
-    }
-    public void setChannelId(Long channelId){
-        this.channelId = channelId;
-    }
-    public Long getChannelId(){
-        return channelId;
-    }
     public void setContentId(Long contentId){
         this.contentId = contentId;
     }
@@ -168,30 +124,6 @@ private static final long serialVersionUID = 1L;
     public String getAddress(){
         return address;
     }
-    public void setReadFlag(String readFlag){
-        this.readFlag = readFlag;
-    }
-    public String getReadFlag(){
-        return readFlag;
-    }
-    public void setGmtCreate(Date gmtCreate){
-        this.gmtCreate = gmtCreate;
-    }
-    public Date getGmtCreate(){
-        return gmtCreate;
-    }
-    public void setGmtModified(Date gmtModified){
-        this.gmtModified = gmtModified;
-    }
-    public Date getGmtModified(){
-        return gmtModified;
-    }
-    public void setGmtIndex(Date gmtIndex){
-        this.gmtIndex = gmtIndex;
-    }
-    public Date getGmtIndex(){
-        return gmtIndex;
-    }
 
     public String getTeamType() {
         return teamType;
@@ -227,11 +159,8 @@ private static final long serialVersionUID = 1L;
 
     @Override
     public String toString() {
-        return "CompetitionApplyDO{" +
-                "id=" + id +
-                ", channelId=" + channelId +
-                ", contentId=" + contentId +
-                ", title='" + title + '\'' +
+        return "CompetitionApplyForSeventyYearSaveBO{" +
+                "contentId=" + contentId +
                 ", division='" + division + '\'' +
                 ", realName='" + realName + '\'' +
                 ", teamName='" + teamName + '\'' +
@@ -239,12 +168,8 @@ private static final long serialVersionUID = 1L;
                 ", mobile='" + mobile + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
-                ", readFlag='" + readFlag + '\'' +
                 ", teamType='" + teamType + '\'' +
                 ", captainName='" + captainName + '\'' +
-                ", gmtCreate=" + gmtCreate +
-                ", gmtModified=" + gmtModified +
-                ", gmtIndex=" + gmtIndex +
                 ", groupCode=" + groupCode +
                 ", groupNum=" + groupNum +
                 '}';

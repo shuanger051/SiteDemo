@@ -18,7 +18,7 @@ public class CompetitionApplyProvider extends BaseDynaSqlProvider{
     //alias
     public static final String TABLE_ALIAS = "t_competition_apply";
 
-    public static final String[] Fields={"id","channel_id","content_id","division","real_name","team_name","project_kind","mobile","email","address","read_flag","team_type","captain_name","gmt_create","gmt_modified","gmt_index"};
+    public static final String[] Fields={"id","channel_id","content_id","division","real_name","team_name","project_kind","mobile","email","address","group_code","read_flag","team_type","group_num","captain_name","gmt_create","gmt_modified","gmt_index"};
 
     /**
      * 获取单个结果集
@@ -73,8 +73,14 @@ public class CompetitionApplyProvider extends BaseDynaSqlProvider{
                 if(bean.getAddress()!=null && bean.getAddress().trim() != ""){
                     WHERE("t.address=#{address}");
                 }
+                if(bean.getGroupCode()!=null){
+                    WHERE("t.group_code=#{groupCode}");
+                }
                 if(bean.getReadFlag()!=null && bean.getReadFlag().trim() != ""){
                     WHERE("t.read_flag=#{readFlag}");
+                }
+                if(bean.getGroupNum()!=null){
+                    WHERE("t.group_num=#{groupNum}");
                 }
                 if(bean.getCaptainName()!= null && bean.getCaptainName().trim() != ""){
                     WHERE("t.captain_name=#{captainName}");
@@ -135,8 +141,14 @@ public class CompetitionApplyProvider extends BaseDynaSqlProvider{
             if (bean.getAddress() != null) {
                 VALUES("address", "#{address}");
             }
+            if (bean.getGroupCode() != null) {
+                VALUES("group_code", "#{groupCode}");
+            }
             if (bean.getReadFlag() != null) {
                 VALUES("read_flag", "#{readFlag}");
+            }
+            if (bean.getGroupNum() != null) {
+                VALUES("group_num", "#{groupNum}");
             }
             if(bean.getCaptainName() != null){
                 VALUES("captain_name", "#{captainName}");
@@ -189,8 +201,14 @@ public class CompetitionApplyProvider extends BaseDynaSqlProvider{
             if (bean.getAddress() != null) {
                 SET("address=#{address}");
             }
+            if (bean.getGroupCode() != null) {
+                SET("group_code=#{groupCode}");
+            }
             if (bean.getReadFlag() != null) {
                 SET("read_flag=#{readFlag}");
+            }
+            if (bean.getGroupNum() != null) {
+                SET("group_num=#{groupNum}");
             }
             if(bean.getCaptainName() != null){
                 SET("captain_name=#{captainName}");
@@ -248,8 +266,14 @@ public class CompetitionApplyProvider extends BaseDynaSqlProvider{
             if(bean.getAddress()!=null){
                 WHERE("address=#{address}");
             }
+            if(bean.getGroupCode()!=null){
+                WHERE("group_code=#{groupCode}");
+            }
             if(bean.getReadFlag()!=null){
                 WHERE("read_flag=#{readFlag}");
+            }
+            if(bean.getGroupNum()!=null){
+                WHERE("group_num=#{groupNum}");
             }
             if(bean.getCaptainName() != null){
                 WHERE("captain_name=#{captainName}");
@@ -322,8 +346,14 @@ public class CompetitionApplyProvider extends BaseDynaSqlProvider{
                 if (bean.getAddress() != null && bean.getAddress().trim() != "") {
                     WHERE("t.address=#{address}");
                 }
+                if (bean.getGroupCode() != null) {
+                    WHERE("t.group_code=#{groupCode}");
+                }
                 if (bean.getReadFlag() != null && bean.getReadFlag().trim() != "") {
                     WHERE("t.read_flag=#{readFlag}");
+                }
+                if (bean.getGroupNum() != null) {
+                    WHERE("t.group_num=#{groupNum}");
                 }
                 if(bean.getCaptainName() != null && bean.getCaptainName().trim() != ""){
                     WHERE("t.captain_name = #{captainName}");
