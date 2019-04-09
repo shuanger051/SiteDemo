@@ -19,13 +19,17 @@
             </ul>
             <form id="searchForm" name="searchForm">
                 <ul class="seachform">
-                    <li>
+                    <!--<li>
                         <label>赛事项目:</label>
                         <input name="title" id="title" type="text" style="width: 120px;" class="scinput" />
+                    </li>-->
+                    <li>
+                        <label>团队编码:</label>
+                        <input name="groupCode" id="groupCode" type="text" style="width: 120px;" class="scinput" />
                     </li>
                     <li>
-                        <label>赛事赛区:</label>
-                        <input name="division" id="division" type="text" style="width: 120px;" class="scinput" />
+                        <label>领队姓名:</label>
+                        <input name="captainName" id="captainName" type="text" style="width: 120px;" class="scinput" />
                     </li>
                     <li>
                         <label>项目类型:</label>
@@ -50,7 +54,7 @@
                 <th>参赛队名</th>
                 <th>领队姓名</th>
                 <th>赛区</th>
-                <th>项目类型</th>
+                <th>团队编码</th>
                 <th>联系电话</th>
                 <th>邮箱地址</th>
                 <th>查阅状态</th>
@@ -93,6 +97,14 @@
                         <input name="projectKindName" type="text" class="dfinput detail"  disabled value="">
                     </li>
                     <li>
+                        <label style="text-align: right">团队编码：</label>
+                        <input name="groupCode" type="text" class="dfinput detail"  disabled value="">
+                    </li>
+                    <li>
+                        <label style="text-align: right">团队成员数：</label>
+                        <input name="groupNum" type="text" class="dfinput detail"  disabled value="">
+                    </li>
+                    <li>
                         <label style="text-align: right">组别：</label>
                         <input name="teamTypeName" type="text" class="dfinput detail"  disabled value="">
                     </li>
@@ -131,7 +143,7 @@
         <tr onclick="Manager.selectThis(event,this)">
             <td><input name="checkbox" type="checkbox" value="{{item.id}}" /></td>
             <td title="{{item.teamName}}" >
-                {{if item.teamName.length > 8 }}
+                {{if item.teamName != null && item.teamName.length > 8 }}
                     {{item.teamName.substr(0,8)}}
                 {{else}}
                     {{item.teamName}}
@@ -139,18 +151,14 @@
             </td>
             <td>{{item.captainName}}</td>
             <td title="{{item.division}}" >
-                {{if item.division.length > 8 }}
+                {{if item.division != null && item.division.length > 8 }}
                     {{item.division.substr(0,8)}}
                 {{else}}
                     {{item.division}}
                 {{/if}}
             </td>
-            <td title="{{item.projectKindName}}" >
-                {{if item.projectKindName.length > 12}}
-                    {{item.projectKindName.substr(0,8)}}
-                {{else}}
-                    {{item.projectKindName}}
-                {{/if}}
+            <td title="{{item.groupCode}}" >
+                {{item.groupCode}}
             </td>
             <td>{{item.mobile}}</td>
             <td>{{item.email}}</td>
