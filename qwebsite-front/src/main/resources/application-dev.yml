@@ -18,7 +18,7 @@ spring:
     time-between-eviction-runs-millis: 30000
     num-tests-per-eviction-run: 20
 server:
-  port: 8080
+  port: 8081
 jwt:
   ## token 过期时间 单位秒
   expiresSecond: 3600

@@ -28,7 +28,7 @@
     }
     html {
     	box-sizing: border-box;
-    	background-color:#f2f2f2;
+    	background-color:#FFFFFF;
     	font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
 		line-height: 1.2;
       	-webkit-user-select: none;
@@ -275,7 +275,7 @@
 	}
 	.ItemDetails .content-list .TR-sex, .ItemDetails .content-list .TR-region , .ItemDetails .content-list .TR-gamegroup{
 		padding-right: .4rem;
-		background: url(../../images/h5/icon_tongyong_jinru.png) center right no-repeat transparent;
+		background: url(../image/icon_tongyong_jinru.png) center right no-repeat transparent;
 		background-size: auto .34rem;
 	}
 	.ItemDetails .content-list .prog-role {
@@ -381,9 +381,7 @@
 		position: absolute;
 		left: 5%;
 		top: 1rem;
-		bottom: 1rem;
 		width: 90%;		
-		overflow: hidden;
 		background-color: #FFFFFF;
 		border-radius: .3rem;
 		text-align: left;
@@ -392,10 +390,6 @@
 		color: #393D42;;
 		vertical-align: middle;
 	}
-	#setGroup .group-list {
-		position: absolute;
-		width: 100%;
-	}
 	#setGroup .group-list i {
 		display: inline-block;
 		width: .4rem;
@@ -403,11 +397,11 @@
 		background-color: transparent;
 		vertical-align: middle;
 		margin: 0 .2rem;
-		background: url(../../images/h5/icon_weixuanzhong.png) center center no-repeat;
+		background: url(../image/icon_weixuanzhong.png) center center no-repeat;
 		background-size: 100% 100%;
 	}
 	#setGroup .group-list .role-selected i {		
-		background: url(../../images/h5/icon_xuanzhong.png) center center no-repeat;
+		background: url(../image/icon_xuanzhong.png) center center no-repeat;
 		background-size: 100% 100%;
 	}
 	#setGroup .group-list .group-button {
@@ -424,11 +418,128 @@
 		color: #FF725C;
 	}
 
+/** -----------------------add-----------------------Start **/
+	.ItemDetails .m-view1 .content-list label, .ItemDetails .m-view1 .content-list .TR-input, .ItemDetails .m-view2 .content-list label, .ItemDetails .m-view2 .content-list .TR-input {
+		font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
+		display: inline-block;
+		font-size: 0.4rem;
+		color: #393D42;
+		line-height: .85rem;		
+		vertical-align: top;
+	}
+	.popupLabel {
+		font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
+		display: inline-block;
+		font-size: 0.55rem;
+		color: #fcf778;
+		vertical-align: top;
+	}
+	.ItemDetails .m-view1 .content-list .TR-input.error, .ItemDetails .m-view2 .content-list .TR-input.error {
+		color: #ff5757;
+		outline: 2px solid #ff5a5a;
+	}
+	.ItemDetails .m-view1 .content-list label, .ItemDetails .m-view2 .content-list label{
+		width: 29.8%;
+		text-align: left;
+		right: .4rem;
+	}
+	.ItemDetails .m-view1 .content-list span, .ItemDetails .m-view2 .content-list span{
+		margin-left: 3%;
+		margin-right: 3%;
+	}
+	.ItemDetails .m-view1 .content-list .TR-input, .ItemDetails .m-view2 .content-list .TR-input {
+		position: relative;
+		width: 64%;
+		min-height: 0.85rem;
+		right: .4rem;
+		background-color: transparent;
+		outline: 0 none;
+		text-align: right;
+	}
+	
+	#setGroup .group-content1 {
+		position: absolute;
+		left: 10%;
+		top: 1.5rem;
+		width: 80%;		
+		background-color: transparent;
+		border-radius: .3rem;
+		text-align: right;
+		font-size: 0.4rem;
+		line-height: 1rem;		
+		vertical-align: middle;
+	}
+		/** 选项卡  **/
+	.m-tab {
+		position: relative;
+		padding: 1.40rem 0 0;
+		width: 100%;
+		background: #fff;
+	}
+	.m-tab a {
+		position: absolute;
+		display: inline-block;
+		width: 50%;
+		font-size: 0.48rem;
+		color: #2C2C2C;
+		letter-spacing: 0;
+		line-height: 1.38rem;
+		text-align: center;
+		text-decoration: none;
+	}
+	.m-tab a:first-child {
+		top: 0;
+		left: 0;
+	}
+	.m-tab a.m-coupons {
+		top: 0;
+		right: 0;
+	}
+	.m-tab a.active {
+		border-bottom: 2px solid #FF725C
+	}
+	.m-division {
+		height: 1px;
+		background: #EBEBEB;
+	}
 
+	.m-view1 {
+		background: #fff;
+	}
+	.m-view2 {
+		background: #fff;
+	}
 
+	#H-dialog {
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 999999;
+		height: auto;
+		background-color: #b01d1c;;
+		text-align: center;
+	}
 
+	#H-dialog .close {
+		float: right;
+		font-size: 30px;
+		margin-right: 10px;
+		margin-top: 5px;
+		cursor: pointer;
+	}
 
+	#H-dialog .title {
+		padding-left: 10px;
+		font-size: 20px;
+		line-height: 40px;
+	}
 
+	#H-dialog.img {
+		height: auto;
+		text-align: center;
+
+	}
 
 
 

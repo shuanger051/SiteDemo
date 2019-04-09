@@ -46,11 +46,68 @@
             <div class="sex-list sex-cancel">取消</div>
         </div>
     </div>
-
-
 </#macro>
 <#macro js>
     <script type="text/javascript">
-        $(function(){$.ajax({url:"${path}/apply/activity/get",type:"get",data:{id:$.Tool.getReqP("id")},success:function(result){var data=result.data;if(result.success&&!!data){$("#contentName").text(data.title);document.title=data.title;$("#contentId").val(data.id)}else{alert("获取数据错误")}},error:function(xhr,type){console.info("Ajax error!")}});$("#tsex").on("touchstart",function(){$("#setSex").fadeIn(500)});$("#setSex .sex-cancel").on("touchend",function(){$("#setSex").fadeOut(500)});$("#setSex .sex-items li").on("touchend",function(){$("#setSex").fadeOut(500);$("#sex").val($(this).attr("data-value"));$("#tsex").val($(this).text())});$("#TrainDeatil .content-list .prog-role").on("touchend",function(){var that=this;$("#trainerType").val($(that).attr("data-value"));if(!$(that).hasClass("pr-selected")){$(that).addClass("pr-selected").siblings(".prog-role").removeClass("pr-selected")}});$.Validate.init(function(){$.Validate.telValid($("#mobile"));$.Validate.nameValid($("#realName"));$.Validate.identityValid($("#idNo"));$.Validate.emailValid($("#email"));$.Validate.heightValid($("#height"));$.Validate.qqValid($("#qq"))});$("#formSubmit").on("touchend",function(e){if(!!$.Validate.check()){$(this).attr("disabled","disabled");Ajax.submit("apply",{url:"/apply/activity",data:$.Tool.serializeJson($("#applyForm")),callback:function(){$(this).removeAttr("disabled");alert("报名成功")},failure:function(result){$(this).removeAttr("disabled");alert(result.message)}})}})});
+        $(function(){
+            $.ajax({
+                url:"${path}/apply/activity/get",
+                type:"get",
+                data:{id:$.Tool.getReqP("id")},
+                success:function(result){
+                    var data=result.data;
+                    if(result.success&&!!data){
+                        $("#contentName").text(data.title);
+                        document.title=data.title;
+                        $("#contentId").val(data.id)
+                    }else{
+                        alert("获取数据错误")
+                    }
+                },
+                error:function(xhr,type){
+                    console.info("Ajax error!")
+                }
+            });
+
+            $("#tsex").on("touchstart",function(){
+                $("#setSex").fadeIn(500)});
+            $("#setSex .sex-cancel").on("touchend",function(){
+                $("#setSex").fadeOut(500)
+            });
+            $("#setSex .sex-items li").on("touchend",function(){
+                $("#setSex").fadeOut(500);
+                $("#sex").val($(this).attr("data-value"));
+                $("#tsex").val($(this).text())
+            });
+            $("#TrainDeatil .content-list .prog-role").on("touchend",function(){
+                var that=this;
+                $("#trainerType").val($(that).attr("data-value"));
+                if(!$(that).hasClass("pr-selected")){
+                    $(that).addClass("pr-selected").siblings(".prog-role").removeClass("pr-selected")
+                }
+            });
+            $.Validate.init(function(){
+                $.Validate.telValid($("#mobile"));
+                $.Validate.nameValid($("#realName"));
+                $.Validate.identityValid($("#idNo"));
+                $.Validate.emailValid($("#email"));
+                $.Validate.heightValid($("#height"));
+                $.Validate.qqValid($("#qq"))
+            });
+            $("#formSubmit").on("touchend",function(e){
+                if(!!$.Validate.check()){
+                    $(this).attr("disabled","disabled");
+                    Ajax.submit("apply",{
+                        url:"/apply/activity",
+                        data:$.Tool.serializeJson($("#applyForm")),
+                        callback:function(){$(this).removeAttr("disabled");
+                        alert("报名成功")},
+                        failure:function(result){
+                            $(this).removeAttr("disabled");
+                            alert(result.message)}
+                    })
+                }
+            })
+        });
     </script>
 </#macro>

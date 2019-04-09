@@ -87,9 +87,18 @@ picker.on('picker.change', function (index, selectedIndex) {
     }
   }
 });
+
 $('#TR-region').on('focus', function() {
 	$(this).blur();
 	picker.show();
+    nameEl = document.getElementById('TR-region');
+});
+
+//为个人报名的城市添加事件
+$('#TR-region1').on('focus', function() {
+    $(this).blur();
+    picker.show();
+    nameEl = document.getElementById('TR-region1');
 });
 
 

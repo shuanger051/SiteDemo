@@ -5,11 +5,11 @@ biz:
     ### 网站默认title 前缀
     title:
     #### 默认描述信息
-    description: 全国排舞中心
+    description: 全国排舞广场舞推广中心
     ### 默认关键字信息
-    keywords: 全国排舞中心
+    keywords: 全国排舞广场舞推广中心
     ### 默认作者
-    author: 全国排舞中心
+    author: 全国排舞广场舞推广中心
 
 #########全局配置项############
 system:

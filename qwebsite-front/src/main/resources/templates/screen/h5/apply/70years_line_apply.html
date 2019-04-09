@@ -1,0 +1,282 @@
+<#assign title="排舞"/>
+<#assign parentChannelId=1/>
+<#include "/layout/h5_layout.html"/>
+<#macro style>
+	<link rel="stylesheet" type="text/css" href="${path}/css/h5/city.css">
+</#macro>
+<#macro content>
+<div id="banner"> 
+ <div class="banner-view up_banner_wrapper"> 
+	<div class="sliderwrap swiper-item-list up_banner"> 
+	 <ul id="banner_list" class="swiper-wrapper"> 
+	<li class="swiper-slide"><img src="${path}/images/h5/banner1.png" /></li>
+	 </ul> 
+	 <div class="swiper-pagination"></div> 
+	</div> 
+ </div> 
+</div>
+	<div id="CompDetail" class="ItemDetails">
+
+		<div class="m-tab">
+			<a href="javascript:void(0);" id="m-my-invite" class="active">团体报名</a>
+			<a href="javascript:void(0);" id="m-my-coupons" class="m-coupons">个人报名</a>
+			<div class="m-division"></div>
+		</div>
+		<form id="applyForm1" name="applyForm1" method="post" style="width: 100%;">
+			<input type="hidden" name="contentId" id="contentId1">
+			<input type="hidden" name="division" id="division1">
+			<div id="m-view1" class="m-view1">
+				<div class="content-list">
+					<ul>
+						<li>
+							<label for="TR-region">报名活动所在地</label><span></span><input id="TR-region" name="address" class="TR-region TR-input" type="text" placeholder="选择你的报名活动所在地"  readonly="readonly" required="required" />
+						</li>
+						<li>
+							<label for="TR-compname">单位/舞队名称</label><span></span><input id="TR-compname" name="teamName" class="TR-compname TR-input" type="text" placeholder="请正确填写单位/舞队名称" required="required" />
+						</li>
+						<li>
+							<label for="TR-realname">负责人姓名</label><span></span><input id="TR-realname" name="captainName" class="TR-realname TR-input" type="text" placeholder="请正确填写负责人姓名" errormsg="请正确填写负责人姓名" required="required" />
+						</li>
+						<li>
+							<label for="TR-tel">负责人联系方式</label><span></span><input id="TR-tel" name="mobile" class="TR-tel TR-input" type="text" placeholder="请正确填写联系方式" errormsg="请正确填写联系方式" required="required"/>
+						</li>
+						<li>
+							<label for="TR-partNum">参与总人数</label><span></span><input id="TR-partNum" name="groupNum" class="TR-partNum TR-input" type="number" placeholder="请正确填写参与总人数" errormsg="请正确填写参与总人数" required="required" />
+						</li>
+					</ul>
+				</div>
+				<button id="formSubmit1" class="TR-button" type="button">提交</button>
+			</div>
+		</form>
+		<form id="applyForm2" name="applyForm2" method="post" style="width: 100%;">
+			<input type="hidden" name="contentId" id="contentId2">
+			<input type="hidden" name="division" id="division2">
+			<div id="m-view2" class="m-view2">
+				<div class="content-list">
+					<ul>
+						<li>
+							<label for="TR-region">报名活动所在地</label><span></span><input id="TR-region1" name="address" class="TR-region TR-input" type="text" placeholder="选择你的报名活动所在地" readonly="readonly" required="required" />
+						</li>
+						<li>
+							<label for="TR-realname">姓&nbsp;&nbsp;&nbsp;&nbsp;名</label><span></span><input id="TR-realname1" name="realName" class="TR-realname TR-input" type="text" placeholder="请正确填写您的真实姓名" errormsg="请正确填写您的真实姓名" required="required" />
+						</li>
+						<li>
+							<label for="TR-tel">联系方式</label><span></span><input id="TR-tel1" name="mobile" class="TR-tel TR-input" type="text" placeholder="请正确填写联系方式" errormsg="请正确填写联系方式" required="required"/>
+						</li>
+						<li>
+							<label for="TR-tel">团队编码</label><span></span><input id="TR-group-code" name="groupCode" class="TR-tel TR-input" type="text" placeholder="请输入您的团队码（选填）" errormsg="请输入正确的团队码" required="required"/>
+						</li>
+					</ul>
+				</div>
+				<button id="formSubmit2" class="TR-button" type="button">提交</button>
+			</div>
+		</form>
+	</div>
+	<div id="setGroup" style="display: none; opacity: 0;">	
+		<div class="group-content1">
+			<img src="${path}/images/h5/icon_close1.png"style="width:6%;left:81%; top:10%; position:fixed;" id="popdown-close"/>
+			<div class="group-list group-items" style="border-bottom: 1px #CACACA solid;">
+				
+				<img src="${path}/images/h5/qrCode.png"style="width:100%" />
+			</div>
+			<div class="container"  id="InvitationCode" style="text-align: center;background-color: #aa1d1c;">
+				<label class="popupLabel" style="color: white;" id="popup-title">报名成功，团队码为：</label><label id="InvitationCodeVal" class="popupLabel"></label>
+			</div>
+			<div class="container" style="text-align: center;color: transparent;">
+				<img src="${path}/images/h5/icon_close.png"style="width:10%" id="popup-close"/>
+			</div>
+		</div>
+	</div>
+</#macro>
+<#macro js>
+<script type="text/javascript" src="${path}/js/h5/picker.min.js" ></script>
+<script type="text/javascript" src="${path}/js/h5/city.js" ></script>
+<script type="text/javascript" src="${path}/js/h5/swiper.min.js" ></script>
+<script type="text/javascript">
+    $(function() {
+
+        Ajax.query("getCompetition", {
+            url:"/apply/competition/get",
+            data:{
+                id:$.Tool.getReqP("id")
+            },
+            callback:function(result){
+                $('#division1,#division2').val(result.title);
+            }
+        });
+
+        /**
+		 * 获取活动模板ID
+         */
+        $('#contentId1,#contentId2').val($.Tool.getReqP("id")==undefined ? "" : $.Tool.getReqP("id"));
+
+        $('#TR-region1').attr('disabled', false);
+        $('#TR-realname1').attr('disabled', false);
+        $('#TR-tel1').attr('disabled', false);
+        //轮播图
+        if($('.up_banner .swiper-slide').length > 1) {
+            var swiper = new Swiper('.up_banner', {
+                loop: true,
+                pagination: '.swiper-pagination',
+                paginationClickable: true
+            });
+            setInterval(function () {
+                swiper.slideNext();
+            }, 5000);
+        }else{
+            $('.up_banner_wrapper .swiper-pagination').hide();
+        };
+        $('#popup-close,#popdown-close').on('touchend', function() {
+            $("#setGroup").fadeOut(500);
+        });
+
+        $('#formSubmit1').on('touchend', function(e) {
+
+            var flag = true;
+
+            if(!(/[\u4e00-\u9fa5a-zA-Z]/.test($("#TR-realname").val()))) {
+                $("#TR-realname").val($("#TR-realname").attr("errormsg")).addClass('error');
+                $("#TR-realname").focus();
+                flag = false;
+                return;
+            }
+
+            if(!(/^((1[3|5|8|7|9][0-9]{1})+\d{8})$/.test($("#TR-tel").val()))) {
+                $("#TR-tel").val($("#TR-tel").attr("errormsg")).addClass('error');
+                $("#TR-tel").focus();
+                flag = false;
+                return;
+            }
+
+            if($("#TR-partNum").val() !== "" && !(/^[0-9]+$/.test($("#TR-partNum").val()))) {
+                $("#TR-partNum").val($("#TR-partNum").attr("errormsg")).addClass('error');
+                $("#TR-partNum").focus();
+                flag = false;
+                return;
+            }
+
+            if(flag){
+                Ajax.submit("70yearApplyTeam",{
+                    url:"/apply/seventyYearCompetitionForTeam",
+                    data:$.Tool.serializeJson($("#applyForm1")),
+                    callback:function(result){
+                        var jsonData = JSON.parse(result);
+                        $(this).removeAttr("disabled");
+                        //弹出层公共函数
+                        showQRAlert();
+                        $("#popup-title").text("").text("报名成功，团队码为：")
+                        //展示团队码
+                        $("#InvitationCodeVal").text("");
+                        $("#InvitationCodeVal").text(jsonData.group_code);
+
+
+                    },
+                    failure:function(result){
+                        $(this).removeAttr("disabled");
+                        alert(result.message)
+                    }
+                });
+			}
+
+        });
+
+        $('#formSubmit2').on('touchend', function(e) {
+
+            var flag = true;
+
+            if(!(/[\u4e00-\u9fa5a-zA-Z]/.test($("#TR-realname1").val()))) {
+                $("#TR-realname1").val($("#TR-realname1").attr("errormsg")).addClass('error');
+                $("#TR-realname1").focus();
+                flag = false;
+                return;
+            }
+
+            if(!(/^((1[3|5|8|7|9][0-9]{1})+\d{8})$/.test($("#TR-tel1").val()))) {
+                $("#TR-tel1").val($("#TR-tel1").attr("errormsg")).addClass('error');
+                $("#TR-tel").focus();
+                flag = false;
+                return;
+            }
+
+            if($('#TR-group-code').val() !== "") {
+                if(!(/^[1-9]+[0-9]*]*$/.test($('#TR-group-code').val()))){
+                    $('#TR-group-code').val($('#TR-group-code').attr("errormsg")).addClass('error');
+                    $("#TR-group-code").focus();
+                    flag = false;
+                    return;
+				}
+            }
+
+            if(flag){
+                Ajax.submit("70yearApplyTeam",{
+                    url:"/apply/seventyYearCompetitionForPerson",
+                    data:$.Tool.serializeJson($("#applyForm2")),
+                    callback:function(result){
+                        $(this).removeAttr("disabled");
+                        //弹出层公共函数
+                        showQRAlert();
+                        $("#InvitationCodeVal").text("");
+                        $('#InvitationCode').show();
+                        $("#popup-title").text("").text("报名成功!")
+                    },
+                    failure:function(result){
+                        $(this).removeAttr("disabled");
+                        alert(result.message)
+                    }
+                });
+			}
+        });
+
+
+    });
+
+    var myCoupons = $('#m-my-coupons');
+    var myInvite = $('#m-my-invite');
+    var view1 = $('#m-view1');
+    var view2 = $('#m-view2');
+    view2.hide();
+    myInvite.on('touchend', function() {
+        myCoupons.removeClass('active');
+        myInvite.addClass('active');
+        view2.hide();
+        view1.show();
+        $('#TR-region1').attr('disabled', false);
+        $('#TR-realname1').attr('disabled', false);
+        $('#TR-tel1').attr('disabled', false);
+
+        $('#TR-region').removeAttr('disabled');
+        $('#TR-compname').removeAttr('disabled');
+        $('#TR-realname').removeAttr('disabled');
+        $('#TR-tel').removeAttr('disabled');
+        $('#TR-partNum').removeAttr('disabled');
+
+    });
+    myCoupons.on('touchend', function() {
+        myInvite.removeClass('active');
+        myCoupons.addClass('active');
+        view1.hide();
+        view2.show();
+        $('#TR-region1').removeAttr('disabled');
+        $('#TR-realname1').removeAttr('disabled');
+        $('#TR-tel1').removeAttr('disabled');
+
+        $('#TR-region').attr('disabled', false);
+        $('#TR-compname').attr('disabled', false);
+        $('#TR-realname').attr('disabled', false);
+        $('#TR-tel').attr('disabled', false);
+        $('#TR-partNum').attr('disabled', false);
+    });
+
+    function showQRAlert() {
+        // 弹出层--start
+        $("#setGroup").fadeIn(500);
+        if ($('#TR-region').attr('disabled') == 'false') {
+            $('#InvitationCode').hide();
+        } else {
+            $('#InvitationCode').show();
+        }
+        // 弹出层--end
+    }
+
+</script>
+</#macro>

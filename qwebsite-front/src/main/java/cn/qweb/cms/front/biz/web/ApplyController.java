@@ -1,9 +1,7 @@
 package cn.qweb.cms.front.biz.web;
 
 import cn.qweb.cms.biz.service.*;
-import cn.qweb.cms.biz.service.bo.ActivityApplySaveBO;
-import cn.qweb.cms.biz.service.bo.CompetitionApplySaveBO;
-import cn.qweb.cms.biz.service.bo.TrainApplySaveBO;
+import cn.qweb.cms.biz.service.bo.*;
 import cn.qweb.cms.biz.service.dto.ActivityDTO;
 import cn.qweb.cms.biz.service.dto.CompetitionDTO;
 import cn.qweb.cms.biz.service.dto.TrainDTO;
@@ -54,6 +52,35 @@ public class ApplyController extends BaseController{
     @RequestMapping(value = "/competition", method = RequestMethod.POST)
     public String competition(@Valid CompetitionApplySaveBO bean){
         competitionApplyService.doSave(bean);
+        return SUCCESS;
+    }
+
+    /**
+     * 70周年报名活动专属函数-团队报名
+     * @param bean
+     * @return
+     */
+    @RequestMapping(value = "/seventyYearCompetitionForTeam", method = RequestMethod.POST)
+    public String seventyYearCompetitionForTeam(@Valid CompetitionApplyForSeventyYearTeamSaveBO bean){
+        //团队长姓名在个人角度也是个人真实姓名
+        bean.setRealName(bean.getCaptainName());
+        Long id = competitionApplyService.doSaveForSeventyYearTeam(bean);
+        //更新团队编号
+        CompetitionApplyUpdateBO competitionApplyUpdateBO = new CompetitionApplyUpdateBO();
+        competitionApplyUpdateBO.setGroupCode(Integer.parseInt(id.toString()));
+        competitionApplyUpdateBO.setId(id);
+        competitionApplyService.doUpdate(competitionApplyUpdateBO);
+        return "{\"success\":\"success\",\"group_code\":"+id+"}";
+    }
+
+    /**
+     * 70周年报名活动专属函数-个人报名
+     * @param bean
+     * @return
+     */
+    @RequestMapping(value = "/seventyYearCompetitionForPerson", method = RequestMethod.POST)
+    public String seventyYearCompetitionForPerson(@Valid CompetitionApplyForSeventyYearPersonSaveBO bean){
+        competitionApplyService.doSaveForSeventyYearPerson(bean);
         return SUCCESS;
     }
 
