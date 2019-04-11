@@ -151,10 +151,20 @@
                 {{if item.teamName != null && item.teamName.length > 8 }}
                     {{item.teamName.substr(0,8)}}
                 {{else}}
-                    {{item.teamName}}
+                    {{if item.teamName == null}}
+                        无
+                    {{else}}
+                        {{item.teamName}}
+                    {{/if}}
                 {{/if}}
             </td>
-            <td>{{item.captainName}}</td>
+            <td>
+                {{if item.captainName == null}}
+                    无
+                {{else}}
+                    {{item.captainName}}
+                {{/if}}
+            </td>
             <td title="{{item.division}}" >
                 {{if item.division != null && item.division.length > 8 }}
                     {{item.division.substr(0,8)}}
@@ -163,11 +173,27 @@
                 {{/if}}
             </td>
             <td title="{{item.groupCode}}" >
-                {{item.groupCode}}
+                {{if item.groupCode == null}}
+                    无
+                {{else}}
+                    {{item.groupCode}}
+                {{/if}}
             </td>
-            <td title="{{item.realName}}" >{{item.realName}}</td>
+            <td title="{{item.realName}}" >
+                {{if item.realName == null}}
+                    无
+                {{else}}
+                    {{item.realName}}
+                {{/if}}
+            </td>
             <td>{{item.mobile}}</td>
-            <td>{{item.email}}</td>
+            <td>
+                {{if item.email == null}}
+                    无
+                {{else}}
+                    {{item.email}}
+                {{/if}}
+            </td>
             {{if item.readFlag > 0}}
             <td><a onclick="Manager.changeReadFlag('{{item.id}}','{{item.readFlag}}',event);" style="cursor: pointer;">{{item.readFlagName}}<img style="height: 16px;width: 16px;" src="${path}/images/eye02.png"></a></td>
             {{else}}
