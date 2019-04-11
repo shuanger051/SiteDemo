@@ -55,6 +55,7 @@
                 <th>领队姓名</th>
                 <th>赛区</th>
                 <th>团队编码</th>
+                <th>姓名</th>
                 <th>联系电话</th>
                 <th>邮箱地址</th>
                 <th>查阅状态</th>
@@ -109,6 +110,10 @@
                         <input name="teamTypeName" type="text" class="dfinput detail"  disabled value="">
                     </li>
                     <li>
+                        <label style="text-align: right">性别：</label>
+                        <input name="realName" type="text" class="dfinput detail"  disabled  value="">
+                    </li>
+                    <li>
                         <label style="text-align: right">联系电话：</label>
                         <input name="mobile" type="text" class="dfinput detail"  disabled  value="">
                     </li>
@@ -160,6 +165,7 @@
             <td title="{{item.groupCode}}" >
                 {{item.groupCode}}
             </td>
+            <td title="{{item.realName}}" >{{item.realName}}</td>
             <td>{{item.mobile}}</td>
             <td>{{item.email}}</td>
             {{if item.readFlag > 0}}
