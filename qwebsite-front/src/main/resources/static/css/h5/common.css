@@ -275,7 +275,7 @@
 	}
 	.ItemDetails .content-list .TR-sex, .ItemDetails .content-list .TR-region , .ItemDetails .content-list .TR-gamegroup{
 		padding-right: .4rem;
-		background: url(../image/icon_tongyong_jinru.png) center right no-repeat transparent;
+		background: url(../../images/h5/icon_tongyong_jinru.png) center right no-repeat transparent;
 		background-size: auto .34rem;
 	}
 	.ItemDetails .content-list .prog-role {
@@ -318,7 +318,7 @@
 	}
 	
 /** 设置性别   **/
-	#setSex, #setGroup  {
+	#setSex, #setGroup,#setGroup1 {
 		position: absolute;
 		position: fixed;
 		top: 0;
@@ -329,6 +329,7 @@
 		overflow: hidden;
 		background-color: rgba(0,0,0,.3);
 	}
+
 	#setSex .sex-list {
 		position: absolute;
 		bottom: .18rem;
@@ -389,6 +390,8 @@
 		line-height: 1.6rem;
 		color: #393D42;;
 		vertical-align: middle;
+		height:90%;
+		overflow-y:scroll;
 	}
 	#setGroup .group-list i {
 		display: inline-block;
@@ -397,11 +400,11 @@
 		background-color: transparent;
 		vertical-align: middle;
 		margin: 0 .2rem;
-		background: url(../image/icon_weixuanzhong.png) center center no-repeat;
+		background: url(../../images/h5/icon_weixuanzhong.png) center center no-repeat;
 		background-size: 100% 100%;
 	}
 	#setGroup .group-list .role-selected i {		
-		background: url(../image/icon_xuanzhong.png) center center no-repeat;
+		background: url(../../images/h5/icon_xuanzhong.png) center center no-repeat;
 		background-size: 100% 100%;
 	}
 	#setGroup .group-list .group-button {
@@ -467,6 +470,19 @@
 		text-align: right;
 		font-size: 0.4rem;
 		line-height: 1rem;		
+		vertical-align: middle;
+	}
+
+	#setGroup1 .group-content1 {
+		position: absolute;
+		left: 10%;
+		top: 1.5rem;
+		width: 80%;
+		background-color: transparent;
+		border-radius: .3rem;
+		text-align: right;
+		font-size: 0.4rem;
+		line-height: 1rem;
 		vertical-align: middle;
 	}
 		/** 选项卡  **/
