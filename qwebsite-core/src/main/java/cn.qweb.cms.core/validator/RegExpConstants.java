@@ -25,9 +25,9 @@ public interface   RegExpConstants {
 
     String PHONE_MESSAGE = "电话格式错误";
 
-    String MOBILE = "^[1][3,4,5,7,8][0-9]{9}$";
+    String MOBILE = "^(0085[23][5689]\\d{7}|1[35789]\\d{9})$";
 
-    String MOBILE_MESSAGE = "手机号格式错误";
+    String MOBILE_MESSAGE = "手机号格式错误,港澳地区须填写区号00852/00853";
 
     String EMAIL = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
 
