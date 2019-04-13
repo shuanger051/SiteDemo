@@ -150,6 +150,13 @@
 
             var flag = true;
 
+            if($("#TR-region").val() == "" || null == $("#TR-region").val() || "undefined" == $("#TR-region").val()){
+                $("#TR-region").focus();
+                flag = false;
+                alert("请选择报名活动所在地");
+                return;
+			}
+
             if(!(/[\u4e00-\u9fa5a-zA-Z]/.test($("#TR-realname").val()))) {
                 $("#TR-realname").val($("#TR-realname").attr("errormsg")).addClass('error');
                 $("#TR-realname").focus();
@@ -197,6 +204,13 @@
         $('#formSubmit2').on('touchend', function(e) {
 
             var flag = true;
+
+            if($("#TR-region1").val() == "" || null == $("#TR-region1").val() || "undefined" == $("#TR-region1").val()){
+                $("#TR-region1").focus();
+                flag = false;
+                alert("请选择报名活动所在地");
+                return;
+            }
 
             if(!(/[\u4e00-\u9fa5a-zA-Z]/.test($("#TR-realname1").val()))) {
                 $("#TR-realname1").val($("#TR-realname1").attr("errormsg")).addClass('error');
